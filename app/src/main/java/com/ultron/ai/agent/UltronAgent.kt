@@ -214,6 +214,3 @@ class UltronAgent(
         return result
     }
 }
-
-/** Backward compatibility alias */
-typealias FridayAgent = UltronAgent

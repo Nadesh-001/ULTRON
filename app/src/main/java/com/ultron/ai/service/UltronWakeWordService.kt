@@ -369,6 +369,3 @@ class UltronWakeWordService : Service() {
         super.onDestroy()
     }
 }
-
-/** Backward compatibility alias */
-typealias FridayWakeWordService = UltronWakeWordService

@@ -123,3 +123,45 @@ fun hudFieldColors(): TextFieldColors = OutlinedTextFieldDefaults.colors(
     focusedContainerColor = BackgroundDark.copy(alpha = 0.5f),
     unfocusedContainerColor = BackgroundDark.copy(alpha = 0.4f)
 )
+
+@Composable
+fun HudToggle(
+    checked: Boolean,
+    title: String,
+    subtitle: String,
+    onCheckedChange: (Boolean) -> Unit,
+    enabled: Boolean = true
+) {
+    HudSwitchRow(title, subtitle, checked, onCheckedChange, enabled)
+}
+
+@Composable
+fun HudRadioOption(
+    selected: Boolean,
+    title: String,
+    subtitle: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    HudOutlinedButton(
+        onClick = onClick,
+        selected = selected,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+            Text(title, style = MaterialTheme.typography.titleMedium, color = if (selected) ArcCyan else OnBackground)
+            Text(subtitle, style = MaterialTheme.typography.bodySmall, color = OnSurfaceMuted)
+        }
+    }
+}
+
+@Composable
+fun HudHeader(
+    title: String,
+    modifier: Modifier = Modifier,
+    status: HudStatus? = null,
+    navigationIcon: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {}
+) {
+    HudTopBar(title, modifier, status, navigationIcon, actions)
+}

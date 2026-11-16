@@ -2,7 +2,7 @@ package com.ultron.ai.service.voice
 
 import android.os.SystemClock
 import android.util.Log
-import com.ultron.ai.agent.FridayAgent
+import com.ultron.ai.agent.UltronAgent
 import com.ultron.ai.agent.PromptBudget
 import com.ultron.ai.core.ConversationControl
 import com.ultron.ai.core.CorrectionDetector
@@ -116,7 +116,7 @@ class SpokenAnswer(
         var speaking = false
         var lastRedraw = 0L
 
-        val settings = FridayAgent.Settings(
+        val settings = UltronAgent.Settings(
             session.apiKey(), session.model(), GroqApiService.VOICE_MAX_TOKENS, session.backupModel()
         )
         agent.reply(settings, messages, russian)

@@ -24,7 +24,7 @@ object WeatherReport {
         val max: Double,
         val code: Int,
         val precipitationMm: Double,
-        val precipitationChance: Int,
+        val precipitationChance: Int?,
         val windMaxKmh: Double
     )
 

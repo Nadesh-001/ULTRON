@@ -73,6 +73,3 @@ data class UltronCapabilities(
         val shizukuInstalled: Boolean = false
     )
 }
-
-/** Backward compatibility alias */
-typealias FridayCapabilities = UltronCapabilities

@@ -7,9 +7,10 @@ import com.ultron.ai.data.local.dao.UserPreferenceDao
 import com.ultron.ai.data.local.entity.UserPreferenceEntity
 import com.ultron.ai.data.remote.LazuriApiService
 import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.UltronWakeWordService
+import com.ultron.ai.service.UltronWakeWordService.Companion.PREF_VOICE_PROFILE
 import com.ultron.ai.service.FridayWakeWordService
 import com.ultron.ai.service.FridayNotificationListener
-import com.ultron.ai.service.FridayWakeWordService.Companion.PREF_VOICE_PROFILE
 import com.ultron.ai.core.GroqModels
 import com.ultron.ai.core.VoiceProfile
 import com.ultron.ai.service.SpeakerEmbedder
@@ -35,7 +36,12 @@ class SettingsViewModel(
 ) : ViewModel() {
 
     data class MessageSettings(val contextAwareMessaging: Boolean = true, val announceCalls: Boolean = true)
-    data class VoiceSettings(val wakeWord: Boolean = false)
+    data class VoiceSettings(
+        val wakeWord: Boolean = false,
+        val wakeThreshold: Double = 0.0,
+        val ambientNoise: Double = 0.0,
+        val whisperThreshold: Double = 0.0
+    )
 
     private val _messages = MutableStateFlow(MessageSettings())
     val messages: StateFlow<MessageSettings> = _messages.asStateFlow()
@@ -64,6 +70,8 @@ class SettingsViewModel(
     fun saveApiKey() = saveSettings()
 
     fun onSelectModel(model: String) = onModelChange(model)
+
+    fun downloadModel() = downloadVoiceModel()
 
     fun connectGmail(activity: Any? = null) = connectGmail()
 
@@ -104,6 +112,7 @@ class SettingsViewModel(
         val message: String? = null,
         val consent: android.app.PendingIntent? = null
     )
+    typealias GmailState = Gmail
 
     private val _gmail = MutableStateFlow(Gmail())
     val gmail: StateFlow<Gmail> = _gmail.asStateFlow()

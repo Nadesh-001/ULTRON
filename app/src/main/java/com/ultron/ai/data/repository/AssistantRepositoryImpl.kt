@@ -1,6 +1,6 @@
 package com.ultron.ai.data.repository
 
-import com.ultron.ai.agent.FridayAgent
+import com.ultron.ai.agent.UltronAgent
 import com.ultron.ai.agent.PromptBudget
 import com.ultron.ai.core.SystemPromptBuilder
 import com.ultron.ai.data.local.dao.ChatMessageDao
@@ -52,7 +52,7 @@ class AssistantRepositoryImpl(
         val responseBuilder = StringBuilder()
         val russian = false
         val backup = catalog.model(com.ultron.ai.core.GroqModels.Role.FAST)
-        val settings = FridayAgent.Settings(apiKey, model, GroqApiService.DEFAULT_MAX_TOKENS, backup)
+        val settings = UltronAgent.Settings(apiKey, model, GroqApiService.DEFAULT_MAX_TOKENS, backup)
         return agent.reply(settings, apiMessages, russian)
             .catch { e ->
                 // A retired model: re-read the list so the next message works.

@@ -70,7 +70,6 @@ object BriefComposer {
             .entries
             .sortedByDescending { it.value.size }
 
-        val total = notifications.size
         val named = byApp.take(MAX_APPS_NAMED).joinToString(", ") { (app, items) ->
             if (items.size == 1) app else "$app (${items.size})"
         }
