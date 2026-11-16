@@ -1,0 +1,97 @@
+package com.ultron.ai.ui.settings
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.PowerManager
+import android.provider.Settings
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LifecycleResumeEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ultron.ai.service.voice.WakeHealth
+import com.ultron.ai.service.voice.WakeStatus
+
+/** Whether the system may stop Friday's always-on listener to save battery. */
+fun isBatteryRestricted(context: Context): Boolean {
+    val power = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+    return !power.isIgnoringBatteryOptimizations(context.packageName)
+}
+
+/**
+ * Asks Android to exempt Friday from battery optimisation. An assistant that
+ * must hear its name at any moment cannot be put to sleep, and Samsung's
+ * battery manager is known for stopping exactly this kind of service.
+ */
+@SuppressLint("BatteryLife") // An always-listening assistant is the case this request exists for.
+fun requestBatteryExemption(context: Context) {
+    context.startActivity(
+        Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:${context.packageName}"))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    )
+}
+
+/** Shown under the wake-word switch while the listener could be put to sleep. */
+@Composable
+fun BackgroundWorkStatus(visible: Boolean) {
+    val context = LocalContext.current
+    var restricted by remember { mutableStateOf(isBatteryRestricted(context)) }
+    // Re-read on return from the system screen, where the choice is made.
+    LifecycleResumeEffect(Unit) {
+        restricted = isBatteryRestricted(context)
+        onPauseOrDispose { }
+    }
+    if (!visible || !restricted) return
+
+    Column {
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            "Android может усыплять Friday ради экономии батареи — тогда она перестаёт слышать «Пятница». " +
+                "Разрешите работу в фоне. На Samsung также: Настройки → Батарея → Ограничения фоновой " +
+                "работы → «Приложения без спящего режима» → добавьте Friday.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.tertiary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        OutlinedButton(onClick = { requestBatteryExemption(context) }) {
+            Text("Разрешить работу в фоне")
+        }
+    }
+}
+
+/**
+ * What the listener is really doing, under the wake-word switch: "listening"
+ * only while the microphone delivers audio, and why not otherwise —
+ * including a start Android refused, which used to reach only logcat.
+ */
+@Composable
+fun WakeHealthStatus(visible: Boolean) {
+    val health by WakeStatus.health.collectAsStateWithLifecycle()
+    val startError by WakeStatus.startError.collectAsStateWithLifecycle()
+    if (!visible) return
+    Column {
+        Spacer(modifier = Modifier.height(8.dp))
+        val listening = health.status == WakeHealth.Status.LISTENING
+        Text(
+            if (listening) "Микрофон: слушает" else "Микрофон: ${health.describe()}",
+            style = MaterialTheme.typography.bodySmall,
+            color = if (listening) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.tertiary
+        )
+        startError?.let {
+            Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+        }
+    }
+}

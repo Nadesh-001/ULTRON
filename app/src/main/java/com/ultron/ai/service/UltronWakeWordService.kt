@@ -1,0 +1,372 @@
+package com.ultron.ai.service
+
+import android.app.Service
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+import android.os.IBinder
+import android.util.Log
+import com.ultron.ai.command.CommandExecutor
+import com.ultron.ai.agent.FridayAgent
+import com.ultron.ai.core.Acknowledgements
+import com.ultron.ai.core.SystemPromptBuilder
+import com.ultron.ai.data.local.dao.ChatMessageDao
+import com.ultron.ai.data.local.dao.UserPreferenceDao
+import com.ultron.ai.data.remote.GroqApiService
+import com.ultron.ai.service.messages.Announcer
+import com.ultron.ai.core.MediaControls
+import com.ultron.ai.service.voice.AudioFocusHold
+import com.ultron.ai.service.voice.CallWatcher
+import com.ultron.ai.service.voice.WakeHealth
+import com.ultron.ai.service.voice.WakeStatus
+import com.ultron.ai.service.voice.ServiceNotifier
+import com.ultron.ai.service.voice.SpeakerGate
+import com.ultron.ai.service.voice.SpokenAnswer
+import com.ultron.ai.service.voice.VoiceConversation
+import com.ultron.ai.service.voice.VoiceIO
+import com.ultron.ai.service.voice.VoiceSession
+import com.ultron.ai.service.voice.WakeListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.get
+
+/**
+ * The foreground service that keeps Friday listening.
+ *
+ * Only lifecycle and wiring live here. The parts each do one thing:
+ * [WakeListener] waits for the owner's "text", [VoiceConversation] runs the
+ * exchange that follows, [SpokenAnswer] speaks the model's replies,
+ * [CommandExecutor] carries out commands — the same one the chat uses — and
+ * [VoiceSession] keeps the record.
+ */
+// Lifecycle, plus one handler per way Friday is called: wake word, side button, NFC tag, shortcut.
+@Suppress("TooManyFunctions")
+class UltronWakeWordService : Service() {
+
+    companion object {
+        private const val TAG = "UltronWakeWord"
+
+        /** True while the service exists; read by diagnostics. */
+        @Volatile
+        var running = false
+            private set
+
+        /** Where the enrolled voice profile lives. */
+        const val PREF_VOICE_PROFILE = "voice_profile"
+
+        /**
+         * Settle margin before the wake listener takes the microphone back.
+         * The recorder has already released it; this is time for the audio
+         * HAL, not a guess at how long release takes.
+         */
+        private const val MIC_SETTLE_MS = 200L
+
+        /** Long enough for a player to react to getting the audio back. */
+        private const val FOCUS_SETTLE_MS = 800L
+
+        /** With the wake word off, the service stays only for the tag's reply. */
+        private const val TAG_SPEECH_MS = 15_000L
+
+        fun start(context: Context) {
+            try {
+                val intent = Intent(context, FridayWakeWordService::class.java)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(intent)
+                } else {
+                    context.startService(intent)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to start: ${e.javaClass.simpleName}")
+                // Seen in settings, not only in logcat.
+                WakeStatus.startFailed(startFailure(e))
+            }
+        }
+
+        /** What a refused start means for the owner, and what to do. */
+        internal fun startFailure(e: Exception): String = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                e is android.app.ForegroundServiceStartNotAllowedException ->
+                "Android не дал запустить прослушивание из фона — откройте Friday"
+            e is SecurityException -> "Android не дал службе микрофон в фоне — откройте Friday"
+            else -> "Прослушивание не запустилось (${e.javaClass.simpleName}) — откройте Friday"
+        }
+
+        private const val ACTION_INVOKE = "com.ultron.ai.INVOKE"
+
+        /**
+         * The side button or the assist gesture: a conversation, as if
+         * "text" had been heard. Starts the service if it wasn't running;
+         * with the wake word off, it stops again once the conversation ends.
+         */
+        fun invoke(context: Context) {
+            try {
+                val intent = Intent(context, FridayWakeWordService::class.java).setAction(ACTION_INVOKE)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
+                else context.startService(intent)
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to invoke: ${e.message}")
+            }
+        }
+
+        private const val ACTION_TAG = "com.ultron.ai.TAG"
+        private const val EXTRA_PAYLOAD = "payload"
+
+        /** A mode's NFC tag was touched: toggle the mode and say what happened. */
+        fun tag(context: Context, payload: ByteArray) {
+            try {
+                val intent = Intent(context, FridayWakeWordService::class.java)
+                    .setAction(ACTION_TAG).putExtra(EXTRA_PAYLOAD, payload)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
+                else context.startService(intent)
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to handle a tag: ${e.message}")
+            }
+        }
+
+        private const val ACTION_MODE = "com.ultron.ai.TOGGLE_MODE"
+        private const val EXTRA_MODE = "mode"
+
+        /** A mode's launcher shortcut: toggle it and say what happened. */
+        fun toggleMode(context: Context, modeId: String) {
+            try {
+                val intent = Intent(context, FridayWakeWordService::class.java)
+                    .setAction(ACTION_MODE).putExtra(EXTRA_MODE, modeId)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
+                else context.startService(intent)
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to toggle a mode: ${e.message}")
+            }
+        }
+
+        fun stop(context: Context) {
+            try {
+                context.stopService(Intent(context, FridayWakeWordService::class.java))
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to stop: ${e.message}")
+            }
+        }
+    }
+
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
+    private lateinit var notifier: ServiceNotifier
+    private lateinit var overlay: FridayOverlayManager
+    private lateinit var focus: AudioFocusHold
+    private lateinit var speaker: EdgeTtsSpeaker
+    private lateinit var wake: WakeListener
+    private lateinit var transcriber: WhisperTranscriber
+    private lateinit var gate: SpeakerGate
+    private lateinit var conversation: VoiceConversation
+    private lateinit var prefDao: UserPreferenceDao
+    private var started = false
+    private var links: LinkWatcher? = null
+    private var calls: CallWatcher? = null
+
+    /** False when only the side button started the service: no wake word, and it ends with the conversation. */
+    private var wakeWordOn = true
+
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onCreate() {
+        super.onCreate()
+        running = true
+        notifier = ServiceNotifier(this)
+        try {
+            notifier.createChannel()
+            startForeground(ServiceNotifier.NOTIFICATION_ID, notifier.build("Initializing..."))
+            WakeStatus.startFailed(null)
+        } catch (e: Exception) {
+            // Android 14+: a microphone service started from the background is refused here.
+            Log.e(TAG, "Failed to start foreground: ${e.javaClass.simpleName}")
+            WakeStatus.startFailed(startFailure(e))
+            stopSelf()
+            return
+        }
+        assemble()
+    }
+
+    private fun assemble() {
+        prefDao = get(UserPreferenceDao::class.java)
+        overlay = FridayOverlayManager(this)
+        focus = AudioFocusHold(this)
+        speaker = EdgeTtsSpeaker(this).apply {
+            // The greeting follows "text" every time; recorded once, it
+            // plays at once instead of after a round-trip to Microsoft.
+            prefetch(Acknowledgements.all)
+        }
+        gate = SpeakerGate(SpeakerEmbedder(applicationContext))
+        wake = WakeListener.create(applicationContext, scope, gate, notifier)
+        transcriber = WhisperTranscriber(get(GroqApiService::class.java), cacheDir).apply {
+            // Fires on the recording thread ~20x a second; the reactor only
+            // stores the value and redraws on its own vsync, so no hop needed.
+            onLevel = { overlay.level(it) }
+            hints = get<SpeechHints>(SpeechHints::class.java)::prompt
+            // The wake word's model hears where a sentence ends.
+            endpointModel = { if (::wake.isInitialized) wake.voskModel else null }
+        }
+        val session = VoiceSession(
+            prefDao, get(FridayMemory::class.java), get(ChatMessageDao::class.java), get(ModelCatalog::class.java)
+        )
+        conversation = VoiceConversation(
+            scope = scope,
+            io = VoiceIO(
+                overlay, speaker, transcriber, OfflineCommandRecognizer(this), wake, notifier, focus,
+                inCall = { com.ultron.ai.core.CallState.inCall(this) }
+            ),
+            gate = gate,
+            commands = get(CommandExecutor::class.java),
+            answers = SpokenAnswer(
+                get(FridayAgent::class.java), get(SystemPromptBuilder::class.java),
+                get(FridayMemory::class.java), session, speaker, overlay
+            ),
+            session = session
+        )
+        wake.onWake = { heard, continuing, audio -> conversation.onWake(heard, continuing, audio) }
+        // The panel's close button and the lock screen's "text" end the conversation itself.
+        com.ultron.ai.service.voice.VoiceUi.onClose = { conversation.close() }
+        overlay.onDismissed = {
+            // The conversation is over: give the audio back. A player that was
+            // told to pause must not take that as its cue to play again.
+            focus.release()
+            scope.launch {
+                delay(FOCUS_SETTLE_MS)
+                get<MediaControls>(MediaControls::class.java).keepPaused()
+            }
+            // Taken now: if a new turn, a call or a stop comes first, this late resume does nothing.
+            val token = wake.token
+            scope.launch {
+                delay(MIC_SETTLE_MS)
+                if (wakeWordOn) wake.resume(token) else stopSelf()
+            }
+        }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val invoked = intent?.action == ACTION_INVOKE
+        val tagged = intent?.takeIf { it.action == ACTION_TAG }?.getByteArrayExtra(EXTRA_PAYLOAD)
+        val toggled = intent?.takeIf { it.action == ACTION_MODE }?.getStringExtra(EXTRA_MODE)
+        if (!::conversation.isInitialized) return START_NOT_STICKY
+        if (!started) {
+            started = true
+            scope.launch {
+                begin()
+                if (invoked) conversation.onWake("")
+                tagged?.let { onTag(it) }
+                toggled?.let { toggle(it) }
+            }
+        } else if (invoked) {
+            conversation.onWake("")
+        } else if (tagged != null) {
+            scope.launch { onTag(tagged) }
+        } else if (toggled != null) {
+            scope.launch { toggle(toggled) }
+        } else if (!wakeWordOn) {
+            // Running for the side button only, and now the wake word was switched on.
+            scope.launch { begin() }
+        } else {
+            // Opened from the app while running: re-arm a listener that gave up.
+            scope.launch { rearm() }
+        }
+        return START_STICKY
+    }
+
+    private suspend fun begin() {
+        gate.load(prefDao.get(PREF_VOICE_PROFILE))
+        prefDao.get(VoiceCalibrator.PREF_WHISPER)?.toDoubleOrNull()?.let { transcriber.silenceThreshold = it }
+        wakeWordOn = prefDao.get("wake_word_enabled") == "true"
+        if (!wakeWordOn) WakeStatus.report(WakeHealth(WakeHealth.Status.DISABLED))
+        if (wakeWordOn && wake.initialise(prefDao.get(VoiceCalibrator.PREF_WAKE)?.toDoubleOrNull())) wake.resume()
+        if (wakeWordOn) {
+            watchLinks()
+            watchCalls()
+        }
+        // Calls and messages the notification listener heard about.
+        scope.launch {
+            get<Announcer>(Announcer::class.java).announcements
+                .collect { conversation.announce(it.text, it.listenAfter) }
+        }
+    }
+
+    /**
+     * Modes waiting for the car's Bluetooth, the charger or home Wi-Fi. A
+     * Bluetooth connection is a moment the owner is there (getting in the
+     * car, putting headphones on), so the result is said; the rest is a
+     * quiet notification.
+     */
+    private fun watchLinks() {
+        val engine = get<com.ultron.ai.core.modes.ModeEngine>(com.ultron.ai.core.modes.ModeEngine::class.java)
+        val commands = get<CommandExecutor>(CommandExecutor::class.java)
+        links = LinkWatcher(this, scope, AndroidPhoneLinks(this)) { trigger, value, connected ->
+            val said = engine.onLink(trigger, value, connected, russian = true) { step ->
+                (commands.execute(step, russian = true) as? CommandExecutor.Outcome.Reply)?.text.orEmpty()
+            } ?: return@LinkWatcher
+            val ownerIsThere = trigger == com.ultron.ai.core.modes.Trigger.BLUETOOTH && connected
+            if (ownerIsThere) conversation.announce(said, listenAfter = false) else notifyModeResult(this, said)
+        }.also { it.start() }
+    }
+
+    /** A listener that failed or never loaded starts again — only from a visible start, like opening the app. */
+    private suspend fun rearm() {
+        val status = wake.health.value.status
+        if (status != WakeHealth.Status.FAILED && status != WakeHealth.Status.UNAVAILABLE) return
+        if (wake.ready || wake.initialise(prefDao.get(VoiceCalibrator.PREF_WAKE)?.toDoubleOrNull())) wake.resume()
+    }
+
+    /** Ringing, a phone call or a VoIP call takes the microphone from the wake listener until it ends. */
+    private fun watchCalls() {
+        calls = CallWatcher(scope, { com.ultron.ai.core.CallState.mode(this) }) { inCall ->
+            if (inCall) wake.pauseForCall() else wake.callEnded(listenNow = !overlayShowing())
+        }.also { it.start() }
+    }
+
+    /** A Friday NFC tag: its mode is toggled, if this phone signed it. */
+    private suspend fun onTag(payload: ByteArray) {
+        val secret = get<AndroidNfcTags>(AndroidNfcTags::class.java).secret()
+        when (val read = com.ultron.ai.core.modes.ModeTags.read(payload, secret)) {
+            is com.ultron.ai.core.modes.ModeTags.Read.Mode -> toggle(read.id)
+            com.ultron.ai.core.modes.ModeTags.Read.Forged -> say("Эту метку записал не этот телефон — не запускаю.")
+            com.ultron.ai.core.modes.ModeTags.Read.NotATag -> Unit
+        }
+    }
+
+    /** A tag or a shortcut: the mode is toggled, and the result said aloud — the owner is right there. */
+    private suspend fun toggle(modeId: String) {
+        val engine = get<com.ultron.ai.core.modes.ModeEngine>(com.ultron.ai.core.modes.ModeEngine::class.java)
+        val commands = get<CommandExecutor>(CommandExecutor::class.java)
+        say(
+            engine.toggle(modeId, russian = true) { step ->
+                (commands.execute(step, russian = true) as? CommandExecutor.Outcome.Reply)?.text.orEmpty()
+            }
+        )
+    }
+
+    private fun say(text: String) {
+        conversation.announce(text, listenAfter = false)
+        if (!wakeWordOn) scope.launch { delay(TAG_SPEECH_MS); if (!overlayShowing()) stopSelf() }
+    }
+
+    private fun overlayShowing() = runCatching { overlay.isShowing }.getOrDefault(false)
+
+    override fun onDestroy() {
+        links?.stop()
+        calls?.stop()
+        running = false
+        started = false
+        if (::conversation.isInitialized) {
+            wake.destroy()
+            speaker.destroy()
+            overlay.dismiss()
+            overlay.release()
+            com.ultron.ai.service.voice.VoiceUi.onClose = null
+        }
+        scope.cancel()
+        super.onDestroy()
+    }
+}
+
+/** Backward compatibility alias */
+typealias FridayWakeWordService = UltronWakeWordService

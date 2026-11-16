@@ -1,0 +1,18 @@
+package com.ultron.ai.data.local.entity
+
+import androidx.room.Entity
+import kotlinx.serialization.Serializable
+import androidx.room.PrimaryKey
+
+@Serializable
+@Entity(tableName = "memories")
+data class MemoryEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val category: String,
+    val key: String,
+    val value: String,
+    val source: String,
+    val confidence: Float = 1.0f,
+    val createdAt: Long = System.currentTimeMillis(),
+    val updatedAt: Long = System.currentTimeMillis()
+)

@@ -1,0 +1,76 @@
+package com.ultron.ai
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.compose.foundation.layout.fillMaxSize
+import com.ultron.ai.ui.voice.InAppVoiceLayer
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.lifecycleScope
+import com.ultron.ai.core.DeviceContext
+import com.ultron.ai.data.local.dao.UserPreferenceDao
+import com.ultron.ai.service.FridayWakeWordService
+import com.ultron.ai.ui.navigation.FridayNavGraph
+import com.ultron.ai.ui.theme.FridayTheme
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+
+class MainActivity : ComponentActivity() {
+
+    var onWakeWordActivated: (() -> Unit)? = null
+
+    private val deviceContext: DeviceContext by inject()
+    private val prefs: UserPreferenceDao by inject()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        handleWakeWordIntent(intent)
+
+        setContent {
+            FridayTheme {
+                androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxSize()) {
+                    FridayNavGraph(activity = this@MainActivity)
+                    // A spoken exchange while Friday is open shows here, not in a window over her.
+                    InAppVoiceLayer()
+                }
+            }
+        }
+    }
+
+    /**
+     * Back from a system settings screen, a permission may have changed:
+     * re-read what works, so the next request (and the diagnostics screen)
+     * reflects it.
+     */
+    override fun onResume() {
+        super.onResume()
+        com.ultron.ai.core.apps.AppVisibility.activityResumed()
+        lifecycleScope.launch {
+            deviceContext.refresh()
+            // An update or a reboot stops the listening service, and Android
+            // won't let a microphone service start itself in the background.
+            // Opening Friday brings her back; if she is already listening,
+            // this changes nothing.
+            if (prefs.get("wake_word_enabled") == "true") FridayWakeWordService.start(this@MainActivity)
+        }
+    }
+
+    override fun onPause() {
+        com.ultron.ai.core.apps.AppVisibility.activityPaused()
+        super.onPause()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleWakeWordIntent(intent)
+    }
+
+    private fun handleWakeWordIntent(intent: Intent?) {
+        if (intent?.getBooleanExtra("wake_word_activated", false) == true) {
+            onWakeWordActivated?.invoke()
+        }
+    }
+}
