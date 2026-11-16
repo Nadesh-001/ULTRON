@@ -1,7 +1,5 @@
 package com.ultron.ai.service
 
-typealias FridayWakeWordService = UltronWakeWordService
-
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -35,6 +33,8 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.get
+
+typealias FridayWakeWordService = UltronWakeWordService
 
 /**
  * The foreground service that keeps Friday listening.
