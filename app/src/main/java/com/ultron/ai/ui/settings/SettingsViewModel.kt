@@ -34,6 +34,39 @@ class SettingsViewModel(
     private val learned: com.ultron.ai.agent.LearnedCommands
 ) : ViewModel() {
 
+    data class MessageSettings(val contextAwareMessaging: Boolean = true, val announceCalls: Boolean = true)
+    data class VoiceSettings(val wakeWord: Boolean = false)
+
+    private val _messages = MutableStateFlow(MessageSettings())
+    val messages: StateFlow<MessageSettings> = _messages.asStateFlow()
+
+    private val _voice = MutableStateFlow(VoiceSettings())
+    val voice: StateFlow<VoiceSettings> = _voice.asStateFlow()
+
+    val availableModels: StateFlow<List<String>> get() = models
+    val selectedModel: StateFlow<String> get() = model
+    val modelState get() = modelDownloadState
+
+    fun setContextAwareMessaging(on: Boolean) {
+        _messages.value = _messages.value.copy(contextAwareMessaging = on)
+    }
+
+    fun setAnnounceCalls(on: Boolean) {
+        _messages.value = _messages.value.copy(announceCalls = on)
+        onAnnounceCallsChange(on)
+    }
+
+    fun setWakeWord(on: Boolean) {
+        _voice.value = _voice.value.copy(wakeWord = on)
+        onWakeWordToggle(on)
+    }
+
+    fun saveApiKey() = saveSettings()
+
+    fun onSelectModel(model: String) = onModelChange(model)
+
+    fun connectGmail(activity: Any? = null) = connectGmail()
+
     // --- Learned commands ------------------------------------------------------
 
     /** Phrase → what it does, for the settings list. */
@@ -223,7 +256,7 @@ class SettingsViewModel(
     private val _isCalibrated = MutableStateFlow(false)
     val isCalibrated: StateFlow<Boolean> = _isCalibrated.asStateFlow()
 
-    private val calibration = Calibration(viewModelScope, ::VoiceCalibrator, ::saveCalibration)
+    val calibration = Calibration(viewModelScope, ::VoiceCalibrator, ::saveCalibration)
     val calibrationPhase: StateFlow<VoiceCalibrator.Phase?> = calibration.phase
     val calibrationEnergy: StateFlow<Double> = calibration.energy
     val calibrationResult: StateFlow<VoiceCalibrator.CalibrationResult?> = calibration.result

@@ -18,8 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ultron.ai.command.LockPolicy
 import com.ultron.ai.service.lock.LockScreen
-import com.ultron.ai.ui.theme.ArcCyan
-import com.ultron.ai.ui.theme.ErrorColor
+import com.ultron.ai.ui.theme.*
+import androidx.core.app.NotificationManagerCompat
+import org.koin.androidx.compose.koinViewModel
 
 private data class LevelItem(
     val level: LockPolicy.Level,
@@ -47,15 +48,14 @@ private val LEVELS = listOf(
 
 @Composable
 fun LockPanel(
-    vm: SettingsViewModel,
+    lockVm: LockLevelViewModel = koinViewModel(),
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val current by vm.lockLevel.collectAsStateWithLifecycle()
-    val privateOnLock by vm.privateOnLock.collectAsStateWithLifecycle()
-    val notifications by vm.lockNotifications.collectAsStateWithLifecycle()
-    val fullScreen by vm.lockFullScreen.collectAsStateWithLifecycle()
-    val outcome by vm.lastLockOutcome.collectAsStateWithLifecycle()
+    val current by lockVm.level.collectAsStateWithLifecycle()
+    val outcome by LockScreen.lastOutcome.collectAsStateWithLifecycle()
+    val notifications = NotificationManagerCompat.from(context).areNotificationsEnabled()
+    val fullScreen = LockScreen.fullScreenAllowed(context)
 
     HudPanel("Lock Screen Policy", index = 14, modifier = modifier) {
         HudNote(
@@ -69,7 +69,7 @@ fun LockPanel(
                 selected = current == item.level,
                 title = item.title,
                 subtitle = item.subtitle,
-                onClick = { vm.setLockLevel(item.level) }
+                onClick = { lockVm.choose(item.level) }
             )
             Spacer(Modifier.height(8.dp))
         }
@@ -105,6 +105,13 @@ fun LockPanel(
         }
     }
 }
+
+@Composable
+fun LockPanel(
+    vm: Any?,
+    lockVm: LockLevelViewModel = koinViewModel(),
+    modifier: Modifier = Modifier
+) = LockPanel(lockVm, modifier)
 
 private fun outcomeText(outcome: LockScreen.Outcome?): String = when (outcome) {
     null -> "NONE YET"

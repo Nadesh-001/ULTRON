@@ -32,8 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ultron.ai.core.VoiceProfile
 import com.ultron.ai.service.VoiceCalibrator
 import com.ultron.ai.service.VoskModelManager
-import com.ultron.ai.ui.theme.ArcCyan
-import com.ultron.ai.ui.theme.ErrorColor
+import com.ultron.ai.ui.theme.*
 
 @Composable
 fun VoicePanels(
@@ -44,7 +43,7 @@ fun VoicePanels(
     val context = LocalContext.current
     val voice by vm.voice.collectAsStateWithLifecycle()
     val modelState by vm.modelState.collectAsStateWithLifecycle()
-    val calibration by vm.calibration.collectAsStateWithLifecycle()
+    val calibration by vm.calibrationResult.collectAsStateWithLifecycle()
     val energy by vm.calibrationEnergy.collectAsStateWithLifecycle()
     val profile by vm.voiceProfile.collectAsStateWithLifecycle()
     val calibrationMessage by vm.calibrationMessage.collectAsStateWithLifecycle()

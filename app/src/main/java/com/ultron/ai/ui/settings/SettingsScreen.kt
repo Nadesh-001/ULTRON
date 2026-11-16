@@ -57,18 +57,17 @@ import com.ultron.ai.core.VoiceProfile
 import com.ultron.ai.service.FridayNotificationListener
 import com.ultron.ai.service.VoiceCalibrator
 import com.ultron.ai.service.VoskModelManager
-import com.ultron.ai.ui.theme.ArcCyan
-import com.ultron.ai.ui.theme.ErrorColor
-import com.ultron.ai.ui.theme.OnBackground
+import com.ultron.ai.ui.theme.*
+import org.koin.androidx.compose.koinViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel,
-    transferViewModel: TransferViewModel,
-    locationViewModel: LocationViewModel,
-    quickLinksViewModel: QuickLinksViewModel,
-    onBack: () -> Unit,
+    viewModel: SettingsViewModel = koinViewModel(),
+    transferViewModel: TransferViewModel = koinViewModel(),
+    locationViewModel: LocationViewModel = koinViewModel(),
+    quickLinksViewModel: QuickLinksViewModel = koinViewModel(),
+    onBack: () -> Unit = {},
     onOpenDiagnostics: () -> Unit = {},
     onOpenModes: () -> Unit = {},
     onOpenMemory: () -> Unit = {},
@@ -200,13 +199,13 @@ fun SettingsScreen(
 
             TransferSection(vm = transferViewModel, say = ::say)
 
-            LocationPanel(vm = locationViewModel, say = ::say)
+            LocationPanel(viewModel = locationViewModel)
 
-            QuickLinksPanel(vm = quickLinksViewModel, say = ::say)
+            QuickLinksPanel(viewModel = quickLinksViewModel)
 
             LockPanel(vm = viewModel)
 
-            BackgroundWorkStatus(vm = viewModel)
+            BackgroundWorkStatus(visible = true)
         }
 
         SnackbarHost(

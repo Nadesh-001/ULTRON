@@ -22,6 +22,17 @@ object BriefComposer {
     private const val MAX_APPS_NAMED = 3
     private const val MAX_AGENDA_ITEMS = 4
 
+    fun pluralRu(n: Int, one: String, few: String, many: String): String {
+        val mod10 = n % 10
+        val mod100 = n % 100
+        return when {
+            mod100 in 11..14 -> many
+            mod10 == 1 -> one
+            mod10 in 2..4 -> few
+            else -> many
+        }
+    }
+
     /**
      * The "what did I miss" answer.
      *
@@ -30,7 +41,29 @@ object BriefComposer {
      */
     fun missedSummary(notifications: List<NotificationSummary>, russian: Boolean = false): String {
         if (notifications.isEmpty()) {
-            return "Nothing new."
+            return if (russian) "Ничего нового." else "Nothing new."
+        }
+
+        val total = notifications.size
+        if (russian) {
+            val noun = pluralRu(total, "новое уведомление", "новых уведомления", "новых уведомлений")
+            val byApp = notifications.groupBy { it.appName }
+                .entries
+                .sortedByDescending { it.value.size }
+            val named = byApp.take(MAX_APPS_NAMED).joinToString(", ") { (app, items) ->
+                if (items.size == 1) app else "$app (${items.size})"
+            }
+            val remaining = byApp.size - MAX_APPS_NAMED
+            return buildString {
+                append("$total $noun: $named")
+                if (remaining > 0) append(" и ещё $remaining")
+                append(".")
+                if (total == 1) {
+                    val only = notifications.first()
+                    val body = listOf(only.title, only.text).filter { it.isNotBlank() }.joinToString(" — ")
+                    if (body.isNotBlank()) append(" $body")
+                }
+            }
         }
 
         val byApp = notifications.groupBy { it.appName }
@@ -78,12 +111,12 @@ object BriefComposer {
 
         parts += when {
             agenda.isEmpty() ->
-                "Nothing in the calendar today."
+                if (russian) "В календаре на сегодня пусто." else "Nothing in the calendar today."
             else -> {
-                val shownEn = agenda.take(MAX_AGENDA_ITEMS)
+                val shown = agenda.take(MAX_AGENDA_ITEMS)
                     .joinToString(", ") { "${it.title} at ${it.timeLabel}" }
                 val extra = agenda.size - MAX_AGENDA_ITEMS
-                "Today: $shownEn" + if (extra > 0) " and $extra more." else "."
+                "Today: $shown" + if (extra > 0) " and $extra more." else "."
             }
         }
 

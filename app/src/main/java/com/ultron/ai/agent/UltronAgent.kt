@@ -1,5 +1,7 @@
 package com.ultron.ai.agent
 
+typealias FridayAgent = UltronAgent
+
 import android.util.Log
 import com.ultron.ai.command.CommandExecutor
 import com.ultron.ai.core.capabilities.UltronCapabilities

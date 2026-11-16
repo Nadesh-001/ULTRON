@@ -8,6 +8,36 @@ import kotlin.math.roundToInt
  */
 object WeatherReport {
 
+    data class Hour(
+        val time: LocalDateTime,
+        val temperature: Double,
+        val feelsLike: Double,
+        val precipitationChance: Int?,
+        val precipitationMm: Double,
+        val code: Int,
+        val windKmh: Double
+    )
+
+    data class Day(
+        val date: java.time.LocalDate,
+        val min: Double,
+        val max: Double,
+        val code: Int,
+        val precipitationMm: Double,
+        val precipitationChance: Int,
+        val windMaxKmh: Double
+    )
+
+    data class Forecast(
+        val place: String,
+        val now: Hour,
+        val hours: List<Hour>,
+        val days: List<Day>
+    )
+
+    fun spoken(f: Forecast, dayOffset: Int = 0, russian: Boolean = false): String =
+        if (dayOffset == 0) current(f, russian) else ahead(f, dayOffset, russian)
+
     private const val WET_CHANCE = 40
     private const val SOME_CHANCE = 25
     private const val WET_MM = 0.2

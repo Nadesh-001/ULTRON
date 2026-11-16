@@ -1,4 +1,4 @@
-name: Build Ultron APK
+name: Android Build & Quality Validation
 
 on:
   push:
@@ -7,16 +7,20 @@ on:
     branches: [ "**" ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    name: Build Ultron Debug APK
+    name: Build & Validate Ultron APK
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 17 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -35,7 +39,7 @@ jobs:
         run: |
           set -o pipefail
           ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee gradle_build.log || {
-            echo "=================== BUILD LOG TAIL ==================="
+            echo "=================== BUILD FAILURE LOG ==================="
             grep -E "e: |error:|FAILURE|Exception" gradle_build.log -B 2 -A 8 | head -n 100 || tail -n 100 gradle_build.log
             exit 1
           }
@@ -46,6 +50,7 @@ jobs:
           name: Ultron-Debug-APK
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+          retention-days: 14
 
       - name: Upload Build Log on Failure
         if: failure()
@@ -53,3 +58,4 @@ jobs:
         with:
           name: gradle-build-log
           path: gradle_build.log
+          retention-days: 14

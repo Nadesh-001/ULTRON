@@ -69,8 +69,7 @@ fun FridayNavGraph(activity: MainActivity) {
         }
         composable("settings") {
             SettingsScreen(
-                onNavigateBack = { navController.popBackStack() },
-                onOpenDashboard = { navController.navigate("lazuri_dashboard") },
+                onBack = { navController.popBackStack() },
                 onOpenDiagnostics = { navController.navigate("diagnostics") },
                 onOpenModes = { navController.navigate("modes") }
             )

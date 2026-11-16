@@ -1,5 +1,7 @@
 package com.ultron.ai.core.capabilities
 
+typealias FridayCapabilities = UltronCapabilities
+
 /**
  * Everything Ultron can or can't do right now, in one snapshot.
  */

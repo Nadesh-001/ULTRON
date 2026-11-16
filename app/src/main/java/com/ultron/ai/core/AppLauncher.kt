@@ -52,7 +52,8 @@ class AppLauncher(
         }
     }
 
-    private val opener = AppOpener(AndroidApps(context, ::roleIntent))
+    private val androidApps = AndroidApps(context, ::roleIntent)
+    private val opener = AppOpener(androidApps)
 
     /** The app [appName] means, opened through [AppOpener]: chosen deterministically, reported truthfully. */
     fun openApp(packageHint: String?, appName: String, russian: Boolean = false): String =
@@ -300,7 +301,10 @@ class AppLauncher(
     }
 
     fun listApps(query: String?): String {
-        val matches = opener.listApps(query)
+        val all = androidApps.launchable()
+        val matches = if (query.isNullOrBlank()) all else all.filter {
+            it.label.contains(query, ignoreCase = true) || it.packageName.contains(query, ignoreCase = true)
+        }
         if (matches.isEmpty()) return if (query == null) "No launchable apps found." else "No apps found matching '$query'."
         val count = matches.size
         val sample = matches.take(15).joinToString(", ") { it.label }

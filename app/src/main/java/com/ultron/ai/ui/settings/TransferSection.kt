@@ -22,8 +22,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.ultron.ai.ui.theme.*
+import com.ultron.ai.data.backup.SettingsTransfer
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ultron.ai.data.backup.SettingsArchive
 import java.text.DateFormat
 import java.util.Date
 
@@ -36,13 +37,18 @@ fun TransferSection(
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
     var exportPassphraseOpen by remember { mutableStateOf(false) }
+    var exportPassphrase by remember { mutableStateOf<String?>(null) }
     var importPassphraseOpen by remember { mutableStateOf(false) }
     var pendingImportUri by remember { mutableStateOf<Uri?>(null) }
 
     val createDoc = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("application/octet-stream")
     ) { uri ->
-        if (uri != null) vm.exportTo(uri)
+        val pass = exportPassphrase
+        if (uri != null && pass != null) {
+            vm.export(uri, pass.toCharArray())
+            exportPassphrase = null
+        }
     }
 
     val openDoc = rememberLauncherForActivityResult(
@@ -80,7 +86,7 @@ fun TransferSection(
             onDismiss = { exportPassphraseOpen = false },
             onConfirm = { pass ->
                 exportPassphraseOpen = false
-                vm.setExportPassphrase(pass)
+                exportPassphrase = pass
                 createDoc.launch("ultron-backup.ultron")
             }
         )
@@ -97,17 +103,17 @@ fun TransferSection(
                 importPassphraseOpen = false
                 val uri = pendingImportUri ?: return@PassphraseDialog
                 pendingImportUri = null
-                vm.inspectArchive(uri, pass)
+                vm.open(uri, pass.toCharArray())
             }
         )
     }
 
-    val confirm = (state as? TransferViewModel.State.ConfirmingImport)
-    if (confirm != null) {
+    val review = state as? TransferViewModel.State.Review
+    if (review != null) {
         ConfirmImportDialog(
-            summary = confirm.summary,
-            onDismiss = { vm.cancelImport() },
-            onConfirm = { vm.applyImport() }
+            summary = review.summary,
+            onDismiss = { vm.dismiss() },
+            onConfirm = { vm.confirmImport() }
         )
     }
 }
@@ -164,7 +170,7 @@ private fun PassphraseDialog(
 
 @Composable
 private fun ConfirmImportDialog(
-    summary: SettingsArchive.Summary,
+    summary: SettingsTransfer.Summary,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {

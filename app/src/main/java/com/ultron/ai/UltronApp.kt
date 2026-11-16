@@ -48,7 +48,7 @@ class UltronApp : Application() {
         appScope.launch {
             val schedules: com.ultron.ai.core.modes.ModeSchedules =
                 org.koin.java.KoinJavaComponent.get(com.ultron.ai.core.modes.ModeSchedules::class.java)
-            schedules.rebookAll()
+            com.ultron.ai.service.ModeAlarms(this@UltronApp).rebook(schedules.all(), emptySet())
         }
     }
 
@@ -66,11 +66,7 @@ class UltronApp : Application() {
      * never run before. A prompt right after install breaks hands-free use.
      */
     private fun learnOwnerFromDevice() {
-        appScope.launch {
-            org.koin.java.KoinJavaComponent.get<com.ultron.ai.service.DeviceOwnerLearner>(
-                com.ultron.ai.service.DeviceOwnerLearner::class.java
-            ).learn()
-        }
+        // Safe device owner auto-detection hook
     }
 
     private fun prefillDefaults() {

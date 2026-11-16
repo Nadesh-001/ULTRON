@@ -43,21 +43,35 @@ import com.ultron.ai.core.modes.Schedule
 import com.ultron.ai.core.modes.ScheduleMath
 import com.ultron.ai.core.modes.Trigger
 import com.ultron.ai.core.modes.describeEvent
-import com.ultron.ai.ui.settings.HudBackground
-import com.ultron.ai.ui.settings.HudButton
-import com.ultron.ai.ui.settings.HudLabelStyle
-import com.ultron.ai.ui.settings.HudNote
-import com.ultron.ai.ui.settings.HudOutlinedButton
-import com.ultron.ai.ui.settings.HudPanel
-import com.ultron.ai.ui.settings.HudReadout
-import com.ultron.ai.ui.settings.HudStatus
-import com.ultron.ai.ui.settings.HudTopBar
-import com.ultron.ai.ui.settings.StatusDot
-import com.ultron.ai.ui.settings.hudFrame
-import com.ultron.ai.ui.theme.ArcCyan
-import com.ultron.ai.ui.theme.ArcCyanDim
-import com.ultron.ai.ui.theme.OnBackground
-import com.ultron.ai.ui.theme.OnSurfaceMuted
+import com.ultron.ai.ui.theme.*
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
+@Composable
+fun ModesScreen(
+    viewModel: ModesViewModel = org.koin.androidx.compose.koinViewModel(),
+    onNavigateBack: () -> Unit = {}
+) {
+    val modes by viewModel.modes.collectAsStateWithLifecycle()
+    val busy by viewModel.busy.collectAsStateWithLifecycle()
+    val status by viewModel.status.collectAsStateWithLifecycle()
+    val schedules by viewModel.schedules.collectAsStateWithLifecycle()
+    val events by viewModel.events.collectAsStateWithLifecycle()
+
+    ModesScreen(
+        modes = modes,
+        busy = busy,
+        status = status,
+        onRun = viewModel::run,
+        onStop = viewModel::stop,
+        onDelete = viewModel::delete,
+        onNavigateBack = onNavigateBack,
+        schedules = schedules,
+        onUnschedule = viewModel::unschedule,
+        events = events,
+        onRemoveEvent = viewModel::removeEvent,
+        onTag = viewModel::tag
+    )
+}
 
 @Composable
 fun ModesScreen(

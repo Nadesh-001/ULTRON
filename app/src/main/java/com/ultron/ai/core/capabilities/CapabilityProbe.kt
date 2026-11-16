@@ -42,29 +42,29 @@ class CapabilityProbe(
         const val SECURE_ASSISTANT = "assistant"
     }
 
-    suspend fun probe(): FridayCapabilities = FridayCapabilities(
+    suspend fun probe(): UltronCapabilities = UltronCapabilities(
         device = device(),
         permissions = permissions(),
-        integrations = FridayCapabilities.Integrations(
+        integrations = UltronCapabilities.Integrations(
             groqKey = !prefs.get(AssistantRepositoryImpl.PREF_API_KEY).isNullOrBlank(),
             gmail = !prefs.get(MailAssistant.PREF_ACCOUNT).isNullOrBlank(),
             lazuri = prefs.get(FridayMemory.PREF_LAZURI_ENABLED) == "true" &&
                 prefs.get(FridayMemory.PREF_LAZURI_DEVICE_ID) != null
         ),
-        voice = FridayCapabilities.Voice(
+        voice = UltronCapabilities.Voice(
             wakeWordEnabled = prefs.get("wake_word_enabled") == "true",
             wakeModelReady = VoskModelManager(context).isModelReady(),
             voiceProfile = !prefs.get(FridayWakeWordService.PREF_VOICE_PROFILE).isNullOrBlank(),
             listening = FridayWakeWordService.running
         ),
-        assistant = FridayCapabilities.Assistant(active = isDefaultAssistant()),
-        privileged = FridayCapabilities.Privileged(shizukuInstalled = installed(SHIZUKU_PACKAGE)),
+        assistant = UltronCapabilities.Assistant(active = isDefaultAssistant()),
+        privileged = UltronCapabilities.Privileged(shizukuInstalled = installed(SHIZUKU_PACKAGE)),
         modes = modes()
     )
 
-    private fun device(): FridayCapabilities.Device {
+    private fun device(): UltronCapabilities.Device {
         val pm = context.packageManager
-        return FridayCapabilities.Device(
+        return UltronCapabilities.Device(
             manufacturer = Build.MANUFACTURER.orEmpty(),
             model = Build.MODEL.orEmpty(),
             sdk = Build.VERSION.SDK_INT,
@@ -76,10 +76,10 @@ class CapabilityProbe(
         )
     }
 
-    private fun permissions(): FridayCapabilities.Permissions {
+    private fun permissions(): UltronCapabilities.Permissions {
         fun granted(p: String) = ContextCompat.checkSelfPermission(context, p) == PackageManager.PERMISSION_GRANTED
         val power = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        return FridayCapabilities.Permissions(
+        return UltronCapabilities.Permissions(
             microphone = granted(Manifest.permission.RECORD_AUDIO),
             overlay = Settings.canDrawOverlays(context),
             notificationListener = FridayNotificationListener.isEnabled(context),

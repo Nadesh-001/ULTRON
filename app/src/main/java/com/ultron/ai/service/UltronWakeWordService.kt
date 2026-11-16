@@ -1,5 +1,7 @@
 package com.ultron.ai.service
 
+typealias FridayWakeWordService = UltronWakeWordService
+
 import android.app.Service
 import android.content.Context
 import android.content.Intent

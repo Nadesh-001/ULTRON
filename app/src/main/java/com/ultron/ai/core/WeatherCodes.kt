@@ -2,6 +2,16 @@ package com.ultron.ai.core
 
 object WeatherCodes {
 
+    fun describe(code: Int, russian: Boolean = false): String = description(code, russian)
+
+    fun summarize(
+        place: String,
+        temperature: Double,
+        feelsLike: Double,
+        code: Int,
+        russian: Boolean = false
+    ): String = currentConditions(place, temperature, code, feelsLike, russian)
+
     fun description(code: Int, russian: Boolean = false): String = when (code) {
         0 -> "clear"
         1 -> "mostly clear"

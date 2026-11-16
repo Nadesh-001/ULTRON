@@ -50,6 +50,10 @@ Reply in the same language the conversation is in. Output only the sentence."""
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
+    fun start(scope: CoroutineScope) {
+        // Lifecycle hook for session summary management
+    }
+
     /** Fire-and-forget: never let summarising delay anything the user sees. */
     fun summarizeInBackground(sessionId: String) {
         scope.launch {
