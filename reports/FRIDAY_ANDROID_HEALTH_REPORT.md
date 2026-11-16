@@ -78,3 +78,4 @@ If any critical step in the pipeline fails:
 1. The GitHub Action step terminates and records exact standard error streams to `build_debug.log`.
 2. The `Failure-Diagnostic-Logs` step triggers unconditionally (`if: failure()`), uploading all raw build logs.
 3. The summary failure matrix is surfaced directly on the GitHub Actions Run Summary.
+
