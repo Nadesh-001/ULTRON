@@ -43,51 +43,56 @@ jobs:
             grep -E "e: |error:|FAILURE|Exception" gradle_build.log -B 2 -A 8 | head -n 100 || tail -n 100 gradle_build.log
             exit 1
           }
-          # Ensure target file name is Ultron-v0.18.0-debug.apk
-          find app/build/outputs/apk/debug/ -name "*.apk" -exec cp {} app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk \;
+          # Ensure target file name is Ultron-v0.19.0-debug.apk
+          find app/build/outputs/apk/debug/ -name "*.apk" -exec cp {} app/build/outputs/apk/debug/Ultron-v0.19.0-debug.apk \;
           ls -la app/build/outputs/apk/debug/
 
       - name: Upload Ultron Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: Ultron-Debug-APK
-          path: app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk
+          path: app/build/outputs/apk/debug/Ultron-v0.19.0-debug.apk
           if-no-files-found: error
           retention-days: 14
 
-      - name: Publish English GitHub Release (v0.18.0)
+      - name: Publish English GitHub Release (v0.19.0)
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v0.18.0
-          name: "ULTRON v0.18.0 — Arc Voice Assistant & Lock Screen HUD"
+          tag_name: v0.19.0
+          name: "ULTRON v0.19.0 — Complete ULTRON Migration, Public APIs & APK CI Build"
           draft: false
           prerelease: false
           make_latest: true
-          files: app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk
+          files: app/build/outputs/apk/debug/Ultron-v0.19.0-debug.apk
           body: |
-            # ⚡ ULTRON 0.18.0 — New Voice HUD Panel & Lock Screen Security
+            # ⚡ ULTRON 0.19.0 — Complete ULTRON Migration & CI/CD Pipeline
+
+            ### 🚀 What's New
+            - **Full ULTRON Branding**: All references migrated from the legacy "Friday" codebase to **ULTRON** (`com.ultron.ai`).
+            - **APK Renamed**: Download file is now `Ultron-v0.19.0-debug.apk` — no more `Friday-*.apk`.
+            - **Automated CI/CD**: GitHub Actions build, test, lint, security scan, and APK artifact generation — fully green.
+            - **English Release Notes**: All release content is now in English and Tanglish.
 
             ### 🎙️ Voice HUD Panel
-            - **Compact Bottom Panel**: Arc reactor HUD, real-time status indicator (*"Listening"*, *"Thinking"*, *"ULTRON · ..."*), dynamic 2-line response preview, and dismiss button.
-            - **Tap to Expand**: Tapping response text expands the entire response transcript cleanly without closing the panel.
-            - **Native In-App HUD**: When ULTRON is open, the HUD renders natively inside the app rather than as a secondary window.
+            - **Compact Bottom Panel**: Arc reactor HUD, real-time status (*"Listening"*, *"Thinking"*, *"ULTRON · ..."*), 2-line response preview, and dismiss button.
+            - **Tap to Expand**: Tapping response text expands the full transcript without closing the panel.
+            - **Native In-App HUD**: When ULTRON is open, the HUD renders inside the app — no overlay window.
 
             ### 🔒 Lock Screen Integration & Security
             - **Configurable Security Levels**: *"Safe Only"*, *"Voice Authenticated"*, or *"Unlock Required"*.
-            - **Sensitive Actions Protection**: Actions involving other people (SMS, calls) prompt system Android unlock and execute immediately after. ULTRON never sees or accesses your PIN/pattern.
-            - **Privacy HUD Overlay**: Only conversation phase is shown over the lock screen—spoken words, personal names, and answers remain private until tapping *"Unlock for details"*.
-            - **Intelligent Screen Keep-Alive**: Screen stays awake during conversations and for 10 seconds following a response (max 2 minutes idle timeout).
-            - **Graceful Notification Fallback**: Without full-screen notification permissions, ULTRON sends a private notification; without notifications, ULTRON replies purely via voice.
+            - **Sensitive Actions Protection**: SMS and call commands prompt Android system unlock first. ULTRON never sees your PIN.
+            - **Privacy Shield**: Lock screen overlay shows only conversation status. Tap *"Unlock for details"* for full answers.
+            - **Smart Screen Wake**: Display stays active during conversations + 10s post-response (max 2 min idle).
 
-            > **Setup Tip**: To enable the lock screen overlay, grant ULTRON *Full-Screen Notifications* under **Settings → Lock Screen**.
+            ### 🇮🇳 Tanglish Summary
+            - **Full ULTRON Branding**: Ella "Friday" references-um "ULTRON"-ku maathirukkum.
+            - **APK File**: `Ultron-v0.19.0-debug.apk` nu download aagum — old Friday name illai.
+            - **Voice HUD**: Arc reactor indicator, status text, 2-line preview panel. Text tap panna full answer expand aagum.
+            - **Lock Screen**: 3 security levels. SMS madhiri sensitive actions-ku Android unlock kekkum.
 
             ---
-
-            ### 🇮🇳 Tanglish Overview
-            - **Compact HUD Panel**: Arc reactor indicator, *"Listening"*, *"Thinking"* status, 2-line preview oda clean panel. Text mela tap panna full answer expand aagum.
-            - **Lock Screen Security**: 3 levels (*Safe only*, *Voice-ku aprom*, *Unlock pannadhukku aprom*). SMS madhiri actions-ku Android system unlock kekkum. Personal details lock screen mela hide aagirukkum.
-            - **Direct APK**: Download `Ultron-v0.18.0-debug.apk` below and install directly!
+            > **Download**: Grab `Ultron-v0.19.0-debug.apk` from the Assets below and install directly!
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

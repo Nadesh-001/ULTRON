@@ -107,9 +107,9 @@ jobs:
             echo "apk_generated=false" >> $GITHUB_OUTPUT
             exit 1
           fi
-          # Ensure file name is Ultron-v0.18.0-debug.apk
-          cp "$APK_PATH" app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk
-          TARGET_APK="app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk"
+          # Ensure file name is Ultron-v0.19.0-debug.apk
+          cp "$APK_PATH" app/build/outputs/apk/debug/Ultron-v0.19.0-debug.apk
+          TARGET_APK="app/build/outputs/apk/debug/Ultron-v0.19.0-debug.apk"
           APK_SIZE=$(du -h "$TARGET_APK" | cut -f1)
           APK_BYTES=$(stat -c%s "$TARGET_APK")
           echo "Ultron Debug APK ready: $TARGET_APK ($APK_SIZE, $APK_BYTES bytes)"
@@ -170,7 +170,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Ultron-Debug-APK
-          path: app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk
+          path: app/build/outputs/apk/debug/Ultron-v0.19.0-debug.apk
           retention-days: 14
           if-no-files-found: error
 
