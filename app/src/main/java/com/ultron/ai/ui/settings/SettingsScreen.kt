@@ -321,7 +321,7 @@ private fun MessagingPanel(
 
 @Composable
 private fun GmailPanel(
-    gmail: SettingsViewModel.GmailState,
+    gmail: SettingsViewModel.Gmail,
     onConnect: () -> Unit,
     onDisconnect: () -> Unit
 ) {
