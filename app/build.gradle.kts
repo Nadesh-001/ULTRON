@@ -61,6 +61,14 @@ android {
         ndk { abiFilters += "arm64-v8a" }
     }
 
+    applicationVariants.all {
+        outputs.all {
+            (this as? com.android.build.gradle.internal.api.BaseVariantOutputImpl)?.let {
+                it.outputFileName = "Ultron-v${defaultConfig.versionName}-${name}.apk"
+            }
+        }
+    }
+
     // The owner's signing key and its passwords are never committed: they come
     // from local.properties or the environment (see keystore/README.md). With
     // them, debug and release builds are signed as the owner's. Without them,

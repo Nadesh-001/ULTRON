@@ -107,11 +107,14 @@ jobs:
             echo "apk_generated=false" >> $GITHUB_OUTPUT
             exit 1
           fi
-          APK_SIZE=$(du -h "$APK_PATH" | cut -f1)
-          APK_BYTES=$(stat -c%s "$APK_PATH")
-          echo "Debug APK found: $APK_PATH ($APK_SIZE, $APK_BYTES bytes)"
+          # Ensure file name is Ultron-v0.18.0-debug.apk
+          cp "$APK_PATH" app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk
+          TARGET_APK="app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk"
+          APK_SIZE=$(du -h "$TARGET_APK" | cut -f1)
+          APK_BYTES=$(stat -c%s "$TARGET_APK")
+          echo "Ultron Debug APK ready: $TARGET_APK ($APK_SIZE, $APK_BYTES bytes)"
           echo "apk_generated=true" >> $GITHUB_OUTPUT
-          echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
+          echo "apk_path=$TARGET_APK" >> $GITHUB_OUTPUT
           echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
 
       # ==========================================
@@ -121,9 +124,9 @@ jobs:
         if: always()
         run: |
           mkdir -p reports
-          REPORT="reports/FRIDAY_ANDROID_HEALTH_REPORT.md"
+          REPORT="reports/ULTRON_ANDROID_HEALTH_REPORT.md"
           
-          echo "# 🛡️ Friday Mobile Android Health & QA Report" > $REPORT
+          echo "# 🛡️ Ultron Mobile Android Health & QA Report" > $REPORT
           echo "" >> $REPORT
           echo "**Generated At:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $REPORT
           echo "**Workflow:** ${{ github.workflow }} (#${{ github.run_number }})" >> $REPORT
@@ -166,8 +169,8 @@ jobs:
         if: steps.verify_apk.outputs.apk_generated == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: Friday-Debug-APK
-          path: app/build/outputs/apk/debug/*.apk
+          name: Ultron-Debug-APK
+          path: app/build/outputs/apk/debug/Ultron-v0.18.0-debug.apk
           retention-days: 14
           if-no-files-found: error
 
@@ -202,8 +205,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Friday-Android-Health-Report
-          path: reports/FRIDAY_ANDROID_HEALTH_REPORT.md
+          name: Ultron-Android-Health-Report
+          path: reports/ULTRON_ANDROID_HEALTH_REPORT.md
           retention-days: 14
           if-no-files-found: ignore
 
