@@ -159,7 +159,7 @@ fun VoicePanels(
 
             if (profile != null) {
                 HudOutlinedButton(
-                    onClick = { vm.resetVoiceProfile() },
+                    onClick = { vm.clearVoiceProfile() },
                     modifier = Modifier.weight(1f)
                 ) {
                     Text("Reset")
@@ -172,7 +172,7 @@ fun VoicePanels(
 @Composable
 private fun ModelRow(state: VoskModelManager.DownloadState, onDownload: () -> Unit) {
     when (state) {
-        is VoskModelManager.DownloadState.NotInstalled -> {
+        is VoskModelManager.DownloadState.NotDownloaded -> {
             HudReadout("Wake model", "NOT INSTALLED", valueColor = ErrorColor)
             HudOutlinedButton(onClick = onDownload, modifier = Modifier.fillMaxWidth()) {
                 Text("Download voice model (~45 MB)")
@@ -185,14 +185,14 @@ private fun ModelRow(state: VoskModelManager.DownloadState, onDownload: () -> Un
             HudReadout("Wake model", "UNPACKING")
         }
         is VoskModelManager.DownloadState.Ready -> HudReadout("Wake model", "READY", valueColor = ArcCyan)
-        is VoskModelManager.DownloadState.Failed -> {
+        is VoskModelManager.DownloadState.Error -> {
             HudReadout("Wake model", "ERROR", valueColor = ErrorColor)
             HudOutlinedButton(onClick = onDownload, modifier = Modifier.fillMaxWidth()) { Text("Retry download") }
         }
     }
 }
 
-private fun voiceProfileDescription(profile: VoiceProfile?): String {
+private fun voiceProfileDescription(profile: VoiceProfile.Profile?): String {
     return if (profile == null) {
         "Ultron currently responds to any voice. Record your voice profile (${VoiceProfile.ENROLMENT_PHRASES.size} short phrases) to recognize only you."
     } else {

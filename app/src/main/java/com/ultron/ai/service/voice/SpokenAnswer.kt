@@ -24,7 +24,7 @@ import kotlinx.coroutines.CancellationException
  * starts talking while the rest of the answer is still being generated.
  */
 class SpokenAnswer(
-    private val agent: FridayAgent,
+    private val agent: UltronAgent,
     private val prompts: SystemPromptBuilder,
     private val memory: FridayMemory,
     private val session: VoiceSession,

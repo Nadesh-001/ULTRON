@@ -40,7 +40,9 @@ class SettingsViewModel(
         val wakeWord: Boolean = false,
         val wakeThreshold: Double = 0.0,
         val ambientNoise: Double = 0.0,
-        val whisperThreshold: Double = 0.0
+        val whisperThreshold: Double = 0.0,
+        val speechEnergy: Double = 0.0,
+        val speechThreshold: Double = 0.0
     )
 
     private val _messages = MutableStateFlow(MessageSettings())
@@ -112,7 +114,6 @@ class SettingsViewModel(
         val message: String? = null,
         val consent: android.app.PendingIntent? = null
     )
-    typealias GmailState = Gmail
 
     private val _gmail = MutableStateFlow(Gmail())
     val gmail: StateFlow<Gmail> = _gmail.asStateFlow()
@@ -439,3 +440,5 @@ class SettingsViewModel(
         }
     }
 }
+
+typealias GmailState = SettingsViewModel.Gmail

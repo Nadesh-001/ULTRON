@@ -32,7 +32,7 @@ class AssistantRepositoryImpl(
     private val promptBuilder: SystemPromptBuilder,
     private val memory: FridayMemory,
     private val catalog: ModelCatalog,
-    private val agent: FridayAgent
+    private val agent: UltronAgent
 ) : AssistantRepository {
 
     companion object {
