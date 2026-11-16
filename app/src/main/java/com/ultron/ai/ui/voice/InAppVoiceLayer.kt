@@ -47,7 +47,7 @@ fun BoxScope.InAppVoiceLayer() {
                 VoiceUi.store.touched()
             },
             onClose = { VoiceUi.close() },
-            actions = if (expanded) listOf(PanelAction("Закрыть", onClick = { VoiceUi.close() })) else emptyList(),
+            actions = if (expanded) listOf(PanelAction("Close", onClick = { VoiceUi.close() })) else emptyList(),
             modifier = Modifier.align(Alignment.BottomCenter)
         )
     }

@@ -93,7 +93,7 @@ fun VoicePanelCard(
     onClose: () -> Unit,
     actions: List<PanelAction>,
     modifier: Modifier = Modifier,
-    closeLabel: String = "Закрыть Пятницу",
+    closeLabel: String = "Close Ultron",
     /** False where an action already ends the session ("text"): one way out, not two. */
     showClose: Boolean = true
 ) {
@@ -113,7 +113,7 @@ fun VoicePanelCard(
                         .padding(horizontal = 12.dp)
                         .clickable(
                             enabled = !expanded && view.body != null,
-                            onClickLabel = "Развернуть",
+                            onClickLabel = "Expand",
                             onClick = onExpand
                         )
                 ) {

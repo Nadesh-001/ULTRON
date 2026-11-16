@@ -12,8 +12,8 @@ package com.ultron.ai.core.capabilities
 object DiagnosticReport {
 
     private val redactions = listOf(
-        Regex("gsk_[A-Za-z0-9]+") to "[ключ]",
-        Regex("(?:enc:v1:)[A-Za-z0-9+/=]+") to "[зашифровано]",
+        Regex("gsk_[A-Za-z0-9]+") to "[key]",
+        Regex("(?:enc:v1:)[A-Za-z0-9+/=]+") to "[encrypted]",
         Regex("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}") to "[email]",
         Regex("«[^»]*»") to "«…»",
         Regex("\"(?:[^\"\\\\]|\\\\.){2,}\"") to "\"…\""
@@ -26,17 +26,17 @@ object DiagnosticReport {
     fun redact(line: String): String {
         val masked = redactions.fold(line) { text, (pattern, replacement) -> pattern.replace(text, replacement) }
         return digitRun.replace(masked) { m ->
-            if (m.value.count(Char::isDigit) >= PHONE_DIGITS) "[номер]" else m.value
+            if (m.value.count(Char::isDigit) >= PHONE_DIGITS) "[number]" else m.value
         }
     }
 
     fun build(version: String, device: String, rows: List<Diagnostics.Row>, log: List<String>): String = buildString {
-        appendLine("Friday $version · $device")
+        appendLine("Ultron $version · $device")
         appendLine()
-        appendLine("== Диагностика ==")
+        appendLine("== Diagnostics ==")
         rows.forEach { appendLine("[${it.status}] ${it.group.title} · ${it.title}: ${it.detail}") }
         appendLine()
-        appendLine("== Журнал (${log.size} строк, без ключей, номеров и текста) ==")
+        appendLine("== Log (${log.size} lines, keys and private details redacted) ==")
         log.forEach { appendLine(redact(it)) }
     }
 }

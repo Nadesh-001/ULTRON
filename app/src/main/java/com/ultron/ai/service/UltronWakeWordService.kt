@@ -92,9 +92,9 @@ class UltronWakeWordService : Service() {
         internal fun startFailure(e: Exception): String = when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
                 e is android.app.ForegroundServiceStartNotAllowedException ->
-                "Android не дал запустить прослушивание из фона — откройте Friday"
-            e is SecurityException -> "Android не дал службе микрофон в фоне — откройте Friday"
-            else -> "Прослушивание не запустилось (${e.javaClass.simpleName}) — откройте Friday"
+                "Android prevented background listening from starting — open Ultron"
+            e is SecurityException -> "Android restricted microphone access in background — open Ultron"
+            else -> "Listening service failed to start (${e.javaClass.simpleName}) — open Ultron"
         }
 
         private const val ACTION_INVOKE = "com.ultron.ai.INVOKE"
@@ -330,7 +330,7 @@ class UltronWakeWordService : Service() {
         val secret = get<AndroidNfcTags>(AndroidNfcTags::class.java).secret()
         when (val read = com.ultron.ai.core.modes.ModeTags.read(payload, secret)) {
             is com.ultron.ai.core.modes.ModeTags.Read.Mode -> toggle(read.id)
-            com.ultron.ai.core.modes.ModeTags.Read.Forged -> say("Эту метку записал не этот телефон — не запускаю.")
+            com.ultron.ai.core.modes.ModeTags.Read.Forged -> say("This NFC tag was written by another device — action blocked.")
             com.ultron.ai.core.modes.ModeTags.Read.NotATag -> Unit
         }
     }
@@ -340,8 +340,8 @@ class UltronWakeWordService : Service() {
         val engine = get<com.ultron.ai.core.modes.ModeEngine>(com.ultron.ai.core.modes.ModeEngine::class.java)
         val commands = get<CommandExecutor>(CommandExecutor::class.java)
         say(
-            engine.toggle(modeId, russian = true) { step ->
-                (commands.execute(step, russian = true) as? CommandExecutor.Outcome.Reply)?.text.orEmpty()
+            engine.toggle(modeId, russian = false) { step ->
+                (commands.execute(step, russian = false) as? CommandExecutor.Outcome.Reply)?.text.orEmpty()
             }
         )
     }

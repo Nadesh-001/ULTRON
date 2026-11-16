@@ -91,9 +91,9 @@ fun LazuriDashboardScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("ПАМЯТЬ", style = com.ultron.ai.ui.theme.HudBrandStyle)
+                        Text("MEMORY", style = com.ultron.ai.ui.theme.HudBrandStyle)
                         Text(
-                            "ФАКТОВ ${state.factCount} · РАЗГОВОРОВ ${state.sessionCount}",
+                            "FACTS ${state.factCount} · SESSIONS ${state.sessionCount}",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                         )
@@ -101,7 +101,7 @@ fun LazuriDashboardScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Назад")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 actions = {

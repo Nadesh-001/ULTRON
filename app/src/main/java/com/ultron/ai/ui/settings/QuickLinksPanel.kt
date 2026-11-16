@@ -40,17 +40,17 @@ fun QuickLinksPanel(viewModel: QuickLinksViewModel = koinViewModel()) {
     // null: closed; an empty link: adding; otherwise the one being edited.
     var editing by remember { mutableStateOf<QuickLink?>(null) }
 
-    HudPanel("Быстрые ссылки", index = 13) {
+    HudPanel("Quick Links", index = 13) {
         HudNote(
-            "Ваша фраза → ваш сайт в новой вкладке Chrome. Формы слов и вступления не важны: «давай посмотрим " +
-                "фильм» сработает и от «хочу посмотреть фильмы». Фраза из одного слова — только в короткой просьбе. " +
-                "«Молча»: без ответа, и ни в чате, ни в памяти Пятницы не остаётся."
+            "Your trigger phrase → your website in a new Chrome tab. Word endings and greetings don't matter: \"let's watch " +
+                "a movie\" will trigger from \"want to watch movies\". Single word phrases work in short requests only. " +
+                "\"Silent\": opens without spoken reply or chat record."
         )
         links.sortedBy { it.name.lowercase() }.forEach { link -> LinkRow(link) { editing = link } }
         HudOutlinedButton(
             onClick = { editing = QuickLink("", "", emptyList(), "") },
             modifier = Modifier.fillMaxWidth()
-        ) { Text("Добавить ссылку") }
+        ) { Text("Add Link") }
     }
 
     editing?.let { link ->
@@ -72,16 +72,16 @@ private fun LinkRow(link: QuickLink, onClick: () -> Unit) {
     Column(
         Modifier
             .fillMaxWidth()
-            .clickable(role = Role.Button, onClickLabel = "Изменить", onClick = onClick)
+            .clickable(role = Role.Button, onClickLabel = "Edit", onClick = onClick)
             .padding(vertical = 6.dp)
     ) {
         Text(
-            link.name + if (link.silent) " · молча" else "",
+            link.name + if (link.silent) " · silent" else "",
             color = ArcCyan,
             style = MaterialTheme.typography.titleSmall
         )
         Text(
-            "«${link.phrases.joinToString("», «")}» → ${host(link.url)}",
+            "\"${link.phrases.joinToString("\", \"")}\" → ${host(link.url)}",
             color = OnBackground,
             style = MaterialTheme.typography.bodySmall,
             maxLines = 2,
@@ -108,26 +108,26 @@ private fun LinkDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (link.id.isEmpty()) "Новая ссылка" else "Ссылка") },
+        title = { Text(if (link.id.isEmpty()) "New Link" else "Link") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                LinkField(name, { name = it }, "Название", "Фильмы")
-                LinkField(phrases, { phrases = it }, "Фразы, через запятую", "давай посмотрим фильм, включи кино")
-                LinkField(address, { address = it }, "Адрес сайта", "example.com")
+                LinkField(name, { name = it }, "Name", "Movies")
+                LinkField(phrases, { phrases = it }, "Phrases, comma-separated", "watch movie, open netflix")
+                LinkField(address, { address = it }, "Website URL", "netflix.com")
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("Открывать молча", Modifier.weight(1f))
+                    Text("Open silently", Modifier.weight(1f))
                     Switch(checked = silent, onCheckedChange = { silent = it })
                 }
                 problem?.let { Text(it, color = ErrorColor, style = MaterialTheme.typography.bodySmall) }
             }
         },
         confirmButton = {
-            TextButton(onClick = { problem = onSave(name, phrases, address, silent) }) { Text("Сохранить") }
+            TextButton(onClick = { problem = onSave(name, phrases, address, silent) }) { Text("Save") }
         },
         dismissButton = {
             Row {
-                onDelete?.let { TextButton(onClick = it) { Text("Удалить", color = ErrorColor) } }
-                TextButton(onClick = onDismiss) { Text("Отмена") }
+                onDelete?.let { TextButton(onClick = it) { Text("Delete", color = ErrorColor) } }
+                TextButton(onClick = onDismiss) { Text("Cancel") }
             }
         }
     )

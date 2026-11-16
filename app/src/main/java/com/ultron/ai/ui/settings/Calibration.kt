@@ -77,11 +77,11 @@ class Calibration(
     }
 
     companion object {
-        const val CANCELLED = "Калибровка отменена — прежние настройки остались."
-        const val TIMED_OUT = "Голос не прозвучал за 10 секунд, микрофон отпущен. " +
-            "Нажмите ещё раз и сразу скажите фразу вслух."
-        const val NO_MICROPHONE = "Микрофон недоступен — разрешите доступ к нему или " +
-            "завершите звонок/запись в другом приложении, затем повторите."
+        const val CANCELLED = "Calibration cancelled — previous settings retained."
+        const val TIMED_OUT = "No voice detected within 10 seconds. " +
+            "Tap Calibrate again and speak aloud immediately."
+        const val NO_MICROPHONE = "Microphone unavailable — please grant permission or " +
+            "end active calls/recordings in other apps, then retry."
 
         fun messageFor(outcome: Outcome): String? = when (outcome) {
             is Outcome.Completed -> null

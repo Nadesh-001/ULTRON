@@ -25,11 +25,11 @@ class LocationViewModel(private val weather: WeatherHere) : ViewModel() {
     /** Checks [typed] against the map and keeps it as the map spells it; blank clears it. */
     fun save(typed: String) {
         viewModelScope.launch {
-            val saved = weather.setHomeCity(typed, russian = true)
+            val saved = weather.setHomeCity(typed, russian = false)
             _result.value = when {
-                saved == null -> "Город «${typed.trim()}» не найден"
-                saved.isEmpty() -> "Город по умолчанию убран"
-                else -> "Сохранено: $saved"
+                saved == null -> "City \"${typed.trim()}\" not found"
+                saved.isEmpty() -> "Default city removed"
+                else -> "Saved: $saved"
             }
             if (saved != null) _city.value = saved
         }

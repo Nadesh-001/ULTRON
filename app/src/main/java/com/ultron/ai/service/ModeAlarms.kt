@@ -118,8 +118,8 @@ fun notifyModeResult(context: Context, text: String) {
     val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         manager.createNotificationChannel(
-            NotificationChannel(CHANNEL_ID, "Режимы", NotificationManager.IMPORTANCE_LOW)
-                .apply { description = "Что сделал режим, включившийся сам: по расписанию, Bluetooth, зарядке, Wi-Fi" }
+            NotificationChannel(CHANNEL_ID, "Modes", NotificationManager.IMPORTANCE_LOW)
+                .apply { description = "Routines triggered automatically: schedule, Bluetooth, charging, Wi-Fi" }
         )
     }
     val open = context.packageManager.getLaunchIntentForPackage(context.packageName)
@@ -127,7 +127,7 @@ fun notifyModeResult(context: Context, text: String) {
         context, 0, open, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
     )
     val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-        .setContentTitle("Пятница")
+        .setContentTitle("Ultron")
         .setContentText(text.take(PREVIEW_CHARS))
         .setStyle(NotificationCompat.BigTextStyle().bigText(text))
         .setSmallIcon(android.R.drawable.ic_dialog_info)

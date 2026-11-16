@@ -218,14 +218,13 @@ class ChatViewModel(
         }
     }
 
-    private fun isRussian(text: String): Boolean =
-        text.any { it in 'а'..'я' || it in 'А'..'Я' }
+    private fun isRussian(text: String): Boolean = false
 
     /** The owner answered the screen-capture consent screen. */
     fun onScreenConsent(resultCode: Int, data: Intent?) {
         val capture = screen ?: return
         if (resultCode != Activity.RESULT_OK || data == null) {
-            showError("Доступ к экрану не дан — анализ отменён")
+            showError("Screen access denied — analysis cancelled")
             return
         }
         if (!begin {
@@ -251,7 +250,7 @@ class ChatViewModel(
                 stream(analyzeContent.analyzeImage(file.jpegBase64, "Analyze this image (${file.name}):"))
             is FileAnalyzer.Outcome.Text -> {
                 val text = if (file.truncated) {
-                    file.text + "\n\n[…обрезано: показаны первые ${FileAnalyzer.MAX_TEXT_CHARS} символов]"
+                    file.text + "\n\n[…truncated: showing first ${FileAnalyzer.MAX_TEXT_CHARS} characters]"
                 } else {
                     file.text
                 }
@@ -259,14 +258,14 @@ class ChatViewModel(
             }
             is FileAnalyzer.Outcome.Unsupported -> fail(
                 if (file.mimeType == "application/pdf") {
-                    "PDF пока не поддерживается — пришлите текст или снимок страницы"
+                    "PDF is not supported yet — please send text or page screenshot"
                 } else {
-                    "Этот тип файла не поддерживается: «${file.name}»"
+                    "File type not supported: \"${file.name}\""
                 }
             )
             is FileAnalyzer.Outcome.TooLarge ->
-                fail("Файл «${file.name}» слишком большой (больше ${file.limitBytes / (1024 * 1024)} МБ)")
-            is FileAnalyzer.Outcome.Unreadable -> fail("Не удалось прочитать файл «${file.name}»")
+                fail("File \"${file.name}\" too large (exceeds ${file.limitBytes / (1024 * 1024)} MB)")
+            is FileAnalyzer.Outcome.Unreadable -> fail("Unable to read file \"${file.name}\"")
         }
     }
 
@@ -276,7 +275,7 @@ class ChatViewModel(
      */
     fun onNotebook(page: com.ultron.ai.ui.notebook.NotebookInbox.Page) {
         val started = begin {
-            persist("[Блокнот] " + page.question.ifBlank { "что здесь написано?" }, MessageRole.USER)
+            persist("[Notebook] " + page.question.ifBlank { "What is written here?" }, MessageRole.USER)
             stream(analyzeContent.analyzeImage(page.imageBase64, notebookPrompt(page.question)))
         }
         if (!started) busy()
@@ -321,7 +320,7 @@ class ChatViewModel(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                request.fail(e.message ?: "Ошибка")
+                request.fail(e.message ?: "Error")
             } finally {
                 request.streamId?.let(::removeStreamingMessage)
                 if (active === request) finishLoading(request)
@@ -369,7 +368,7 @@ class ChatViewModel(
         _uiState.update { it.copy(error = reason) }
     }
 
-    private fun busy() = showError("Пятница ещё отвечает — подождите немного")
+    private fun busy() = showError("Ultron is still responding — please wait a moment")
 
     private fun updateStreamingMessage(id: String, content: String) {
         _uiState.update { state ->
