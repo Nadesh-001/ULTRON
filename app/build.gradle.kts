@@ -1,4 +1,4 @@
-﻿import java.util.Properties
+import java.util.Properties
 
 // No API key is read here: one compiled into an APK can be read back out of
 // it by anyone who has the file. The user enters their own in Settings.
@@ -214,6 +214,19 @@ dependencies {
     // Vosk offline speech recognition (silent wake word detection)
     implementation("com.alphacephei:vosk-android:0.3.47")
     implementation("net.java.dev.jna:jna:5.13.0@aar")
+
+    // CameraX
+    val cameraxVersion = "1.4.1"
+    implementation("androidx.camera:camera-core:$cameraxVersion")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
+
+    // Google ML Kit
+    implementation("com.google.mlkit:text-recognition:16.0.1")
+    implementation("com.google.mlkit:barcode-scanning:17.3.0")
+    implementation("com.google.mlkit:language-id:17.0.6")
 
     // Unit Tests
     testImplementation("junit:junit:4.13.2")

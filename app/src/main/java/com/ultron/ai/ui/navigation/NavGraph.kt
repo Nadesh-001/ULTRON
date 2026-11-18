@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.navigation
+package com.ultron.ai.ui.navigation
 
 import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -32,7 +32,8 @@ fun ULTRONNavGraph(activity: MainActivity) {
             UltronHomeDashboard(
                 onNavigateToChat = { navController.navigate("chat") },
                 onNavigateToVoice = { navController.navigate("voice") },
-                onOpenSettings = { navController.navigate("settings") }
+                onOpenSettings = { navController.navigate("settings") },
+                onNavigateToVision = { navController.navigate("vision_camera") }
             )
         }
         composable("voice") {
@@ -117,6 +118,17 @@ fun ULTRONNavGraph(activity: MainActivity) {
             com.ultron.ai.ui.security.SecurityDashboard(
                 viewModel = koinViewModel(),
                 onBack = { navController.popBackStack() }
+            )
+        }
+        composable("vision_camera") {
+            com.ultron.ai.vision.ui.VisionCameraScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToChat = { navController.navigate("vision_chat") }
+            )
+        }
+        composable("vision_chat") {
+            com.ultron.ai.vision.ui.VisionChatScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
     }

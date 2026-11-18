@@ -39,7 +39,16 @@ import com.ultron.ai.ui.theme.OnPrimary
 import com.ultron.ai.ui.theme.OnSurfaceMuted
 import com.ultron.ai.ui.theme.SurfaceDark
 
-/** A glass command line with the reactor microphone beside it. */
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.IconButton
+import com.ultron.ai.ui.theme.OutlineDim
+import com.ultron.ai.ui.theme.SurfaceVariant
+import com.ultron.ai.ui.theme.UltronRed
+
+/** A glass command line with the (+) Add Context trigger and reactor microphone beside it. */
 @Composable
 fun ChatInputBar(
     text: String,
@@ -48,6 +57,7 @@ fun ChatInputBar(
     onMicClick: () -> Unit,
     isLoading: Boolean,
     isListening: Boolean = false,
+    onToggleAddContext: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -57,6 +67,21 @@ fun ChatInputBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        // (+) Add Context Trigger Button
+        IconButton(
+            onClick = onToggleAddContext,
+            modifier = Modifier
+                .size(42.dp)
+                .background(SurfaceVariant, CircleShape)
+                .border(1.dp, OutlineDim, CircleShape)
+        ) {
+            Icon(
+                Icons.Default.Add,
+                contentDescription = "Add context & tools",
+                tint = UltronRed
+            )
+        }
+
         OutlinedTextField(
             value = text,
             onValueChange = onTextChange,

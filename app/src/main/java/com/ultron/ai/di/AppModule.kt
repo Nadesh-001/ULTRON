@@ -286,4 +286,26 @@ val appModule = module {
     single { com.ultron.ai.core.PrivacyManager(androidContext()) }
     single { com.ultron.ai.core.EmergencyStopController(androidContext(), get(), get()) }
     viewModel { com.ultron.ai.ui.security.SecurityDashboardViewModel(get(), get(), get()) }
+
+    // Chat Context & Tool Integration Engine
+    single { com.ultron.ai.core.context.ContextManager(androidContext()) }
+
+    // ULTRON Vision AI
+    single { com.ultron.ai.vision.camera.CameraController(androidContext()) }
+    single { com.ultron.ai.vision.ocr.TextRecognitionService() }
+    single { com.ultron.ai.vision.barcode.BarcodeScanner() }
+    single { com.ultron.ai.vision.translation.TranslationService() }
+    single { com.ultron.ai.vision.ai.VisionContextManager() }
+    single { com.ultron.ai.vision.ai.VisionAIService(get()) }
+    viewModel {
+        com.ultron.ai.vision.ui.VisionViewModel(
+            application = get(),
+            cameraController = get(),
+            textRecognitionService = get(),
+            barcodeScanner = get(),
+            translationService = get(),
+            contextManager = get(),
+            visionAIService = get()
+        )
+    }
 }

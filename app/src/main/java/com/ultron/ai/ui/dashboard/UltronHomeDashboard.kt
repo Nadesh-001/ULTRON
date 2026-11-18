@@ -87,6 +87,7 @@ fun UltronHomeDashboard(
     onNavigateToChat: () -> Unit,
     onNavigateToVoice: () -> Unit,
     onOpenSettings: () -> Unit,
+    onNavigateToVision: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var currentState by remember { mutableStateOf(UltronAiState.READY) }
@@ -356,7 +357,7 @@ fun UltronHomeDashboard(
                 modifier = Modifier
                     .clip(RoundedCornerShape(8.dp))
                     .clickable { onNavigateToChat() }
-                    .padding(horizontal = 16.dp, vertical = 4.dp)
+                    .padding(horizontal = 14.dp, vertical = 4.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Terminal,
@@ -369,6 +370,31 @@ fun UltronHomeDashboard(
                     color = OnSurfaceMuted,
                     fontFamily = FontFamily.Monospace,
                     fontSize = 10.sp,
+                    letterSpacing = 0.6.sp
+                )
+            }
+
+            // Vision
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable { onNavigateToVision() }
+                    .padding(horizontal = 14.dp, vertical = 4.dp)
+            ) {
+                Icon(
+                    imageVector = androidx.compose.material.icons.Icons.Filled.PhotoCamera,
+                    contentDescription = "Vision",
+                    tint = UltronRed,
+                    modifier = Modifier.size(24.dp)
+                )
+                Text(
+                    text = "VISION",
+                    color = UltronRed,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
                     letterSpacing = 0.6.sp
                 )
             }
