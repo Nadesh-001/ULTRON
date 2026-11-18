@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.chat
+package com.ultron.ai.ui.chat
 
 import android.app.Activity
 import android.content.Intent

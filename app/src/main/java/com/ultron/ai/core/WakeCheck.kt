@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 /**
  * Whether a wake call the decoder reported is to be believed, judged on the

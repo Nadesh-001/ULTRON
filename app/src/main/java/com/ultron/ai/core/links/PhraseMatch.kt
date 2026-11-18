@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.links
+package com.ultron.ai.core.links
 
 /**
  * Whether a quick link's phrase was said, the way people actually say it.

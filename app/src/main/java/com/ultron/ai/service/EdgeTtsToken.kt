@@ -1,4 +1,4 @@
-﻿/*
+/*
  * The Sec-MS-GEC v2 token for Edge's read-aloud service.
  *
  * Ported from edge-tts (https://github.com/rany2/edge-tts,

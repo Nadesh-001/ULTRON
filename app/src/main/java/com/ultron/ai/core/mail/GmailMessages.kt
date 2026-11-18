@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.mail
+package com.ultron.ai.core.mail
 
 import java.util.Base64
 import org.json.JSONArray

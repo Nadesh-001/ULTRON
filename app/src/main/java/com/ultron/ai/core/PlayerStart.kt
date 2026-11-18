@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 /**
  * What came of starting music, and how to say it.

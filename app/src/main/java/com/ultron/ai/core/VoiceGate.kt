@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 /**
  * Decides which audio frames reach the wake-word decoder.

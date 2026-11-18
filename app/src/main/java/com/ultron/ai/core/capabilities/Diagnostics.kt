@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.capabilities
+package com.ultron.ai.core.capabilities
 
 /**
  * The diagnostics screen as data: one row per check that decides whether an

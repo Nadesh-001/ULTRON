@@ -1,4 +1,4 @@
-﻿package com.ultron.ai
+package com.ultron.ai
 
 import com.ultron.ai.service.ULTRONWakeWordService
 

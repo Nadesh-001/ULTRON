@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 import kotlin.math.cos
 import kotlin.math.min

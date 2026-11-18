@@ -1,4 +1,4 @@
-﻿// Long lines on purpose: each reply is a Russian/English pair kept side by side.
+// Long lines on purpose: each reply is a Russian/English pair kept side by side.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core.modes

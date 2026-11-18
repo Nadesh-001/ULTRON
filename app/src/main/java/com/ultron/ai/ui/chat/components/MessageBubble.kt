@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.chat.components
+package com.ultron.ai.ui.chat.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.RepeatMode

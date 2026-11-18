@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.messages
+package com.ultron.ai.core.messages
 
 import com.ultron.ai.core.ContactMatcher
 

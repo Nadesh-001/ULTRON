@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service
+package com.ultron.ai.service
 
 import android.util.Log
 import com.ultron.ai.data.local.dao.InteractionDao

@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.backup
+package com.ultron.ai.data.backup
 
 import com.ultron.ai.data.local.dao.BackupDao
 import com.ultron.ai.data.local.secure.SecurePreferenceDao

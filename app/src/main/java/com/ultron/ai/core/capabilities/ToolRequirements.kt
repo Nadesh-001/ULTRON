@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.capabilities
+package com.ultron.ai.core.capabilities
 
 /**
  * What each tool needs in order to work.

@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.mail
+package com.ultron.ai.service.mail
 
 import android.app.PendingIntent
 import android.content.Context

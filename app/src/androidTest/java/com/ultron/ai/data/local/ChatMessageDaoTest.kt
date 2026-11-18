@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.local
+package com.ultron.ai.data.local
 
 import android.content.Context
 import androidx.room.Room

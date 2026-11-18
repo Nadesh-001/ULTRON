@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.dashboard
+package com.ultron.ai.ui.dashboard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures

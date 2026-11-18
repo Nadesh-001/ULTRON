@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.settings
+package com.ultron.ai.ui.settings
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

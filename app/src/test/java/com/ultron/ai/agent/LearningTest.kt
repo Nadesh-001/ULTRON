@@ -1,4 +1,4 @@
-﻿// Long lines on purpose: tool-call JSON is kept whole so it reads as the model sends it.
+// Long lines on purpose: tool-call JSON is kept whole so it reads as the model sends it.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.agent

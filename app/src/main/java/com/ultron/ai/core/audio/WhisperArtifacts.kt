@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.audio
+package com.ultron.ai.core.audio
 
 /**
  * Text Whisper makes up when there is no speech to hear.

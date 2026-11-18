@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.theme
+package com.ultron.ai.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme

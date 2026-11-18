@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.command
+package com.ultron.ai.command
 
 /**
  * Asks Android to unlock the phone — its own screen: fingerprint, face or

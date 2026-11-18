@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.remote
+package com.ultron.ai.data.remote
 
 import android.util.Log
 import com.ultron.ai.core.WeatherCodes

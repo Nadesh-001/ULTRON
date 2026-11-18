@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.voice
+package com.ultron.ai.service.voice
 
 import android.media.AudioManager
 import com.ultron.ai.service.voice.WakeHealth.Status

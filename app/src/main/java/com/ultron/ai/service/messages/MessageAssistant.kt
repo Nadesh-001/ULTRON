@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.messages
+package com.ultron.ai.service.messages
 
 import android.content.Context
 import com.ultron.ai.core.mail.Confirmation

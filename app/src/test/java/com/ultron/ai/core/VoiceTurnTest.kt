@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 import com.ultron.ai.core.VoiceTurn.Next
 import com.ultron.ai.core.VoiceTurn.Outcome

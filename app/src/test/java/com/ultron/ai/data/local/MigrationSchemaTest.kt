@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.local
+package com.ultron.ai.data.local
 
 import java.io.File
 import org.json.JSONObject

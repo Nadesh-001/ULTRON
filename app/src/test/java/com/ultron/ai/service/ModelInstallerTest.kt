@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service
+package com.ultron.ai.service
 
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream

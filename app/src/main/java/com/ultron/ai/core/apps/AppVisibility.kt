@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.apps
+package com.ultron.ai.core.apps
 
 import java.util.concurrent.atomic.AtomicInteger
 import kotlinx.coroutines.flow.MutableStateFlow

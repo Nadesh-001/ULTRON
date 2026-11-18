@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.modes
+package com.ultron.ai.core.modes
 
 import android.util.Log
 import com.ultron.ai.agent.ActionEnvelope

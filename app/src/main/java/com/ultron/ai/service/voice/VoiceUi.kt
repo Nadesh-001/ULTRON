@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.voice
+package com.ultron.ai.service.voice
 
 import android.os.SystemClock
 import com.ultron.ai.core.voice.VoicePanelStore

@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.capture
+package com.ultron.ai.service.capture
 
 import android.app.Activity
 import android.app.Notification

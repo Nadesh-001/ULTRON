@@ -41,6 +41,10 @@ jobs:
           ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee gradle_build.log || {
             echo "=================== BUILD FAILURE LOG ==================="
             grep -E "e: |error:|FAILURE|Exception" gradle_build.log -B 2 -A 8 | head -n 100 || tail -n 100 gradle_build.log
+            echo "### ❌ ULTRON Assemble Debug Failed" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            tail -n 80 gradle_build.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
             exit 1
           }
           # Ensure target file name is Ultron-v0.21.0-debug.apk

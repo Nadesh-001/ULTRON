@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 /**
  * Splits a streaming LLM response into speakable chunks as tokens arrive.

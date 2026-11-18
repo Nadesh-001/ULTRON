@@ -116,4 +116,4 @@ class UltronApp : Application() {
 }
 
 /** Backward compatibility alias */
-typealias UltronApp = UltronApp
+typealias FridayApp = UltronApp

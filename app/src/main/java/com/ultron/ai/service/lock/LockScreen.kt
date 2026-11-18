@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.lock
+package com.ultron.ai.service.lock
 
 import android.app.KeyguardManager
 import android.app.Notification

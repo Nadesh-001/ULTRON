@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 import android.app.AlarmManager
 import android.content.Context

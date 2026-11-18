@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.voice
+package com.ultron.ai.core.voice
 
 /** What a panel says, decided apart from how it is drawn. */
 data class PanelView(

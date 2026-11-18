@@ -1,4 +1,4 @@
-﻿// Long lines on purpose: tool descriptions are prompt text sent to the model.
+// Long lines on purpose: tool descriptions are prompt text sent to the model.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.agent

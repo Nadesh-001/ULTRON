@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.people
+package com.ultron.ai.core.people
 
 import android.content.ClipData
 import android.content.ClipboardManager

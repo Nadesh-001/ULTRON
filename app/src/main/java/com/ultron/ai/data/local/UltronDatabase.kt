@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.local
+package com.ultron.ai.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -55,4 +55,4 @@ abstract class UltronDatabase : RoomDatabase() {
 }
 
 /** Backward compatibility alias */
-typealias UltronDatabase = UltronDatabase
+typealias FridayDatabase = UltronDatabase

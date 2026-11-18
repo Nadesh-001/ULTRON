@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.modes
+package com.ultron.ai.core.modes
 
 import java.util.Base64
 import javax.crypto.Mac

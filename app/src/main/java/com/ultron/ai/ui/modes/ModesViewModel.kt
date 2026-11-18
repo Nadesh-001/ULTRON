@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.modes
+package com.ultron.ai.ui.modes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

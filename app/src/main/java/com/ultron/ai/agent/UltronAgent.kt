@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.agent
+package com.ultron.ai.agent
 
 import android.util.Log
 import com.ultron.ai.command.CommandExecutor

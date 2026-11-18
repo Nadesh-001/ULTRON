@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.local.entity
+package com.ultron.ai.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.Index

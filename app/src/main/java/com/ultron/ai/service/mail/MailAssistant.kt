@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.mail
+package com.ultron.ai.service.mail
 
 import android.util.Log
 import com.ultron.ai.core.ContactMatcher

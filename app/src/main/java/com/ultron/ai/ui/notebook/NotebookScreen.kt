@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.notebook
+package com.ultron.ai.ui.notebook
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitEachGesture

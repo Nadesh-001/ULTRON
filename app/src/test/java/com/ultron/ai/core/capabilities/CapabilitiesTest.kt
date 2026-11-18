@@ -1,4 +1,4 @@
-﻿// Long lines on purpose: fixtures and tool-call JSON are kept whole.
+// Long lines on purpose: fixtures and tool-call JSON are kept whole.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core.capabilities

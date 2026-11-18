@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.links
+package com.ultron.ai.service.links
 
 import android.content.ActivityNotFoundException
 import android.content.Context

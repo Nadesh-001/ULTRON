@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 import com.ultron.ai.domain.model.CommandResult
 import com.ultron.ai.domain.model.DeviceAction

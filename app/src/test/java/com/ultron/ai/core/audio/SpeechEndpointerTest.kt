@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.audio
+package com.ultron.ai.core.audio
 
 import com.ultron.ai.core.VoiceProfile
 import com.ultron.ai.core.audio.SpeechEndpointer.End

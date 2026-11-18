@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.voice
+package com.ultron.ai.service.voice
 
 import com.ultron.ai.command.CommandExecutor
 import com.ultron.ai.core.OfflineCommands

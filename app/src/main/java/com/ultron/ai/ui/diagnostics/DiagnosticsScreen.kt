@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.diagnostics
+package com.ultron.ai.ui.diagnostics
 
 import android.Manifest
 import android.app.Activity

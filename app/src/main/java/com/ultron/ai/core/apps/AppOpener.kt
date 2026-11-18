@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.apps
+package com.ultron.ai.core.apps
 
 /**
  * Opens the app a name means, and says only what is known.

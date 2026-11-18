@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.backup
+package com.ultron.ai.data.backup
 
 import com.ultron.ai.data.local.entity.ChatMessageEntity
 import com.ultron.ai.data.local.entity.ErrandEntity

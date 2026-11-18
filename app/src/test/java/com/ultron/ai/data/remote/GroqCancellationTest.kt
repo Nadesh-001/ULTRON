@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.remote
+package com.ultron.ai.data.remote
 
 import com.ultron.ai.data.remote.dto.ApiMessage
 import java.io.File

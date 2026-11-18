@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.modes
+package com.ultron.ai.core.modes
 
 import com.ultron.ai.domain.model.CommandResult
 

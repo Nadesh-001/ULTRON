@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.agent
+package com.ultron.ai.agent
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.overlay
+package com.ultron.ai.ui.overlay
 
 import android.animation.ValueAnimator
 import android.content.Context

@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.data.local.secure
+package com.ultron.ai.data.local.secure
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

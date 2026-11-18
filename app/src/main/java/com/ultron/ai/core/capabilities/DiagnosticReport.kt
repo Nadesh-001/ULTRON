@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.capabilities
+package com.ultron.ai.core.capabilities
 
 /**
  * A plain-text report for working out what went wrong: version, every

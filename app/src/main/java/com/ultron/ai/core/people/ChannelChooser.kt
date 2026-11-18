@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.people
+package com.ultron.ai.core.people
 
 /**
  * How to reach someone: SMS, WhatsApp or Telegram, and which of their numbers.

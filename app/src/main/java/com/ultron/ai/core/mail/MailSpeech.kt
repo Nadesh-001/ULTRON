@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.mail
+package com.ultron.ai.core.mail
 
 import com.ultron.ai.core.BriefComposer
 

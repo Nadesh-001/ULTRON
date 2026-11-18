@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.command
+package com.ultron.ai.command
 
 import com.ultron.ai.domain.model.CommandResult
 

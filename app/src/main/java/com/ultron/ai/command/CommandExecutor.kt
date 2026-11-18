@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.command
+package com.ultron.ai.command
 
 import android.util.Log
 import com.ultron.ai.agent.LearnedCommands

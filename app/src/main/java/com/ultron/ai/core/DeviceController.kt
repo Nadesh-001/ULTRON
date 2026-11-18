@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core
+package com.ultron.ai.core
 
 import android.util.Log
 import com.ultron.ai.domain.model.DeviceAction

@@ -1,4 +1,4 @@
-﻿// Long lines on purpose: a table of regexes, each kept on one line so it can be read whole.
+// Long lines on purpose: a table of regexes, each kept on one line so it can be read whole.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core

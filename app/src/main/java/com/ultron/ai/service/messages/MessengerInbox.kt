@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service.messages
+package com.ultron.ai.service.messages
 
 import android.app.Notification
 import android.app.PendingIntent

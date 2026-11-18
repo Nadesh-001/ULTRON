@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.capabilities
+package com.ultron.ai.core.capabilities
 
 import android.Manifest
 import android.app.role.RoleManager

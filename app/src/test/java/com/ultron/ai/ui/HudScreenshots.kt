@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui
+package com.ultron.ai.ui
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Arrangement

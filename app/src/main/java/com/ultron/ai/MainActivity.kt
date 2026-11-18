@@ -1,4 +1,4 @@
-﻿package com.ultron.ai
+package com.ultron.ai
 
 import android.content.Intent
 import android.os.Bundle

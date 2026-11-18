@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.capabilities
+package com.ultron.ai.core.capabilities
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

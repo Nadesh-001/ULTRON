@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.voice
+package com.ultron.ai.ui.voice
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable

@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.dashboard
+package com.ultron.ai.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

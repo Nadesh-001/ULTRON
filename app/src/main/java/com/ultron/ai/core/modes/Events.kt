@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.core.modes
+package com.ultron.ai.core.modes
 
 /** What can start a mode besides the owner's voice and the clock. */
 enum class Trigger(val key: String) {

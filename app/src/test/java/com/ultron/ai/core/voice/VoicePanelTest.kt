@@ -1,4 +1,4 @@
-﻿@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
+@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
 
 package com.ultron.ai.core.voice
 
