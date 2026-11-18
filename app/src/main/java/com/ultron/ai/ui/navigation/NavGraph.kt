@@ -18,6 +18,7 @@ import com.ultron.ai.ui.dashboard.LazuriDashboardScreen
 import com.ultron.ai.ui.dashboard.UltronHomeDashboard
 import com.ultron.ai.ui.diagnostics.DiagnosticsScreen
 import com.ultron.ai.ui.settings.SettingsScreen
+import com.ultron.ai.ui.voice.UltronVoiceAssistantScreen
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
@@ -29,7 +30,14 @@ fun FridayNavGraph(activity: MainActivity) {
         composable("home") {
             UltronHomeDashboard(
                 onNavigateToChat = { navController.navigate("chat") },
-                onNavigateToVoice = { navController.navigate("chat") },
+                onNavigateToVoice = { navController.navigate("voice") },
+                onOpenSettings = { navController.navigate("settings") }
+            )
+        }
+        composable("voice") {
+            UltronVoiceAssistantScreen(
+                onNavigateToHome = { navController.navigate("home") },
+                onNavigateToChat = { navController.navigate("chat") },
                 onOpenSettings = { navController.navigate("settings") }
             )
         }
