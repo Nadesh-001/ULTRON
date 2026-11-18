@@ -119,7 +119,7 @@ class MorningBriefWorker(
         }
         val proactive: ProactiveBriefService =
             org.koin.java.KoinJavaComponent.get(ProactiveBriefService::class.java)
-        val russian = (prefDao.get("prefer_russian") ?: "true") == "true"
+        val russian = false
         notify(proactive.morningBrief(russian))
     }
 
