@@ -70,23 +70,25 @@ object ImageProcessor {
                 this.inSampleSize = inSampleSize
             }
 
-            var rawBitmap: Bitmap? = contentResolver.openInputStream(uri)?.use { inputStream ->
+            val decodedBitmap: Bitmap = contentResolver.openInputStream(uri)?.use { inputStream ->
                 BitmapFactory.decodeStream(inputStream, null, decodeOptions)
             } ?: return@withContext null
 
             // EXIF Orientation check
             val rotationDegrees = getExifOrientationDegrees(contentResolver.openInputStream(uri))
-            if (rotationDegrees != 0) {
+            val rawBitmap: Bitmap = if (rotationDegrees != 0) {
                 val matrix = Matrix().apply { postRotate(rotationDegrees.toFloat()) }
-                rawBitmap = Bitmap.createBitmap(
-                    rawBitmap,
+                Bitmap.createBitmap(
+                    decodedBitmap,
                     0,
                     0,
-                    rawBitmap.width,
-                    rawBitmap.height,
+                    decodedBitmap.width,
+                    decodedBitmap.height,
                     matrix,
                     true
                 )
+            } else {
+                decodedBitmap
             }
 
             scaleBitmap(rawBitmap)

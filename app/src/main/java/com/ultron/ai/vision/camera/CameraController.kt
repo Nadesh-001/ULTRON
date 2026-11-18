@@ -107,14 +107,9 @@ class CameraController(private val context: Context) {
         if (_isFrontFacing.value) {
             _isFlashOn.value = false
         }
-        lifecycleOwner.let {
-            // Re-bind with new lens
-            androidx.lifecycle.lifecycleScope.let {
-                // Trigger re-start via caller or direct call
-                android.os.Handler(android.os.Looper.getMainLooper()).post {
-                    bindCameraSafely(lifecycleOwner, previewView)
-                }
-            }
+        // Re-bind with new lens via main thread
+        android.os.Handler(android.os.Looper.getMainLooper()).post {
+            bindCameraSafely(lifecycleOwner, previewView)
         }
     }
 

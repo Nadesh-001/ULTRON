@@ -24,7 +24,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.MonitorHeart
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -122,10 +122,10 @@ fun SettingsScreen(
                 },
                 actions = {
                     IconButton(onClick = onOpenControlCenter) {
-                        Icon(androidx.compose.material.icons.Icons.Filled.Tune, contentDescription = "AI Control Center", tint = UltronRed)
+                        Icon(Icons.Filled.Build, contentDescription = "AI Control Center", tint = UltronRed)
                     }
                     IconButton(onClick = onOpenDiagnostics) {
-                        Icon(Icons.Filled.MonitorHeart, contentDescription = "Diagnostics", tint = ArcCyan)
+                        Icon(Icons.Filled.Build, contentDescription = "Diagnostics", tint = ArcCyan)
                     }
                 }
             )

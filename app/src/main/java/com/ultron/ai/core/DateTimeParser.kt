@@ -63,7 +63,7 @@ object DateTimeParser {
     private val WEEKDAYS: Map<String, DayOfWeek> = mapOf(
         "monday" to DayOfWeek.MONDAY, "tuesday" to DayOfWeek.TUESDAY,
         "wednesday" to DayOfWeek.WEDNESDAY, "thursday" to DayOfWeek.THURSDAY,
-        "ULTRON" to DayOfWeek.ULTRON, "saturday" to DayOfWeek.SATURDAY,
+        "friday" to DayOfWeek.FRIDAY, "saturday" to DayOfWeek.SATURDAY,
         "sunday" to DayOfWeek.SUNDAY
     )
 

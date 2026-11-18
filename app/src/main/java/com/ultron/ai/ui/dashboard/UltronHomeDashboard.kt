@@ -384,7 +384,7 @@ fun UltronHomeDashboard(
                     .padding(horizontal = 14.dp, vertical = 4.dp)
             ) {
                 Icon(
-                    imageVector = androidx.compose.material.icons.Icons.Filled.PhotoCamera,
+                    imageVector = Icons.Filled.Radar,
                     contentDescription = "Vision",
                     tint = UltronRed,
                     modifier = Modifier.size(24.dp)

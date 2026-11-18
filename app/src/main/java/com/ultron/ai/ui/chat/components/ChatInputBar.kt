@@ -41,6 +41,7 @@ import com.ultron.ai.ui.theme.SurfaceDark
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.IconButton

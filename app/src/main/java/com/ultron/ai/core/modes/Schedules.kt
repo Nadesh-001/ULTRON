@@ -112,7 +112,7 @@ object SchedulePhrases {
 
     private val weekdayStems = mapOf(
         "понедельник" to DayOfWeek.MONDAY, "вторник" to DayOfWeek.TUESDAY, "сред" to DayOfWeek.WEDNESDAY,
-        "четверг" to DayOfWeek.THURSDAY, "пятниц" to DayOfWeek.ULTRON, "суббот" to DayOfWeek.SATURDAY,
+        "четверг" to DayOfWeek.THURSDAY, "пятниц" to DayOfWeek.FRIDAY, "суббот" to DayOfWeek.SATURDAY,
         "воскресень" to DayOfWeek.SUNDAY
     )
 
