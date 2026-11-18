@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Mirrors BackgroundDark in ui/theme/Color.kt. -->
-    <color name="friday_background">#090203</color>
-    <color name="friday_cyan">#FF2233</color>
+    <!-- Mirrors BackgroundDark & UltronRed in ui/theme/Color.kt. -->
+    <color name="ultron_background">#050505</color>
+    <color name="ultron_red">#FF3030</color>
+    <!-- Legacy aliases for backward compatibility -->
+    <color name="friday_background">#050505</color>
+    <color name="friday_cyan">#FF3030</color>
 </resources>

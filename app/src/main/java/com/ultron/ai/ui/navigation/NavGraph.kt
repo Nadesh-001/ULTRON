@@ -15,6 +15,7 @@ import com.ultron.ai.service.capture.ScreenCapture
 import com.ultron.ai.ui.chat.ChatScreen
 import com.ultron.ai.ui.chat.ChatViewModel
 import com.ultron.ai.ui.dashboard.LazuriDashboardScreen
+import com.ultron.ai.ui.dashboard.UltronHomeDashboard
 import com.ultron.ai.ui.diagnostics.DiagnosticsScreen
 import com.ultron.ai.ui.settings.SettingsScreen
 import org.koin.androidx.compose.koinViewModel
@@ -24,7 +25,14 @@ import org.koin.compose.koinInject
 fun FridayNavGraph(activity: MainActivity) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "chat") {
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") {
+            UltronHomeDashboard(
+                onNavigateToChat = { navController.navigate("chat") },
+                onNavigateToVoice = { navController.navigate("chat") },
+                onOpenSettings = { navController.navigate("settings") }
+            )
+        }
         composable("chat") {
             val viewModel: ChatViewModel = koinViewModel()
             val screenCapture: ScreenCapture = koinInject()

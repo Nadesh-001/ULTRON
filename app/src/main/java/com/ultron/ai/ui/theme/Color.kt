@@ -3,45 +3,56 @@ package com.ultron.ai.ui.theme
 import androidx.compose.ui.graphics.Color
 
 /**
- * Ultron Dark Red palette: commanding dark crimson and obsidian aesthetic.
+ * ULTRON AI - Cinematic dark-metallic HUD and neural core design system.
  *
- * Crimson / deep red is emitted from active elements, HUD rings, reactor cores,
- * and highlights against a deep obsidian dark-red background.
+ * Strict dark-mode palette anchored by deep obsidian void (#050505),
+ * dark metallic gunmetal (#101216), Ultron Red (#FF3030), and Crimson (#A50000).
  */
 
-// --- The light (Dark Red / Crimson Glow) -----------------------------------
-/** The core Ultron energy red. */
-val ArcCyan = Color(0xFFFF2233)
+// --- Primary & Secondary Energy Accents -----------------------------------
+/** Ultron Red (#FF3030): AI core, active voice states, primary interactive triggers. */
+val UltronRed = Color(0xFFFF3030)
+val ArcCyan = UltronRed
 
-/** Hot centre of the glow — used sparingly, at the middle of a bloom. */
-val ArcCyanHot = Color(0xFFFF858F)
+/** Secondary deep crimson (#A50000): energy gradients, orbital rings, pressed states. */
+val CrimsonRed = Color(0xFFA50000)
+val ArcCyanDim = CrimsonRed
 
-/** Red pushed back into the dark: rings, hairlines, inactive rails. */
-val ArcCyanDim = Color(0xFF7A101A)
+/** Hot neon core bloom / high-energy highlight. */
+val UltronRedHot = Color(0xFFFFDAD6)
+val ArcCyanHot = UltronRedHot
 
-/** Stark amber/orange. The only other hue, for "working" / caution. */
-val ArcAmber = Color(0xFFFF6A00)
+/** Tactical Amber/Orange: telemetry warnings and computing states. */
+val ArcAmber = Color(0xFFF59E0B)
 
-// --- The room (Obsidian / Deep Dark Red) -----------------------------------
-val BackgroundDark = Color(0xFF090203)   // near-black with deep crimson undertone
-val SurfaceDark = Color(0xFF140507)      // panels
-val SurfaceVariant = Color(0xFF220A0E)   // raised panels, input fields
-val OutlineDim = Color(0xFF3D131A)       // hairline structure
+/** Success green for telemetry checks. */
+val SuccessGreen = Color(0xFF22C55E)
 
-// --- Text -----------------------------------------------------------------
-val OnBackground = Color(0xFFFBE4E6)     // pale warm white
-val OnSurface = Color(0xFFE8CBCE)
-val OnSurfaceMuted = Color(0xFFA66F76)   // readable on SurfaceDark
-val OnPrimary = Color(0xFF1A0003)        // dark ink on lit red surface
+// --- Obsidian Void & Metallic Gunmetal Surfaces ----------------------------
+val BackgroundDark = Color(0xFF050505)       // Deep obsidian void canvas
+val SurfaceContainerLow = Color(0xFF0B0C0F)  // Recessed panels
+val SurfaceDark = Color(0xFF101216)          // Standard HUD containers & cards
+val SurfaceVariant = Color(0xFF181B22)       // Elevated gunmetal surfaces
+val SurfaceContainerHighest = Color(0xFF222630)
 
-val ErrorColor = Color(0xFFFF453A)
+// --- Structural Outlines & Framing ----------------------------------------
+val OutlineDim = Color(0xFF2A2F3A)           // Crisp hairline steel outline
+val OutlineVariant = Color(0xFF1A1D24)
 
-// --- Chat -----------------------------------------------------------------
-/** The user speaks from a lit crimson surface; Ultron answers from the dark. */
-val UserBubble = Color(0xFF4D0C14)
-val AssistantBubble = Color(0xFF160608)
+// --- Typography & Readouts ------------------------------------------------
+val OnBackground = Color(0xFFFFFFFF)         // Crisp white for primary telemetry & titles
+val OnSurface = Color(0xFFFFFFFF)
+val OnSurfaceMuted = Color(0xFF929292)       // Metallic grey for secondary metadata
+val OnPrimary = Color(0xFF050505)            // Obsidian ink on lit red button
 
-// Kept so older call sites still compile
-val PrimaryDark = ArcCyan
-val PrimaryVariant = ArcCyanHot
+val ErrorColor = Color(0xFFFF3030)
+
+// --- Chat & Bubble Tokens -------------------------------------------------
+val UserBubble = Color(0xFF3B0808)           // Primary dark container
+val AssistantBubble = Color(0xFF101216)      // Surface container
+
+// Kept for seamless backwards compatibility with existing UI components
+val PrimaryDark = UltronRed
+val PrimaryVariant = UltronRedHot
 val SecondaryDark = ArcAmber
+
