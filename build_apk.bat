@@ -46,7 +46,7 @@ if errorlevel 1 (
 echo.
 echo ========================================================
 echo [OK] SUCCESS! ULTRON APK BUILT SUCCESSFULLY:
-echo app\build\outputs\apk\debug\app-debug.apk
+echo app\build\outputs\apk\debug\Ultron-v0.21.0-debug.apk
 echo ========================================================
 pause
 

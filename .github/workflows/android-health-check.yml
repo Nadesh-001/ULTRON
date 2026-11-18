@@ -103,7 +103,7 @@ jobs:
         run: |
           mkdir -p app/build/outputs/apk/debug
           ls -la app/build/outputs/apk/debug/ || true
-          APK_PATH=$(find app/build/outputs/apk/debug/ -name "*.apk" ! -name "Ultron-v0.19.0-debug.apk" | head -n 1)
+          APK_PATH=$(find app/build/outputs/apk/debug/ -name "Ultron-v0.21.0-debug.apk" | head -n 1)
           if [ -z "$APK_PATH" ] || [ ! -f "$APK_PATH" ]; then
             APK_PATH=$(find app/build/outputs/apk/debug/ -name "*.apk" | head -n 1)
           fi
@@ -150,7 +150,7 @@ jobs:
           echo "| **JDK & Gradle Setup** | ✅ PASSED | Java 17 Temurin, Gradle 8.13 |" >> $REPORT
           echo "| **Security Secret Scan** | ✅ PASSED | Zero committed credentials found |" >> $REPORT
           echo "| **Kotlin Compile & APK Build** | ${{ steps.build_debug.outcome == 'success' && '✅ PASSED' || '❌ FAILED' }} | Task: \`:app:assembleDebug\` |" >> $REPORT
-          echo "| **Unit Test Suite** | ${{ steps.run_tests.outcome == 'success' && '✅ PASSED' || '⚠️ ACTION NEEDED' }} | 85 test suites |" >> $REPORT
+          echo "| **Unit Test Suite** | ${{ steps.run_tests.outcome == 'success' && '✅ PASSED' || '⚠️ ACTION NEEDED' }} | 91 test suites |" >> $REPORT
           echo "| **Android Lint QA** | ${{ steps.run_lint.outcome == 'success' && '✅ PASSED' || '⚠️ WARNINGS' }} | Android Lint checks |" >> $REPORT
           echo "| **APK Artifact** | ${{ steps.verify_apk.outputs.apk_generated == 'true' && '✅ GENERATED' || '❌ MISSING' }} | Size: ${{ steps.verify_apk.outputs.apk_size }} |" >> $REPORT
           echo "" >> $REPORT
