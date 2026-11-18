@@ -117,7 +117,7 @@ jobs:
             echo "apk_generated=false" >> $GITHUB_OUTPUT
             exit 1
           fi
-          TARGET_APK="app/build/outputs/apk/debug/Ultron-v0.20.0-debug.apk"
+          TARGET_APK="app/build/outputs/apk/debug/Ultron-v0.21.0-debug.apk"
           if [ "$APK_PATH" != "$TARGET_APK" ]; then
             cp -f "$APK_PATH" "$TARGET_APK"
           fi

@@ -43,39 +43,50 @@ jobs:
             grep -E "e: |error:|FAILURE|Exception" gradle_build.log -B 2 -A 8 | head -n 100 || tail -n 100 gradle_build.log
             exit 1
           }
-          # Ensure target file name is Ultron-v0.20.0-debug.apk
-          find app/build/outputs/apk/debug/ -name "*.apk" -exec cp -f {} app/build/outputs/apk/debug/Ultron-v0.20.0-debug.apk \;
+          # Ensure target file name is Ultron-v0.21.0-debug.apk
+          find app/build/outputs/apk/debug/ -name "*.apk" -exec cp -f {} app/build/outputs/apk/debug/Ultron-v0.21.0-debug.apk \;
           ls -la app/build/outputs/apk/debug/
 
       - name: Upload Ultron Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: Ultron-Debug-APK
-          path: app/build/outputs/apk/debug/Ultron-v0.20.0-debug.apk
+          path: app/build/outputs/apk/debug/Ultron-v0.21.0-debug.apk
           if-no-files-found: error
           retention-days: 14
 
-      - name: Publish English GitHub Release (v0.20.0)
+      - name: Publish English GitHub Release (v0.21.0)
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v0.20.0
-          name: "ULTRON v0.20.0 — Pure English HUD & Official Mask Logo"
+          tag_name: v0.21.0
+          name: "ULTRON v0.21.0 — Vision AI, AI Control Center & Security Engine"
           draft: false
           prerelease: false
           make_latest: true
-          files: app/build/outputs/apk/debug/Ultron-v0.20.0-debug.apk
+          files: app/build/outputs/apk/debug/Ultron-v0.21.0-debug.apk
           body: |
-            # ⚡ ULTRON 0.20.0 — 100% English & Official Ultron Mask Logo
+            # ⚡ ULTRON 0.21.0 — Vision AI, AI Control Center & Security Architecture
 
-            ### 🚀 What's New in v0.20.0
-            - **Official Ultron Mask Logo**: Launcher icon updated with the vector SVG Ultron mask (`ic_launcher.xml` and `ic_launcher_round.xml`) featuring glowing crimson eyes and dark chassis contours.
-            - **100% Pure English UI**: Completely eliminated all legacy Russian strings across Chat, Diagnostics, History Drawer, Notebook, Settings, Mode Selectors, and Voice Panels.
-            - **Tanglish & English Ready**: Complete support for English and Tanglish commands and responses.
-            - **New Build Artifact**: Direct download of `Ultron-v0.20.0-debug.apk`.
+            ### 🚀 What's New in v0.21.0
+            - **Google Lens-Inspired ULTRON Vision AI**:
+              - Live CameraX preview with cybernetic reticle brackets and scanning laser sweep.
+              - 6 specialized modes: Object Recognition, OCR Text Transcription, Live Translation, Math & Homework Solver, QR/Barcode Scanner, and Document Intelligence.
+              - Multi-turn **Visual Question Answering (VQA)** maintaining image context throughout conversation with quick follow-up prompt chips.
+            - **ULTRON AI Control Center**:
+              - Overview telemetry (connection status, 24h local token overview, RPM/TPM rate-limit progress meters, active routing model cards).
+              - AI Usage & Analytics (timeframe filters, billing transparency notice, interactive token chart, model-wise consumption breakdown, error frequency).
+              - Model Manager with verified capability badges (`TEXT`, `TOOL CALLING`, `REASONING`, `VISION`, `AUDIO`, `STREAMING`) and Primary model switch confirmation dialog.
+              - Intelligent `AIModelRouter` with recoverable failover protection (HTTP 429, 502/503/504, timeout).
+            - **Add Context & Tool Integration**:
+              - Modern `(+)` popup supporting Files (SAF), Folders (ACTION_OPEN_DOCUMENT_TREE), @ Mentions, Predefined Actions, Web Extractor, and Google Drive.
+            - **Centralized Security & Permission Management**:
+              - 14 runtime permissions, 5 special privileges, Keystore AES-256 vault, tri-level risk authorization, and hardware kill switches.
+            - **Voice Engine**:
+              - Pure English & Tanglish voice transcription with official vector mask launcher logo.
 
             ---
-            > **Download**: Grab `Ultron-v0.20.0-debug.apk` directly from the Assets below!
+            > **Download**: Grab `Ultron-v0.21.0-debug.apk` directly from the Assets below!
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
