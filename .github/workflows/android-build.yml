@@ -102,3 +102,20 @@ jobs:
           path: gradle_build.log
           retention-days: 14
 
+      - name: Publish Build Failure to Commit Comment
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Publishing build error diagnostics to commit comment..."
+          {
+            echo "### ❌ Build Failure Diagnostics on $(date -u)"
+            echo '```'
+            grep -E "e: |error:|FAILURE|Exception" gradle_build.log -B 2 -A 6 | head -n 60 || true
+            echo '--- [TAIL LOG] ---'
+            tail -n 60 gradle_build.log || true
+            echo '```'
+          } > failure_report.txt
+          gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" \
+            --raw-field "body=$(cat failure_report.txt)" || true
+
