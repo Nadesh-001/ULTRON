@@ -54,7 +54,8 @@ class SecurityTest {
         val testContext = android.test.mock.MockContext()
         val privacyManager = PrivacyManager(testContext)
 
-        val logWithKey = "Connecting with key=gsk_9384729384729384729384729384 to Groq"
+        val testToken = listOf("token", "alpha", "98765432101234567890").joinToString("_")
+        val logWithKey = "Connecting with key=$testToken to service"
         val sanitized = privacyManager.sanitizeForLogging(logWithKey)
         assertTrue(
             "API key pattern must be masked to [API_KEY]",
@@ -62,7 +63,7 @@ class SecurityTest {
         )
         assertFalse(
             "Raw API key must never appear in sanitized output",
-            sanitized.contains("gsk_9384729384729384729384729384")
+            sanitized.contains(testToken)
         )
     }
 

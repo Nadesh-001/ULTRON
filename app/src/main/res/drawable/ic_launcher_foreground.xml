@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
 
-    <!-- Atmospheric Red Background Glow -->
+    <!-- Atmospheric Circular Outer Halo -->
     <path
-        android:pathData="M256,20 A236,236 0 1,1 255.9,20 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:centerX="256"
-                android:centerY="235"
-                android:gradientRadius="266"
-                android:type="radial">
-                <item android:color="#52FF3030" android:offset="0.0" />
-                <item android:color="#24A50000" android:offset="0.45" />
-                <item android:color="#00050505" android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
+        android:fillColor="#1A330505"
+        android:pathData="M256,20 A236,236 0 1,1 255.9,20 Z" />
 
     <!-- Outer HUD Circular Reticle Rings -->
     <path
@@ -55,59 +43,24 @@
 
     <!-- Upper Cranium Armor Plates (Left Titanium Dark) -->
     <path
+        android:fillColor="#252A30"
         android:strokeColor="#4A525C"
         android:strokeWidth="1.5"
-        android:pathData="M176,120 L256,92 L256,192 L188,188 L154,204 L136,184 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="176"
-                android:startY="92"
-                android:endX="256"
-                android:endY="204"
-                android:type="linear">
-                <item android:color="#4A525C" android:offset="0.0" />
-                <item android:color="#21252B" android:offset="0.5" />
-                <item android:color="#121418" android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
+        android:pathData="M176,120 L256,92 L256,192 L188,188 L154,204 L136,184 Z" />
 
     <!-- Upper Cranium Armor Plates (Right Metallic Steel) -->
     <path
+        android:fillColor="#7E8A95"
         android:strokeColor="#8D98A4"
         android:strokeWidth="1.5"
-        android:pathData="M336,120 L256,92 L256,192 L324,188 L358,204 L376,184 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="256"
-                android:startY="92"
-                android:endX="376"
-                android:endY="204"
-                android:type="linear">
-                <item android:color="#CCD7E2" android:offset="0.0" />
-                <item android:color="#7E8A95" android:offset="0.5" />
-                <item android:color="#353A40" android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
+        android:pathData="M336,120 L256,92 L256,192 L324,188 L358,204 L376,184 Z" />
 
     <!-- Forehead Central Blade / Crest Plates -->
     <path
+        android:fillColor="#CCD7E2"
         android:strokeColor="#B3FFFFFF"
         android:strokeWidth="1.2"
-        android:pathData="M256,104 L274,152 L256,220 L238,152 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="238"
-                android:startY="104"
-                android:endX="274"
-                android:endY="220"
-                android:type="linear">
-                <item android:color="#E2ECF5" android:offset="0.0" />
-                <item android:color="#77828D" android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
+        android:pathData="M256,104 L274,152 L256,220 L238,152 Z" />
 
     <path
         android:fillColor="#15171B"
@@ -205,20 +158,8 @@
 
     <!-- Inner Glowing Crimson Core -->
     <path
-        android:pathData="M212,304 L256,290 L300,304 L282,342 L256,348 L230,342 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="256"
-                android:startY="290"
-                android:endX="256"
-                android:endY="348"
-                android:type="linear">
-                <item android:color="#FFFF3030" android:offset="0.0" />
-                <item android:color="#80FF1010" android:offset="0.5" />
-                <item android:color="#33400000" android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
+        android:fillColor="#A50000"
+        android:pathData="M212,304 L256,290 L300,304 L282,342 L256,348 L230,342 Z" />
 
     <!-- Grille Energy Teeth Bars -->
     <path
