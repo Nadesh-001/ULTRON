@@ -85,3 +85,8 @@ val ULTRONTypography = Typography(
     )
 )
 
+val TitleMedium: TextStyle = ULTRONTypography.titleMedium
+val LabelMedium: TextStyle = ULTRONTypography.labelMedium
+val LabelSmall: TextStyle = ULTRONTypography.labelSmall
+
+

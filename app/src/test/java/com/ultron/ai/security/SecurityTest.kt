@@ -1,20 +1,23 @@
 package com.ultron.ai.security
 
+import android.content.Context
 import com.ultron.ai.core.*
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Test
 
 /**
- * Pure unit tests verifying ULTRON security, authorization, and privacy logic
- * with zero mocks or external dependencies.
+ * Unit tests verifying ULTRON security, authorization, and privacy logic.
  */
 class SecurityTest {
+
+    private fun createTestContext(): Context = mockk(relaxed = true)
 
     // 1. Classification: LOW risk for benign navigation & launch commands
     @Test
     fun testLowRiskClassification() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val secMgr = SecurityManager(testContext, PermissionManager(testContext))
         val authManager = ActionAuthorizationManager(testContext, secMgr)
 
@@ -27,7 +30,7 @@ class SecurityTest {
     // 2. Classification: HIGH risk for destructive & payment operations
     @Test
     fun testHighRiskClassification() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val secMgr = SecurityManager(testContext, PermissionManager(testContext))
         val authManager = ActionAuthorizationManager(testContext, secMgr)
 
@@ -40,7 +43,7 @@ class SecurityTest {
     // 3. Classification: MEDIUM risk for personal communication
     @Test
     fun testMediumRiskClassification() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val secMgr = SecurityManager(testContext, PermissionManager(testContext))
         val authManager = ActionAuthorizationManager(testContext, secMgr)
 
@@ -51,7 +54,7 @@ class SecurityTest {
     // 4. Privacy: API keys are completely redacted from logs
     @Test
     fun testApiKeySanitization() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val privacyManager = PrivacyManager(testContext)
 
         val testToken = listOf("token", "alpha", "98765432101234567890").joinToString("_")
@@ -70,7 +73,7 @@ class SecurityTest {
     // 5. Privacy: Email addresses are redacted from logs
     @Test
     fun testEmailSanitization() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val privacyManager = PrivacyManager(testContext)
 
         val logWithEmail = "Recipient is tony.stark@avengers.org"
@@ -81,7 +84,7 @@ class SecurityTest {
     // 6. Privacy: Credit card numbers are redacted from logs
     @Test
     fun testCardSanitization() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val privacyManager = PrivacyManager(testContext)
 
         val logWithCard = "Card 4532 1234 5678 9010 approved"
@@ -92,7 +95,7 @@ class SecurityTest {
     // 7. Action history records approval
     @Test
     fun testActionHistoryRecording() = runBlocking {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val secMgr = SecurityManager(testContext, PermissionManager(testContext))
         val authManager = ActionAuthorizationManager(testContext, secMgr)
 
@@ -113,7 +116,7 @@ class SecurityTest {
     // 8. Emergency stop lifecycle transitions
     @Test
     fun testEmergencyStopLifecycle() {
-        val testContext = android.test.mock.MockContext()
+        val testContext = createTestContext()
         val secMgr = SecurityManager(testContext, PermissionManager(testContext))
         val privacyManager = PrivacyManager(testContext)
         val controller = EmergencyStopController(testContext, secMgr, privacyManager)

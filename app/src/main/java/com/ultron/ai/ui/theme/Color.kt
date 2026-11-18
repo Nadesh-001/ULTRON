@@ -17,6 +17,7 @@ val ArcCyan = UltronRed
 /** Secondary deep crimson (#A50000): energy gradients, orbital rings, pressed states. */
 val CrimsonRed = Color(0xFFA50000)
 val ArcCyanDim = CrimsonRed
+val Crimson = CrimsonRed
 
 /** Hot neon core bloom / high-energy highlight. */
 val UltronRedHot = Color(0xFFFFDAD6)
@@ -32,17 +33,21 @@ val SuccessGreen = Color(0xFF22C55E)
 val BackgroundDark = Color(0xFF050505)       // Deep obsidian void canvas
 val SurfaceContainerLow = Color(0xFF0B0C0F)  // Recessed panels
 val SurfaceDark = Color(0xFF101216)          // Standard HUD containers & cards
+val SurfaceContainer = SurfaceDark
 val SurfaceVariant = Color(0xFF181B22)       // Elevated gunmetal surfaces
+val SurfaceContainerHigh = SurfaceVariant
 val SurfaceContainerHighest = Color(0xFF222630)
 
 // --- Structural Outlines & Framing ----------------------------------------
 val OutlineDim = Color(0xFF2A2F3A)           // Crisp hairline steel outline
+val Outline = OutlineDim
 val OutlineVariant = Color(0xFF1A1D24)
 
 // --- Typography & Readouts ------------------------------------------------
 val OnBackground = Color(0xFFFFFFFF)         // Crisp white for primary telemetry & titles
 val OnSurface = Color(0xFFFFFFFF)
 val OnSurfaceMuted = Color(0xFF929292)       // Metallic grey for secondary metadata
+val MetallicGrey = OnSurfaceMuted
 val OnPrimary = Color(0xFF050505)            // Obsidian ink on lit red button
 
 val ErrorColor = Color(0xFFFF3030)
