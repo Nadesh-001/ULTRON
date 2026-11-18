@@ -1,10 +1,10 @@
-/*
+﻿/*
  * The Sec-MS-GEC v2 token for Edge's read-aloud service.
  *
  * Ported from edge-tts (https://github.com/rany2/edge-tts,
  * src/edge_tts/drm.py), licensed under the GNU Lesser General Public
  * License v3. This file is a derivative of that work and is under the same
- * license; the rest of Friday is not affected by it.
+ * license; the rest of ULTRON is not affected by it.
  */
 // A published algorithm: its constants and mixing steps are the specification itself,
 // and naming each of them would only hide where they came from.

@@ -1,11 +1,11 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
  * Whether a wake call the decoder reported is to be believed, judged on the
  * timing and confidence of the name itself.
  *
  * A decoder that knows only a few words maps anything onto them; singing
- * in particular used to wake Friday. A spoken "text" takes about half a
+ * in particular used to wake ULTRON. A spoken "text" takes about half a
  * second and is recognised with confidence; a sung one is drawn out, and a
  * syllable forced onto the name is recognised without it.
  */

@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.media.AudioManager
 import com.ultron.ai.service.voice.WakeHealth.Status
@@ -248,7 +248,7 @@ class WakeListenerTest {
         }
         assertEquals(6, rig.source.captures)
         assertEquals(Status.FAILED, rig.status)
-        assertTrue(rig.shown.last(), rig.shown.last().contains("откройте Friday"))
+        assertTrue(rig.shown.last(), rig.shown.last().contains("откройте ULTRON"))
         advanceTimeBy(120_000)
         assertEquals("no endless retry", 6, rig.source.captures)
     }

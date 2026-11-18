@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import com.ultron.ai.core.VoiceTurn.Next
 import com.ultron.ai.core.VoiceTurn.Outcome
@@ -23,7 +23,7 @@ class VoiceTurnTest {
 
     @Test
     fun `a stranger during a follow-up just ends the conversation`() {
-        // Nobody addressed Friday in a follow-up. Answering another voice in
+        // Nobody addressed ULTRON in a follow-up. Answering another voice in
         // the room would be her butting in; saying "not you" would announce her.
         assertEquals(Next.END_QUIETLY, next(Outcome.Stranger, followUp = true))
         assertEquals(Next.END_QUIETLY, next(Outcome.Nothing, followUp = true))

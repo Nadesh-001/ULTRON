@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
         Dark base, not Light: the window is painted before Compose runs, and a
         light default flashed white on every cold start.
     -->
-    <style name="Theme.FridayMobile" parent="android:Theme.Material.NoActionBar">
-        <item name="android:windowBackground">@color/friday_background</item>
-        <item name="android:colorBackground">@color/friday_background</item>
+    <style name="Theme.ULTRONMobile" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/ULTRON_background</item>
+        <item name="android:colorBackground">@color/ULTRON_background</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <!--
-        Friday's panel over the lock screen: see-through, over the owner's own
+        ULTRON's panel over the lock screen: see-through, over the owner's own
         wallpaper, so the panel sits on their lock screen rather than replacing it.
     -->
-    <style name="Theme.FridayMobile.LockPanel" parent="Theme.FridayMobile">
+    <style name="Theme.ULTRONMobile.LockPanel" parent="Theme.ULTRONMobile">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowShowWallpaper">true</item>

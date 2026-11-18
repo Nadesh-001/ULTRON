@@ -1,4 +1,4 @@
-package com.ultron.ai.data.remote
+﻿package com.ultron.ai.data.remote
 
 import android.util.Log
 import com.ultron.ai.data.remote.dto.LazuriDeviceRegisterRequest
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * Client for the Lazuri Core backend — the shared "second brain" (notes,
  * tasks, memory) that all of the user's devices sync through. Every call is
  * best-effort: Lazuri may be offline (server down, off the Tailscale
- * network), and Friday Mobile must keep working fully on its local Room DB
+ * network), and ULTRON Mobile must keep working fully on its local Room DB
  * in that case. Callers should treat failures as non-fatal.
  */
 class LazuriApiService private constructor(

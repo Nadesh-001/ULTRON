@@ -1,4 +1,4 @@
-package com.ultron.ai.core.modes
+﻿package com.ultron.ai.core.modes
 
 import java.util.Base64
 import javax.crypto.Mac
@@ -18,7 +18,7 @@ import kotlinx.serialization.json.Json
  */
 object ModeTags {
 
-    const val MIME = "application/vnd.friday.mode"
+    const val MIME = "application/vnd.ULTRON.mode"
     private const val VERSION = 1
     private const val MAC_BYTES = 16
     private const val ALGORITHM = "HmacSHA256"
@@ -33,7 +33,7 @@ object ModeTags {
 
     sealed interface Read {
         data class Mode(val id: String) : Read
-        /** Not ours, unreadable, or a version this Friday doesn't know. */
+        /** Not ours, unreadable, or a version this ULTRON doesn't know. */
         data object NotATag : Read
         /** Well formed, but not signed by this phone's secret. */
         data object Forged : Read

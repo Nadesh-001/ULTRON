@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
  * - Conversational Body: Clean humanist legibility (Ubuntu equivalent)
  * - HUD Telemetry & Status: Strict Monospace tags (Space Mono equivalent)
  */
-val FridayTypography = Typography(
+val ULTRONTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,

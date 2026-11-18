@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -38,10 +38,10 @@ class MorningBriefWorker(
          * The old daily periodic job. Kept only so it can be cancelled: it is
          * the one that drifted to 16:00 and stayed there.
          */
-        private const val LEGACY_PERIODIC_WORK = "friday_morning_brief"
-        private const val WORK_NAME = "friday_morning_brief_next"
+        private const val LEGACY_PERIODIC_WORK = "ULTRON_morning_brief"
+        private const val WORK_NAME = "ULTRON_morning_brief_next"
 
-        const val CHANNEL_ID = "friday_brief"
+        const val CHANNEL_ID = "ULTRON_brief"
         private const val NOTIFICATION_ID = 2001
 
         const val PREF_ENABLED = "brief_enabled"
@@ -133,7 +133,7 @@ class MorningBriefWorker(
                     CHANNEL_ID,
                     "Morning briefing",
                     NotificationManager.IMPORTANCE_DEFAULT
-                ).apply { description = "Your daily summary from Friday" }
+                ).apply { description = "Your daily summary from ULTRON" }
             )
         }
 
@@ -145,7 +145,7 @@ class MorningBriefWorker(
         )
 
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-            .setContentTitle("Friday")
+            .setContentTitle("ULTRON")
             .setContentText(text.take(80))
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setSmallIcon(android.R.drawable.ic_dialog_info)

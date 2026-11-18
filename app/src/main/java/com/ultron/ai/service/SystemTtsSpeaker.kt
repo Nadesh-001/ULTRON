@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
@@ -17,7 +17,7 @@ import kotlin.coroutines.resume
  * This is the safety net, not the first choice: Edge's neural voices sound
  * better, but they live on someone else's server and already went down once
  * (Microsoft started rejecting the handshake with 403). When that happens
- * Friday still has to be able to talk, offline and with no third party
+ * ULTRON still has to be able to talk, offline and with no third party
  * involved.
  *
  * Voice quality here is whatever TTS engine the phone has selected. Installing

@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.dashboard
+﻿package com.ultron.ai.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 import java.util.Calendar
 
 /**
- * Backs the map of everything Friday has learned: facts it extracted, and the
+ * Backs the map of everything ULTRON has learned: facts it extracted, and the
  * conversations they came from.
  */
 class LazuriDashboardViewModel(

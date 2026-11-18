@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.media.AudioFormat
 import android.media.AudioRecord
@@ -113,7 +113,7 @@ class WakeWordEngine : WakeSource {
         val minBuffer = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL, ENCODING)
         if (minBuffer <= 0) return@withContext WakeSource.End.Failed(WakeFailure.RECORDER)
         // VOICE_RECOGNITION gets the device's echo cancellation, which
-        // matters when this listens while Friday is speaking (barge-in) —
+        // matters when this listens while ULTRON is speaking (barge-in) —
         // otherwise it hears the assistant's own voice through the speaker.
         val record = openVoiceRecord(SAMPLE_RATE, minBuffer.coerceAtLeast(MIN_BUFFER), TAG)
             ?: return@withContext WakeSource.End.Failed(WakeFailure.RECORDER)

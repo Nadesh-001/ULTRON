@@ -1,4 +1,4 @@
-package com.ultron.ai.service.mail
+﻿package com.ultron.ai.service.mail
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -39,7 +39,7 @@ class GmailConnector(
     suspend fun finish(data: Intent?, completed: Boolean): Step = next(auth.fromConsent(data, completed))
 
     /**
-     * Friday forgets the account. Access already granted stays listed under
+     * ULTRON forgets the account. Access already granted stays listed under
      * the Google account's third-party connections until removed there.
      */
     suspend fun disconnect() {

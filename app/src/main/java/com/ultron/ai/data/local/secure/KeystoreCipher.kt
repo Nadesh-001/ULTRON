@@ -1,4 +1,4 @@
-package com.ultron.ai.data.local.secure
+﻿package com.ultron.ai.data.local.secure
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
@@ -21,7 +21,7 @@ import javax.crypto.spec.GCMParameterSpec
 class KeystoreCipher(private val alias: String = DEFAULT_ALIAS) : SecretCipher {
 
     private companion object {
-        const val DEFAULT_ALIAS = "friday.secrets.v1"
+        const val DEFAULT_ALIAS = "ULTRON.secrets.v1"
         const val KEYSTORE = "AndroidKeyStore"
         const val TRANSFORMATION = "AES/GCM/NoPadding"
         const val KEY_BITS = 256

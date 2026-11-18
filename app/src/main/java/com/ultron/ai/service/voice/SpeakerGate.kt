@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.util.Log
 import com.ultron.ai.core.VoiceProfile
@@ -52,7 +52,7 @@ class SpeakerGate(
         Log.i(
             TAG,
             "Voice profile: " + (profile?.let { "v${it.version}, ${it.sampleCount} samples, threshold ${it.threshold}" }
-                ?: "none — anyone may wake Friday")
+                ?: "none — anyone may wake ULTRON")
         )
     }
 

@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
  * Decides which audio frames reach the wake-word decoder.
@@ -57,7 +57,7 @@ class VoiceGate(
 
         /**
          * The floor may not push the gate arbitrarily high, or a genuinely
-         * noisy place would make Friday deaf instead of merely picky.
+         * noisy place would make ULTRON deaf instead of merely picky.
          */
         const val MAX_FLOOR_MULTIPLIER = 6.0
 
@@ -120,7 +120,7 @@ class VoiceGate(
 
     /**
      * The threshold actually in force: the configured one, raised if the room
-     * is loud, and capped so a noisy place cannot silence Friday entirely.
+     * is loud, and capped so a noisy place cannot silence ULTRON entirely.
      */
     val effectiveThreshold: Double
         get() = (noiseFloor * NOISE_MARGIN)

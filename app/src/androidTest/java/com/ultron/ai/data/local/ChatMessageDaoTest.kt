@@ -1,4 +1,4 @@
-package com.ultron.ai.data.local
+﻿package com.ultron.ai.data.local
 
 import android.content.Context
 import androidx.room.Room
@@ -22,13 +22,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ChatMessageDaoTest {
 
-    private lateinit var database: FridayDatabase
+    private lateinit var database: UltronDatabase
     private lateinit var dao: ChatMessageDao
 
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        database = Room.inMemoryDatabaseBuilder(context, FridayDatabase::class.java)
+        database = Room.inMemoryDatabaseBuilder(context, UltronDatabase::class.java)
             .allowMainThreadQueries()
             .build()
         dao = database.chatMessageDao()
@@ -43,7 +43,7 @@ class ChatMessageDaoTest {
     fun insertAndReadMessage() = runTest {
         val message = ChatMessageEntity(
             id = "msg-1",
-            content = "Hello Friday!",
+            content = "Hello ULTRON!",
             role = "USER",
             timestamp = 1000L
         )
@@ -52,7 +52,7 @@ class ChatMessageDaoTest {
         val messages = dao.observeAll().first()
 
         assertEquals(1, messages.size)
-        assertEquals("Hello Friday!", messages[0].content)
+        assertEquals("Hello ULTRON!", messages[0].content)
         assertEquals("USER", messages[0].role)
     }
 

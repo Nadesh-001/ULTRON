@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.content.Context
 import android.content.Intent
@@ -39,7 +39,7 @@ import com.ultron.ai.core.voice.VoicePresentation
 import com.ultron.ai.core.voice.Surfaces
 import com.ultron.ai.service.lock.LockScreen
 import com.ultron.ai.service.voice.VoiceUi
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.ui.theme.ULTRONTheme
 import com.ultron.ai.ui.voice.PanelAction
 import com.ultron.ai.ui.voice.VoicePanelCard
 import kotlinx.coroutines.CoroutineScope
@@ -50,14 +50,14 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 /**
- * Friday's voice panel: writes each stage of the conversation into the one
+ * ULTRON's voice panel: writes each stage of the conversation into the one
  * session state ([VoiceUi]) and puts it on whichever surface Android allows
  * right now ([Surfaces]):
  *
  *  - over the home screen or another app — a compact floating capsule; a
- *    tap on the text expands it (whole text, "text text Friday"), the cross
+ *    tap on the text expands it (whole text, "text text ULTRON"), the cross
  *    closes it;
- *  - inside Friday's own screen — her own layer, no second window on top;
+ *  - inside ULTRON's own screen — her own layer, no second window on top;
  *  - over the lock screen — a private panel ([LockScreen]);
  *  - nowhere, when nothing is allowed: the answer is spoken.
  *
@@ -80,15 +80,15 @@ class UltronOverlayManager(private val context: Context) {
 
     var onDismissed: (() -> Unit)? = null
 
-    /** True while a session is open: Friday is in the middle of something. */
+    /** True while a session is open: ULTRON is in the middle of something. */
     val isShowing: Boolean get() = store.state.value != null
 
     init {
-        // Surfaces follow the session and Friday's own screen coming and going.
+        // Surfaces follow the session and ULTRON's own screen coming and going.
         scope.launch { combine(store.state, AppVisibility.foreground) { p, _ -> p }.collect(::render) }
     }
 
-    /** Opens a session: [userInitiated] when the owner called, false for Friday's own announcements. */
+    /** Opens a session: [userInitiated] when the owner called, false for ULTRON's own announcements. */
     fun begin(userInitiated: Boolean) {
         store.begin(userInitiated)
     }
@@ -230,8 +230,8 @@ private class OverlayWindow(
         val compose = ComposeView(context).apply {
             setViewTreeLifecycleOwner(this@OverlayWindow)
             setViewTreeSavedStateRegistryOwner(this@OverlayWindow)
-            setContent { FridayTheme { FloatingPanel(onInteract) { openFriday() } } }
-            // Attached = a window Android counts as visible, which lets Friday start apps from the background.
+            setContent { ULTRONTheme { FloatingPanel(onInteract) { openULTRON() } } }
+            // Attached = a window Android counts as visible, which lets ULTRON start apps from the background.
             addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
                 override fun onViewAttachedToWindow(v: View) = AppVisibility.overlay(true)
                 override fun onViewDetachedFromWindow(v: View) = AppVisibility.overlay(false)
@@ -248,7 +248,7 @@ private class OverlayWindow(
         view = null
     }
 
-    private fun openFriday() {
+    private fun openULTRON() {
         context.packageManager.getLaunchIntentForPackage(context.packageName)
             ?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             ?.let { runCatching { context.startActivity(it) } }
@@ -272,7 +272,7 @@ private class OverlayWindow(
 
 /** The floating capsule: the session as the unlocked phone shows it. */
 @Composable
-private fun FloatingPanel(onInteract: () -> Unit, onOpenFriday: () -> Unit) {
+private fun FloatingPanel(onInteract: () -> Unit, onOpenULTRON: () -> Unit) {
     val panel by VoiceUi.store.state.collectAsState()
     val level by VoiceUi.store.level.collectAsState()
     var expanded by remember { mutableStateOf(false) }
@@ -292,7 +292,7 @@ private fun FloatingPanel(onInteract: () -> Unit, onOpenFriday: () -> Unit) {
             actions = if (expanded) {
                 listOf(PanelAction("Close", onClick = close), PanelAction("Open in Ultron", primary = true) {
                     close()
-                    onOpenFriday()
+                    onOpenULTRON()
                 })
             } else {
                 emptyList()
@@ -302,4 +302,4 @@ private fun FloatingPanel(onInteract: () -> Unit, onOpenFriday: () -> Unit) {
 }
 
 /** Backward compatibility alias */
-typealias FridayOverlayManager = UltronOverlayManager
+typealias ULTRONOverlayManager = UltronOverlayManager

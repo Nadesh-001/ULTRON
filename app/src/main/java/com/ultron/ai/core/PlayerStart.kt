@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
  * What came of starting music, and how to say it.
@@ -6,7 +6,7 @@ package com.ultron.ai.core
  * "text text text Spotify" with Spotify closed used to open Spotify and
  * stop there: there was no media session to press play on, so nothing
  * played, and the second attempt (Spotify now running) worked — which looked
- * like Friday not understanding the first time. Starting is now a checked
+ * like ULTRON not understanding the first time. Starting is now a checked
  * hand-off ([HandOff], [PlaybackStarter]), and only music a player's session
  * reports as playing is called "playing" — as only an alarm actually set is
  * called "set".

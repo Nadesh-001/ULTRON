@@ -1,4 +1,4 @@
-package com.ultron.ai.service.mail
+﻿package com.ultron.ai.service.mail
 
 import android.app.PendingIntent
 import android.content.Context
@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 /**
  * Access to the user's Gmail through Google Play services.
  *
- * The consent screen is Google's own; Friday never sees the password, and no
+ * The consent screen is Google's own; ULTRON never sees the password, and no
  * client secret is compiled in — Google recognises the app by its package
  * name and signing certificate, registered once in Google Cloud. Tokens are
  * cached by Play services, so asking for one on every request is cheap.
@@ -108,7 +108,7 @@ class GmailAuth(private val context: Context) {
         // Google reports a missing or mismatched OAuth client as a generic
         // internal error (code 8) carrying this status — the code alone hides it.
         if (e.message.orEmpty().contains("UNREGISTERED_ON_API_CONSOLE")) {
-            return "Google не нашёл Friday в Google Cloud (UNREGISTERED_ON_API_CONSOLE). В том же проекте, " +
+            return "Google не нашёл ULTRON в Google Cloud (UNREGISTERED_ON_API_CONSOLE). В том же проекте, " +
                 "где включён Gmail API, нужен OAuth-клиент типа Android: пакет com.ultron.ai, " +
                 "SHA-1 4B:B3:CB:54:33:D6:E0:EC:B8:4B:4F:AE:F8:15:40:D7:59:F9:82:96. " +
                 "Если клиент создан только что, подождите до получаса"

@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -13,16 +13,16 @@ import androidx.core.app.NotificationCompat
 class ServiceNotifier(private val context: Context) {
 
     companion object {
-        const val CHANNEL_ID = "friday_wake_word"
+        const val CHANNEL_ID = "ULTRON_wake_word"
         const val NOTIFICATION_ID = 1001
         private const val TAG = "ServiceNotifier"
     }
 
     fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, "Friday Assistant", NotificationManager.IMPORTANCE_LOW)
+            val channel = NotificationChannel(CHANNEL_ID, "ULTRON Assistant", NotificationManager.IMPORTANCE_LOW)
                 .apply {
-                    description = "Friday wake word listener"
+                    description = "ULTRON wake word listener"
                     setShowBadge(false)
                     setSound(null, null)
                 }
@@ -37,7 +37,7 @@ class ServiceNotifier(private val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         return NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentTitle("Friday AI")
+            .setContentTitle("ULTRON AI")
             .setContentText(text)
             .setSmallIcon(android.R.drawable.ic_btn_speak_now)
             .setContentIntent(open)

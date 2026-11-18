@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.app.AlarmManager
 import android.content.Context
@@ -15,7 +15,7 @@ import kotlinx.coroutines.delay
  *
  * It used to open the Clock's edit screen and report "Setting alarm" at once.
  * With the phone face-down nobody pressed Save, so there was no alarm, while
- * Friday had already said there was. Now the alarm is created without a
+ * ULTRON had already said there was. Now the alarm is created without a
  * screen, and the answer depends on what Android then reports.
  */
 class AlarmSetter(
@@ -36,7 +36,7 @@ class AlarmSetter(
         val expected = AlarmRequest.nextOccurrence(time, now()).atZone(zone()).toInstant().toEpochMilli()
         when (send(time, label, skipUi = true)) {
             Sent.NO_APP -> return "There's no Clock app that accepts alarms on this phone."
-            Sent.REFUSED -> return "The Clock app didn't allow Friday to set the alarm."
+            Sent.REFUSED -> return "The Clock app didn't allow ULTRON to set the alarm."
             Sent.OK -> Unit
         }
 

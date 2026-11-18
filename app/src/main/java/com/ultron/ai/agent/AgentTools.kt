@@ -1,10 +1,10 @@
-// Long lines on purpose: tool descriptions are prompt text sent to the model.
+﻿// Long lines on purpose: tool descriptions are prompt text sent to the model.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.agent
 
 import com.ultron.ai.core.AlarmRequest
-import com.ultron.ai.core.capabilities.FridayCapabilities
+import com.ultron.ai.core.capabilities.UltronCapabilities
 import com.ultron.ai.core.capabilities.ToolRequirements
 import com.ultron.ai.core.mail.MailCommands
 import com.ultron.ai.data.remote.dto.FunctionSpec
@@ -99,7 +99,7 @@ object AgentTools {
         },
         tool(
             "call",
-            "Call someone. Friday picks an ordinary call or a WhatsApp/Telegram call from their number's country " +
+            "Call someone. ULTRON picks an ordinary call or a WhatsApp/Telegram call from their number's country " +
                 "and the apps they are on. The result says which and why."
         ) {
             string("contact", "name as the user said it, or a number", required = true)
@@ -107,7 +107,7 @@ object AgentTools {
         },
         tool(
             "send_message",
-            "Message someone. Friday picks SMS, WhatsApp or Telegram from their number's country, the user's country and " +
+            "Message someone. ULTRON picks SMS, WhatsApp or Telegram from their number's country, the user's country and " +
                 "the apps they use, and fills the text in; the user taps Send. The result says which and why."
         ) {
             string("contact", "name as the user said it (e.g. 'Mom', 'Dad', 'John'), or a number", required = true)
@@ -119,7 +119,7 @@ object AgentTools {
         },
         tool(
             "reply_message",
-            "Reply in a chat that recently got a message (WhatsApp, Telegram, SMS). Friday reads it back and sends on " +
+            "Reply in a chat that recently got a message (WhatsApp, Telegram, SMS). ULTRON reads it back and sends on " +
                 "the user's yes. Omit 'to' to answer whoever wrote last."
         ) {
             string("to", "who, as the user said it")
@@ -174,7 +174,7 @@ object AgentTools {
         },
         tool(
             "play",
-            "Find and play a song, artist, album, playlist or video. Friday picks the app the user uses unless one is named."
+            "Find and play a song, artist, album, playlist or video. ULTRON picks the app the user uses unless one is named."
         ) {
             string("query", "what to play, e.g. 'Imagine Dragons Believer'", required = true)
             enum("kind", setOf("music", "video"), required = true)
@@ -247,7 +247,7 @@ object AgentTools {
      * two thousand. With [capabilities], tools that can't work right now
      * (Gmail not connected, no notification access…) are left out entirely.
      */
-    fun definitions(kit: ToolKit.Kit, capabilities: FridayCapabilities? = null): List<ToolDefinition> {
+    fun definitions(kit: ToolKit.Kit, capabilities: UltronCapabilities? = null): List<ToolDefinition> {
         val names = ToolKit.names(kit)
         val kitTools = when {
             names == null -> definitions

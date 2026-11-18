@@ -1,4 +1,4 @@
-# ─────────────────────────────────────────────────────────────
+﻿# ─────────────────────────────────────────────────────────────
 #  Secrets — never committed
 # ─────────────────────────────────────────────────────────────
 
@@ -62,7 +62,7 @@ desktop.ini
 #  Private working notes
 # ─────────────────────────────────────────────────────────────
 AUDIT.md
-Friday_project_review_and_android_porting_guide.md
+ULTRON_project_review_and_android_porting_guide.md
 # Platform / Samsung roadmap
 00_OVERVIEW.md
 P[0-9]*.md
@@ -71,4 +71,4 @@ SOURCE_MAP.md
 CLAUDE_OPUS_*.md
 
 # Owner's task briefs
-FRIDAY_*_IMPLEMENTATION.md
+ULTRON_*_IMPLEMENTATION.md

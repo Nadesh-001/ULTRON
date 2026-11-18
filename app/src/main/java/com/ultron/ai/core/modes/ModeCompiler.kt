@@ -1,10 +1,10 @@
-package com.ultron.ai.core.modes
+﻿package com.ultron.ai.core.modes
 
 import android.util.Log
 import com.ultron.ai.agent.ActionEnvelope
 import com.ultron.ai.agent.AgentTools
 import com.ultron.ai.agent.ToolKit
-import com.ultron.ai.core.capabilities.FridayCapabilities
+import com.ultron.ai.core.capabilities.UltronCapabilities
 import com.ultron.ai.data.remote.ChatEvent
 import com.ultron.ai.data.remote.GroqApiException
 import com.ultron.ai.data.remote.GroqApiService
@@ -20,7 +20,7 @@ import kotlinx.serialization.json.jsonObject
  * One model call with the phone's tools, asking for the calls that would
  * put the phone in that mode, all at once. The calls are *not* carried out:
  * they are checked like any tool call ([AgentTools.interpret]) and kept as
- * envelopes. So the vocabulary is closed (a mode can only do what Friday
+ * envelopes. So the vocabulary is closed (a mode can only do what ULTRON
  * can), a misunderstanding costs nothing, and running the mode later needs
  * no model at all.
  */
@@ -28,7 +28,7 @@ class ModeCompiler(
     private val groq: GroqApiService,
     /** Groq key, main model and its backup. */
     private val access: suspend () -> Access,
-    private val capabilities: suspend () -> FridayCapabilities?,
+    private val capabilities: suspend () -> UltronCapabilities?,
     /** The phone context the agent gets (installed players, messengers…), for picking apps. */
     private val phone: () -> String = { "" },
     private val now: () -> LocalDateTime = LocalDateTime::now
@@ -37,7 +37,7 @@ class ModeCompiler(
     data class Access(val apiKey: String, val model: String, val backup: String?)
 
     sealed interface Result {
-        /** [skipped]: parts the model asked for that Friday can't do, said back to the owner. */
+        /** [skipped]: parts the model asked for that ULTRON can't do, said back to the owner. */
         data class Steps(val steps: List<ActionEnvelope>, val skipped: List<String>) : Result
         data class Failed(val reason: String) : Result
     }

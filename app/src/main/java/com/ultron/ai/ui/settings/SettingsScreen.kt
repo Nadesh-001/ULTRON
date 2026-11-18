@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.settings
+﻿package com.ultron.ai.ui.settings
 
 import android.Manifest
 import android.content.Context
@@ -54,7 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ultron.ai.core.VoiceProfile
-import com.ultron.ai.service.FridayNotificationListener
+import com.ultron.ai.service.ULTRONNotificationListener
 import com.ultron.ai.service.VoiceCalibrator
 import com.ultron.ai.service.VoskModelManager
 import com.ultron.ai.ui.theme.*

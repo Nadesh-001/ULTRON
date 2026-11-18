@@ -1,4 +1,4 @@
-package com.ultron.ai.core.capabilities
+﻿package com.ultron.ai.core.capabilities
 
 import android.Manifest
 import android.app.role.RoleManager
@@ -14,14 +14,14 @@ import android.view.InputDevice
 import androidx.core.content.ContextCompat
 import com.ultron.ai.data.local.dao.UserPreferenceDao
 import com.ultron.ai.data.repository.AssistantRepositoryImpl
-import com.ultron.ai.service.FridayMemory
-import com.ultron.ai.service.FridayNotificationListener
-import com.ultron.ai.service.FridayWakeWordService
+import com.ultron.ai.service.ULTRONMemory
+import com.ultron.ai.service.ULTRONNotificationListener
+import com.ultron.ai.service.ULTRONWakeWordService
 import com.ultron.ai.service.VoskModelManager
 import com.ultron.ai.service.mail.MailAssistant
 
 /**
- * Reads [FridayCapabilities] from the system and from Friday's own settings.
+ * Reads [UltronCapabilities] from the system and from ULTRON's own settings.
  *
  * Every check is a cheap local call — a permission, a package lookup, a
  * preference — so a fresh snapshot can be taken before each answer. Each
@@ -48,14 +48,14 @@ class CapabilityProbe(
         integrations = UltronCapabilities.Integrations(
             groqKey = !prefs.get(AssistantRepositoryImpl.PREF_API_KEY).isNullOrBlank(),
             gmail = !prefs.get(MailAssistant.PREF_ACCOUNT).isNullOrBlank(),
-            lazuri = prefs.get(FridayMemory.PREF_LAZURI_ENABLED) == "true" &&
-                prefs.get(FridayMemory.PREF_LAZURI_DEVICE_ID) != null
+            lazuri = prefs.get(ULTRONMemory.PREF_LAZURI_ENABLED) == "true" &&
+                prefs.get(ULTRONMemory.PREF_LAZURI_DEVICE_ID) != null
         ),
         voice = UltronCapabilities.Voice(
             wakeWordEnabled = prefs.get("wake_word_enabled") == "true",
             wakeModelReady = VoskModelManager(context).isModelReady(),
-            voiceProfile = !prefs.get(FridayWakeWordService.PREF_VOICE_PROFILE).isNullOrBlank(),
-            listening = FridayWakeWordService.running
+            voiceProfile = !prefs.get(ULTRONWakeWordService.PREF_VOICE_PROFILE).isNullOrBlank(),
+            listening = ULTRONWakeWordService.running
         ),
         assistant = UltronCapabilities.Assistant(active = isDefaultAssistant()),
         privileged = UltronCapabilities.Privileged(shizukuInstalled = installed(SHIZUKU_PACKAGE)),
@@ -82,7 +82,7 @@ class CapabilityProbe(
         return UltronCapabilities.Permissions(
             microphone = granted(Manifest.permission.RECORD_AUDIO),
             overlay = Settings.canDrawOverlays(context),
-            notificationListener = FridayNotificationListener.isEnabled(context),
+            notificationListener = ULTRONNotificationListener.isEnabled(context),
             postNotifications = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
                 granted(Manifest.permission.POST_NOTIFICATIONS),
             contacts = granted(Manifest.permission.READ_CONTACTS),

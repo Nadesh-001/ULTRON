@@ -1,4 +1,4 @@
-// Long lines on purpose: each reply is a Russian/English pair kept side by side.
+﻿// Long lines on purpose: each reply is a Russian/English pair kept side by side.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core.modes
@@ -80,7 +80,7 @@ class ModeEngine(
     /**
      * The mode request in [text], or null. Run, exit and describe only count
      * when the name is one of the owner's modes: "mode mode mode" is a
-     * system setting, not a mode Friday doesn't have.
+     * system setting, not a mode ULTRON doesn't have.
      */
     fun route(text: String): CommandResult.Mode? =
         correction(text) ?: tagRequest(text) ?: eventRequest(text) ?: scheduleRequest(text) ?: cancelRequest(text) ?: request(text)

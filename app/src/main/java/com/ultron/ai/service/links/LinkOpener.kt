@@ -1,4 +1,4 @@
-package com.ultron.ai.service.links
+﻿package com.ultron.ai.service.links
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -19,7 +19,7 @@ class LinkOpener(private val context: Context) {
     fun open(url: String): Boolean {
         val view = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            // A tab of its own each time, not the one Friday opened last.
+            // A tab of its own each time, not the one ULTRON opened last.
             .putExtra(Browser.EXTRA_APPLICATION_ID, context.packageName)
             .putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
         return start(Intent(view).setPackage(CHROME)) || start(view)

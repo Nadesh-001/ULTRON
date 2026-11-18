@@ -1,4 +1,4 @@
-package com.ultron.ai.service.lock
+﻿package com.ultron.ai.service.lock
 
 import android.app.KeyguardManager
 import android.os.Build
@@ -28,7 +28,7 @@ import com.ultron.ai.core.voice.ScreenHold
 import com.ultron.ai.core.voice.VoicePanel
 import com.ultron.ai.core.voice.VoicePresentation
 import com.ultron.ai.service.voice.VoiceUi
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.ui.theme.ULTRONTheme
 import com.ultron.ai.ui.voice.PanelAction
 import com.ultron.ai.ui.voice.VoicePanelCard
 import com.ultron.ai.ui.voice.VoiceTokens
@@ -39,12 +39,12 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 /**
- * Friday over the lock screen: a compact private panel, not a copy of the
+ * ULTRON over the lock screen: a compact private panel, not a copy of the
  * chat and not an imitation of the lock screen — the clock and the system
  * unlock stay Android's.
  *
  * By default it shows only the stage ([VoicePresentation.locked]); the
- * owner's words and Friday's answer appear after "text text
+ * owner's words and ULTRON's answer appear after "text text
  * text" and Android's own unlock. "text", the cross and Back all end
  * the session without undoing what was already done.
  *
@@ -63,7 +63,7 @@ class LockScreenActivity : ComponentActivity() {
             override fun handleOnBackPressed() = end()
         })
         setContent {
-            FridayTheme {
+            ULTRONTheme {
                 LockPanelScreen(
                     unlocked = unlocked.collectAsState().value,
                     onClosed = ::finish,
@@ -111,7 +111,7 @@ class LockScreenActivity : ComponentActivity() {
         val owners = VoiceUi.store.state.value?.userInitiated == true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true)
-            // Only a call by the owner lights the screen; Friday's own announcements never do.
+            // Only a call by the owner lights the screen; ULTRON's own announcements never do.
             setTurnScreenOn(owners)
         } else {
             @Suppress("DEPRECATION")

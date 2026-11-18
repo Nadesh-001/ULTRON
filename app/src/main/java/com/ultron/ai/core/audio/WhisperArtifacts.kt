@@ -1,4 +1,4 @@
-package com.ultron.ai.core.audio
+﻿package com.ultron.ai.core.audio
 
 /**
  * Text Whisper makes up when there is no speech to hear.
@@ -6,7 +6,7 @@ package com.ultron.ai.core.audio
  * Trained on subtitled video, Whisper fills music and noise with the
  * credits it saw most: "text text DimaTorzok", "text
  * text…", "Thank you. Thank you." On the owner's own voice notes it did
- * exactly that for a song. Taken as a command, that is Friday answering a
+ * exactly that for a song. Taken as a command, that is ULTRON answering a
  * radio; removed, what remains (usually nothing) is what was said.
  */
 object WhisperArtifacts {

@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.navigation
+﻿package com.ultron.ai.ui.navigation
 
 import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -17,13 +17,14 @@ import com.ultron.ai.ui.chat.ChatViewModel
 import com.ultron.ai.ui.dashboard.LazuriDashboardScreen
 import com.ultron.ai.ui.dashboard.UltronHomeDashboard
 import com.ultron.ai.ui.diagnostics.DiagnosticsScreen
+import com.ultron.ai.ui.security.SecurityDashboard
 import com.ultron.ai.ui.settings.SettingsScreen
 import com.ultron.ai.ui.voice.UltronVoiceAssistantScreen
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
 @Composable
-fun FridayNavGraph(activity: MainActivity) {
+fun ULTRONNavGraph(activity: MainActivity) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "home") {
@@ -111,6 +112,12 @@ fun FridayNavGraph(activity: MainActivity) {
         }
         composable("lazuri_dashboard") {
             LazuriDashboardScreen(onNavigateBack = { navController.popBackStack() })
+        }
+        composable("security") {
+            com.ultron.ai.ui.security.SecurityDashboard(
+                viewModel = koinViewModel(),
+                onBack = { navController.popBackStack() }
+            )
         }
     }
 }

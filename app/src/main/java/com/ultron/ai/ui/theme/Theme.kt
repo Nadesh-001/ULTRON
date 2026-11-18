@@ -1,10 +1,10 @@
-package com.ultron.ai.ui.theme
+﻿package com.ultron.ai.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 
-private val FridayDarkScheme = darkColorScheme(
+private val ULTRONDarkScheme = darkColorScheme(
     primary = ArcCyan,
     onPrimary = OnPrimary,
     primaryContainer = ArcCyanDim,
@@ -28,11 +28,11 @@ private val FridayDarkScheme = darkColorScheme(
 )
 
 @Composable
-fun FridayTheme(content: @Composable () -> Unit) {
+fun ULTRONTheme(content: @Composable () -> Unit) {
     // Only one scheme on purpose: the arc reactor look depends on a dark room.
     MaterialTheme(
-        colorScheme = FridayDarkScheme,
-        typography = FridayTypography,
+        colorScheme = ULTRONDarkScheme,
+        typography = ULTRONTypography,
         content = content
     )
 }

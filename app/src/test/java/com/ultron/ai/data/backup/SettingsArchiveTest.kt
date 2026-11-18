@@ -1,4 +1,4 @@
-package com.ultron.ai.data.backup
+﻿package com.ultron.ai.data.backup
 
 import com.ultron.ai.data.backup.SettingsArchive.Failure
 import com.ultron.ai.data.local.dao.BackupDao
@@ -106,7 +106,7 @@ class SettingsArchiveTest {
     }
 
     @Test
-    fun `a file from a newer Friday is refused, not misread`() {
+    fun `a file from a newer ULTRON is refused, not misread`() {
         val file = archive.seal(content, passphrase).also { it[4] = (SettingsArchive.FORMAT + 1).toByte() }
         val failure = expect<Failure.NewerFormat> { archive.open(file, passphrase) }
         assertEquals(SettingsArchive.FORMAT + 1, failure.format)
@@ -121,7 +121,7 @@ class SettingsArchiveTest {
 
     @Test
     fun `fields added by a later version are ignored`() {
-        // A newer 1.x may add sections; an older Friday still opens the file.
+        // A newer 1.x may add sections; an older ULTRON still opens the file.
         val json = """{"format":1,"appVersion":"0.12.0","createdAt":1,"protocols":[{"id":"x"}],"preferences":[]}"""
         val opened = SettingsArchive.json.decodeFromString(SettingsArchive.Content.serializer(), json)
         assertEquals("0.12.0", opened.appVersion)

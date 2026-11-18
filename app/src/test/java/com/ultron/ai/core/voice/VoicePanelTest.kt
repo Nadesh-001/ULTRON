@@ -1,4 +1,4 @@
-@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
+﻿@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
 
 package com.ultron.ai.core.voice
 
@@ -175,7 +175,7 @@ class SurfacesTest {
     private fun pick(c: Surfaces.Conditions) = Surfaces.choose(c)
 
     @Test
-    fun `unlocked - the floating panel, Friday's own layer when she is open, voice when no overlay`() {
+    fun `unlocked - the floating panel, ULTRON's own layer when she is open, voice when no overlay`() {
         assertEquals(Surfaces.Surface.OVERLAY, pick(base))
         assertEquals(Surfaces.Surface.IN_APP, pick(base.copy(appInForeground = true)))
         assertEquals(Surfaces.Surface.VOICE_ONLY, pick(base.copy(overlayAllowed = false)))
@@ -192,7 +192,7 @@ class SurfacesTest {
     }
 
     @Test
-    fun `friday's own announcements never light the locked screen`() {
+    fun `ULTRON's own announcements never light the locked screen`() {
         assertEquals(Surfaces.Surface.VOICE_ONLY, pick(base.copy(locked = true, userInitiated = false)))
         assertEquals(Surfaces.Surface.OVERLAY, pick(base.copy(userInitiated = false)))
     }

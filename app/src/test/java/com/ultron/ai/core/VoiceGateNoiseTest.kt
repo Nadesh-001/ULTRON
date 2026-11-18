@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -66,7 +66,7 @@ class VoiceGateNoiseTest {
     }
 
     @Test
-    fun `a noisy room cannot make Friday deaf`() {
+    fun `a noisy room cannot make ULTRON deaf`() {
         val g = gate()
         soak(g, 5000.0, 60)
         assertTrue(
@@ -91,7 +91,7 @@ class VoiceGateNoiseTest {
     fun `talking does not progressively deafen the assistant`() {
         // Real speech is bursty, and the gaps between phrases are what the
         // minimum tracker latches onto. If a conversation could raise the
-        // floor, Friday would go deaf the longer you talked to her.
+        // floor, ULTRON would go deaf the longer you talked to her.
         val g = gate()
         repeat(8) {
             repeat(1500 / frameMs) { g.onFrame(3000.0) }  // 1.5s of speech

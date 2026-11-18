@@ -1,4 +1,4 @@
-@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
+﻿@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
 
 package com.ultron.ai.ui.voice
 
@@ -26,7 +26,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.ultron.ai.core.voice.VoicePanel
 import com.ultron.ai.core.voice.VoicePhase
 import com.ultron.ai.core.voice.VoicePresentation
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.ui.theme.ULTRONTheme
 import java.io.File
 import org.junit.Assume
 import org.junit.Before
@@ -40,7 +40,7 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The voice surfaces drawn to PNG, to look at without a phone. Off by
  * default: `./gradlew testDebugUnitTest --tests "*VoiceSurfaceScreenshots*" -Pscreenshots`.
- * The backgrounds stand in for a launcher and a lock screen; they are not Friday's.
+ * The backgrounds stand in for a launcher and a lock screen; they are not ULTRON's.
  */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -86,7 +86,7 @@ class VoiceSurfaceScreenshots {
         VoicePanelCard(
             view = VoicePresentation.open(p), level = { 0.45f }, expanded = expanded, onExpand = {}, onClose = {},
             actions = if (expanded) {
-                listOf(PanelAction("Закрыть") {}, PanelAction("Открыть в Friday", primary = true) {})
+                listOf(PanelAction("Закрыть") {}, PanelAction("Открыть в ULTRON", primary = true) {})
             } else {
                 emptyList()
             }
@@ -137,7 +137,7 @@ class VoiceSurfaceScreenshots {
         compose.mainClock.autoAdvance = false
         compose.setContent {
             val density = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) { FridayTheme(content) }
+            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) { ULTRONTheme(content) }
         }
         compose.mainClock.advanceTimeBy(1_200)
         org.robolectric.shadows.ShadowLooper.idleMainLooper()

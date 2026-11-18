@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import kotlinx.coroutines.delay
 
@@ -8,7 +8,7 @@ import kotlinx.coroutines.delay
  * Starting a call in WhatsApp or music in Spotify means sending that app an
  * intent and hoping. A cold start can swallow the first one: the app comes
  * up on its home screen and drops the request. The user then repeats the
- * command, the app (now running) obeys, and it looks as though Friday needs
+ * command, the app (now running) obeys, and it looks as though ULTRON needs
  * everything said twice.
  *
  * So a hand-off is: send → wait for the effect the system can show (a

@@ -1,4 +1,4 @@
-// Long lines on purpose: tool-call JSON is kept whole so it reads as the model sends it.
+﻿// Long lines on purpose: tool-call JSON is kept whole so it reads as the model sends it.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.agent
@@ -89,7 +89,7 @@ class EscalationAndLearningTest {
     private val groq = mockk<GroqApiService>()
     private val commands = mockk<CommandExecutor>()
     private val learned = mockk<LearnedCommands>(relaxed = true)
-    private val agent = FridayAgent(groq, commands, now = { LocalDateTime.of(2026, 10, 5, 22, 0) }, learned = learned)
+    private val agent = ULTRONAgent(groq, commands, now = { LocalDateTime.of(2026, 10, 5, 22, 0) }, learned = learned)
     private val offered = mutableListOf<Set<String>?>()
 
     private fun script(vararg turns: kotlinx.coroutines.flow.Flow<ChatEvent>) {
@@ -104,7 +104,7 @@ class EscalationAndLearningTest {
         flowOf(ChatEvent.ToolCalls(c.mapIndexed { i, (n, a) -> ToolCall("c$i", function = FunctionCall(n, a)) }))
 
     private suspend fun ask(q: String) =
-        agent.reply(FridayAgent.Settings("k", "m", 100), listOf(ApiMessage("user", q)), true).toList().joinToString("")
+        agent.reply(ULTRONAgent.Settings("k", "m", 100), listOf(ApiMessage("user", q)), true).toList().joinToString("")
 
     @Test
     fun `a missed guess costs one round, not a refusal`() = runTest {

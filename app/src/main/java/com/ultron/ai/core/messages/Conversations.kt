@@ -1,4 +1,4 @@
-package com.ultron.ai.core.messages
+﻿package com.ultron.ai.core.messages
 
 import com.ultron.ai.core.ContactMatcher
 
@@ -9,7 +9,7 @@ data class InboxMessage(val sender: String, val text: String, val time: Long)
  * A chat that has notified recently — a person or a group, in one app.
  *
  * @param title who the chat is with: the person, or the group's name
- * @param canReply the notification carries a reply field, so Friday can
+ * @param canReply the notification carries a reply field, so ULTRON can
  *   answer without opening the app
  */
 data class Conversation(

@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.util.Log
 import com.ultron.ai.command.CommandExecutor
@@ -9,7 +9,7 @@ import com.ultron.ai.core.VoiceTurn
 import com.ultron.ai.core.WakePhrases
 import com.ultron.ai.domain.model.CommandResult
 import com.ultron.ai.service.EdgeTtsSpeaker
-import com.ultron.ai.service.FridayOverlayManager
+import com.ultron.ai.service.ULTRONOverlayManager
 import com.ultron.ai.service.OfflineCommandRecognizer
 import com.ultron.ai.service.WhisperTranscriber
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 // A holder: one field per device the conversation uses, nothing to group.
 @Suppress("LongParameterList")
 class VoiceIO(
-    val overlay: FridayOverlayManager,
+    val overlay: ULTRONOverlayManager,
     val speaker: EdgeTtsSpeaker,
     val transcriber: WhisperTranscriber,
     val offline: OfflineCommandRecognizer,
@@ -41,7 +41,7 @@ class VoiceIO(
  * here holds the thread.
  *
  * Every wake starts a new *turn*, and anything still in flight from an older
- * one is ignored when it lands. Interrupting Friday stops her speech, and a
+ * one is ignored when it lands. Interrupting ULTRON stops her speech, and a
  * stopped utterance still reports itself finished — without the turn check
  * that report reopened the microphone alongside the new turn, so one spoken
  * command was recorded, and carried out, twice.
@@ -78,7 +78,7 @@ class VoiceConversation(
      */
     private var language: String? = null
 
-    /** True while Friday is talking, so a wake word means "interrupt". */
+    /** True while ULTRON is talking, so a wake word means "interrupt". */
     @Volatile
     var speaking = false
         private set
@@ -108,7 +108,7 @@ class VoiceConversation(
             }
             io.notifier.update("Listening...")
 
-            // Cutting Friday off and then being greeted would be absurd —
+            // Cutting ULTRON off and then being greeted would be absurd —
             // that user already knows they were heard.
             if (bargedIn || continuing) {
                 io.overlay.listening()
@@ -127,7 +127,7 @@ class VoiceConversation(
                     speaking = false
                     io.overlay.listening()
                     // Only now is the microphone opened. Under the greeting it
-                    // would have Friday transcribing her own voice.
+                    // would have ULTRON transcribing her own voice.
                     listen(mine, isFollowUp = false)
                 }
             }
@@ -146,7 +146,7 @@ class VoiceConversation(
                 Log.i(TAG, "Busy; announcement skipped")
                 return@launch
             }
-            // Friday's own announcement: shown where allowed, never lights the screen.
+            // ULTRON's own announcement: shown where allowed, never lights the screen.
             io.overlay.begin(userInitiated = false)
             val mine = ++turn
             // Only when an answer is awaited: a ringing phone keeps its ringtone.
@@ -156,14 +156,14 @@ class VoiceConversation(
     }
 
     /**
-     * Records one voice turn and handles it. A follow-up (Friday has just
+     * Records one voice turn and handles it. A follow-up (ULTRON has just
      * answered and listens on, with no new wake word) ends quietly on silence
      * instead of complaining "text text".
      */
     internal suspend fun listen(mine: Int, isFollowUp: Boolean, attempt: Int = 1, lead: FloatArray? = null) {
         io.transcriber.listener = overlayFeedback
         // The wake listener may still hold the microphone (it listens while
-        // Friday speaks, so she can be interrupted). Two recorders at once
+        // ULTRON speaks, so she can be interrupted). Two recorders at once
         // left one of them with silence: "text text" for no reason.
         io.wake.stop()
         // With no network Whisper cannot transcribe at all; fall back to the
@@ -174,7 +174,7 @@ class VoiceConversation(
         }
         val apiKey = session.apiKey()
         if (apiKey.isBlank()) {
-            io.overlay.error("Не задан ключ Groq — откройте настройки Friday", ERROR_MS)
+            io.overlay.error("Не задан ключ Groq — откройте настройки ULTRON", ERROR_MS)
             return
         }
 
@@ -315,7 +315,7 @@ class VoiceConversation(
      * cuts the answer short instead of queueing behind it.
      */
     private fun speakAndContinue(mine: Int, text: String, allowFollowUp: Boolean) {
-        // A call has just started (often one Friday placed): she doesn't talk
+        // A call has just started (often one ULTRON placed): she doesn't talk
         // over it, and the microphone is the call's, not hers.
         if (io.inCall()) {
             speaking = false

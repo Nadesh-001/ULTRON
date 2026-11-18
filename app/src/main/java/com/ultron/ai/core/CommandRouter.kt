@@ -1,4 +1,4 @@
-// Long lines on purpose: a table of regexes, each kept on one line so it can be read whole.
+﻿// Long lines on purpose: a table of regexes, each kept on one line so it can be read whole.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core
@@ -430,7 +430,7 @@ class CommandRouter(private val now: () -> java.time.LocalDateTime = java.time.L
             )
             .replace(
                 Regex(
-                    """(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)""",
+                    """(?:monday|tuesday|wednesday|thursday|ULTRON|saturday|sunday)""",
                     RegexOption.IGNORE_CASE
                 ), " "
             )

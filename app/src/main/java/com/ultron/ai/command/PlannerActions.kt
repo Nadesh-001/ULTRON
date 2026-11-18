@@ -1,11 +1,11 @@
-package com.ultron.ai.command
+﻿package com.ultron.ai.command
 
 import com.ultron.ai.core.AppLauncher
 import com.ultron.ai.core.DateTimeParser
 import com.ultron.ai.data.local.dao.ErrandDao
 import com.ultron.ai.data.local.entity.ErrandEntity
 import com.ultron.ai.domain.model.CommandResult
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeParseException
@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException
 class PlannerActions(
     private val apps: AppLauncher,
     private val errandDao: ErrandDao,
-    private val memory: FridayMemory,
+    private val memory: ULTRONMemory,
     /** Starts the location watcher that raises errands; must be safe to call repeatedly. */
     private val watchErrands: () -> Unit,
     private val zone: () -> ZoneId = ZoneId::systemDefault

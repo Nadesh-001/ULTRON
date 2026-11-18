@@ -1,4 +1,4 @@
-package com.ultron.ai.agent
+﻿package com.ultron.ai.agent
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -8,9 +8,9 @@ class LogPrivacyTest {
 
     @Test
     fun `a tool call is logged without what was said or sent`() {
-        val line = FridayAgent.toolLog("send_message", done = true)
+        val line = ULTRONAgent.toolLog("send_message", done = true)
         assertEquals("Tool send_message: done", line)
         listOf("маме", "опоздаю", "+998", "{", "contact", "text").forEach { assertFalse(it, it in line) }
-        assertEquals("Tool call: not done", FridayAgent.toolLog("call", done = false))
+        assertEquals("Tool call: not done", ULTRONAgent.toolLog("call", done = false))
     }
 }

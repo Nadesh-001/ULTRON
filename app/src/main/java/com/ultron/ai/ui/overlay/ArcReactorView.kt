@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.overlay
+﻿package com.ultron.ai.ui.overlay
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -186,7 +186,7 @@ class ArcReactorView(context: Context) : View(context) {
         val breath = 0.5f + 0.5f * sin(phase * BREATHS_PER_TURN * 2f * PI.toFloat())
 
         val energy = when (mood) {
-            // No microphone while Friday talks, so speech gets its own rhythm.
+            // No microphone while ULTRON talks, so speech gets its own rhythm.
             Mood.SPEAKING -> max(displayedLevel, breath * 0.7f)
             Mood.THINKING -> 0.55f
             Mood.LISTENING -> displayedLevel

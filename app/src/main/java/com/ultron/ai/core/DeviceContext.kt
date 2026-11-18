@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.os.SystemClock
 import android.telephony.TelephonyManager
 import com.ultron.ai.core.capabilities.CapabilityProbe
-import com.ultron.ai.core.capabilities.FridayCapabilities
+import com.ultron.ai.core.capabilities.UltronCapabilities
 import com.ultron.ai.core.capabilities.ToolRequirements
 import com.ultron.ai.core.people.Channel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ import java.time.ZoneId
 import java.util.Locale
 
 /**
- * What Friday knows about where the user is and what the phone can do.
+ * What ULTRON knows about where the user is and what the phone can do.
  *
  * Decisions that used to be fixed in code — which maps, which messenger,
  * which country "local" means — are made from this instead. It is also told
@@ -27,22 +27,22 @@ import java.util.Locale
  * with the same facts.
  *
  * Installed apps are grouped by the category each app declares about itself
- * (audio, video, maps, social), so a player Friday has never heard of still
+ * (audio, video, maps, social), so a player ULTRON has never heard of still
  * counts as a player.
  *
- * It also owns the current [FridayCapabilities] snapshot — what works right
+ * It also owns the current [UltronCapabilities] snapshot — what works right
  * now — which the prompt, the tool kits and the diagnostics screen all read,
  * so they never disagree about it.
  */
 class DeviceContext(private val context: Context, private val probe: CapabilityProbe) {
 
-    private val _capabilities = MutableStateFlow<FridayCapabilities?>(null)
+    private val _capabilities = MutableStateFlow<UltronCapabilities?>(null)
 
     /** The last snapshot; null until the first [refresh], and then nothing is held back. */
-    val capabilities: StateFlow<FridayCapabilities?> = _capabilities.asStateFlow()
+    val capabilities: StateFlow<UltronCapabilities?> = _capabilities.asStateFlow()
 
     /** Takes a fresh snapshot. Cheap: permissions, package lookups and settings only. */
-    suspend fun refresh(): FridayCapabilities =
+    suspend fun refresh(): UltronCapabilities =
         withContext(Dispatchers.IO) { probe.probe() }.also { _capabilities.value = it }
 
     /** An installed app the user can open. */

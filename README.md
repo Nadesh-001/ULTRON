@@ -1,11 +1,11 @@
-<div align="center">
+﻿<div align="center">
 
 <img src="docs/assets/banner.svg" alt="ULTRON — an advanced AI assistant for Android" width="100%">
 
 <br>
 
-[![Release](https://img.shields.io/github/v/release/n1dlee/friday-mobile?include_prereleases&style=for-the-badge&logo=github&color=FF2233&labelColor=090203)](https://github.com/n1dlee/friday-mobile/releases)
-[![CI](https://img.shields.io/github/actions/workflow/status/n1dlee/friday-mobile/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=tests&labelColor=090203)](https://github.com/n1dlee/friday-mobile/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/n1dlee/ULTRON-mobile?include_prereleases&style=for-the-badge&logo=github&color=FF2233&labelColor=090203)](https://github.com/n1dlee/ULTRON-mobile/releases)
+[![CI](https://img.shields.io/github/actions/workflow/status/n1dlee/ULTRON-mobile/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=tests&labelColor=090203)](https://github.com/n1dlee/ULTRON-mobile/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-FF2233?style=for-the-badge&labelColor=090203)](LICENSE)
 
 [![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](#-installation)
@@ -123,7 +123,7 @@ flowchart TD
 
 ## 📥 Installation & Setup
 
-1. Download the latest **`Ultron.apk`** from [Releases](https://github.com/n1dlee/friday-mobile/releases/latest) and install it on your device.
+1. Download the latest **`Ultron.apk`** from [Releases](https://github.com/n1dlee/ULTRON-mobile/releases/latest) and install it on your device.
 2. Open **Settings** in Ultron:
    - Enter your free **Groq API key** ([console.groq.com/keys](https://console.groq.com/keys));
    - Download the offline voice model (~40 MB) and enable **Wake Word**;
@@ -177,8 +177,8 @@ Push the code or fork this repository on GitHub. The pre-configured GitHub Actio
 Prerequisites: **JDK 17 or 21**, Android SDK 35.
 
 ```bash
-git clone https://github.com/n1dlee/friday-mobile.git
-cd friday-mobile
+git clone https://github.com/n1dlee/ULTRON-mobile.git
+cd ULTRON-mobile
 ./gradlew assembleDebug          # APK generated in app/build/outputs/apk/debug/
 ./gradlew assembleRelease        # Minified with R8, in app/build/outputs/apk/release/
 ./gradlew testDebugUnitTest      # Run unit test suite

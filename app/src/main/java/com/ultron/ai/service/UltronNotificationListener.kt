@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.app.Notification
 import android.app.NotificationManager
@@ -25,7 +25,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 /**
- * Records notifications so Friday can answer "what did I miss".
+ * Records notifications so ULTRON can answer "what did I miss".
  *
  * This is the cheapest route to knowing about Telegram messages, bank alerts
  * and email at once — no per-service API, no accounts to link. It is also the
@@ -33,12 +33,12 @@ import kotlinx.coroutines.launch
  *
  *  - only the app name, title and a short text are stored, never the full
  *    notification or its extras
- *  - Friday's own foreground notification and silent/ongoing system noise are
+ *  - ULTRON's own foreground notification and silent/ongoing system noise are
  *    ignored
  *  - rows older than [RETENTION_MS] are deleted on every write
  *  - nothing is sent anywhere; it stays in the local database
  *
- * It also passes chats to [MessengerInbox] (kept in memory only, so Friday
+ * It also passes chats to [MessengerInbox] (kept in memory only, so ULTRON
  * can read and answer them) and tells [Announcer] about incoming calls and,
  * if the user turned it on, new messages.
  */
@@ -207,4 +207,4 @@ class UltronNotificationListener : NotificationListenerService() {
 }
 
 /** Backward compatibility alias */
-typealias FridayNotificationListener = UltronNotificationListener
+typealias ULTRONNotificationListener = UltronNotificationListener

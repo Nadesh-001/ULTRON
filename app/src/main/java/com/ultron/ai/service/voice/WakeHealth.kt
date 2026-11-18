@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,7 +31,7 @@ data class WakeHealth(
         Status.UNAVAILABLE, Status.FAILED -> failureText(reason)
         Status.LOADING -> "Loading voice model..."
         Status.STARTING -> "Starting microphone..."
-        Status.LISTENING -> "Listening for \"Friday\""
+        Status.LISTENING -> "Listening for \"ULTRON\""
         Status.PAUSING, Status.PAUSED_FOR_COMMAND -> "Listening..."
         Status.PAUSED_FOR_CALL -> "Пауза на время звонка"
         Status.RECOVERING -> "Микрофон недоступен — повтор через ${retryInMs / MS_PER_SECOND} с ($attempt/$MAX_SHOWN)"
@@ -39,9 +39,9 @@ data class WakeHealth(
     }
 
     private fun failureText(reason: WakeFailure?): String = when (reason) {
-        WakeFailure.PERMISSION -> "Нет доступа к микрофону — откройте Friday и разрешите его"
+        WakeFailure.PERMISSION -> "Нет доступа к микрофону — откройте ULTRON и разрешите его"
         WakeFailure.MODEL -> "Голосовая модель не установлена — скачайте её в настройках"
-        else -> "Пятница не слышит — откройте Friday, чтобы перезапустить"
+        else -> "Пятница не слышит — откройте ULTRON, чтобы перезапустить"
     }
 
     companion object {

@@ -1,4 +1,4 @@
-package com.ultron.ai.agent
+﻿package com.ultron.ai.agent
 
 import com.ultron.ai.core.ContactMatcher
 
@@ -8,7 +8,7 @@ import com.ultron.ai.core.ContactMatcher
  * Asked to send "text text text text text text text text
  * text", the model called send_message with «text text» — the text of
  * a message from earlier in the conversation. A person writing a message for
- * someone uses the words they were just given; so does Friday. A text whose
+ * someone uses the words they were just given; so does ULTRON. A text whose
  * words are mostly not in the request is refused back to the model, which
  * then takes the words from the request.
  */

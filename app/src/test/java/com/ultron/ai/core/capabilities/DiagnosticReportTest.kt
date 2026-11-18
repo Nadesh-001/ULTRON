@@ -1,4 +1,4 @@
-package com.ultron.ai.core.capabilities
+﻿package com.ultron.ai.core.capabilities
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -9,13 +9,13 @@ class DiagnosticReportTest {
 
     @Test
     fun `keys, numbers, mail and quoted words never leave the phone`() {
-        val line = "10-07 12:34:56.789 I/FridayAgent( 4321): send_message({\"contact\":\"мама\",\"text\":\"еду\"}) " +
+        val line = "10-07 12:34:56.789 I/ULTRONAgent( 4321): send_message({\"contact\":\"мама\",\"text\":\"еду\"}) " +
             "-> Пишу маме: «буду в семь» on +1 (415) 555-0132, key gsk_abcDEF123456, mail me@example.com"
         val r = DiagnosticReport.redact(line)
         listOf("мама", "еду", "буду в семь", "415", "gsk_", "example.com").forEach {
             assertFalse("\"$it\" leaked: $r", r.contains(it))
         }
-        assertTrue("timestamp and tag are kept: $r", r.startsWith("10-07 12:34:56.789 I/FridayAgent( 4321)"))
+        assertTrue("timestamp and tag are kept: $r", r.startsWith("10-07 12:34:56.789 I/ULTRONAgent( 4321)"))
         assertTrue(r.contains("[номер]") && r.contains("[ключ]") && r.contains("[email]"))
     }
 
@@ -31,7 +31,7 @@ class DiagnosticReportTest {
             Diagnostics.Row("dnd", Diagnostics.Group.PHONE, "Не беспокоить", Diagnostics.Status.PROBLEM, "Нет")
         )
         val report = DiagnosticReport.build("0.13.0", "samsung SM-S938B", rows, listOf("line"))
-        assertTrue(report.startsWith("Friday 0.13.0 · samsung SM-S938B"))
+        assertTrue(report.startsWith("ULTRON 0.13.0 · samsung SM-S938B"))
         assertTrue(report.contains("[PROBLEM] Телефон и люди · Не беспокоить: Нет"))
     }
 }

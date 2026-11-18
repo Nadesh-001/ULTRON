@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
@@ -25,7 +25,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ultron.ai.core.modes.ModeTags
 import com.ultron.ai.ui.theme.ArcCyan
 import com.ultron.ai.ui.theme.ErrorColor
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.ui.theme.ULTRONTheme
 import com.ultron.ai.ui.theme.HudBackground
 import com.ultron.ai.ui.theme.HudOutlinedButton
 import com.ultron.ai.ui.theme.HudPanel
@@ -40,8 +40,8 @@ import org.koin.android.ext.android.inject
 /**
  * "text text": writes the mode's tag while this screen is open.
  *
- * The tag gets two records: Friday's own (which mode, signed) and an
- * Android application record, so touching it starts Friday even when she
+ * The tag gets two records: ULTRON's own (which mode, signed) and an
+ * Android application record, so touching it starts ULTRON even when she
  * isn't running. Reader mode keeps other apps from grabbing the tag
  * meanwhile.
  */
@@ -64,7 +64,7 @@ class NfcWriteActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FridayTheme {
+            ULTRONTheme {
                 HudBackground {
                     Column(
                         Modifier.fillMaxSize().padding(24.dp),

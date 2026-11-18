@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import com.ultron.ai.core.Acknowledgements
 import com.ultron.ai.core.GroqModels
@@ -25,7 +25,7 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-/** The model retirement that silenced Friday, and everything built so it cannot again. */
+/** The model retirement that silenced ULTRON, and everything built so it cannot again. */
 class GroqFailuresTest {
 
     private val retired = GroqApiException(

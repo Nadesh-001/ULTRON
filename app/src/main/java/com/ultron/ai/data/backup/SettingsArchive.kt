@@ -1,4 +1,4 @@
-package com.ultron.ai.data.backup
+﻿package com.ultron.ai.data.backup
 
 import com.ultron.ai.data.local.entity.ChatMessageEntity
 import com.ultron.ai.data.local.entity.ErrandEntity
@@ -25,9 +25,9 @@ import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 
 /**
- * Everything Friday knows, in one file that can move to another phone.
+ * Everything ULTRON knows, in one file that can move to another phone.
  *
- * Friday lives on one phone; this is how she changes phones. The file holds
+ * ULTRON lives on one phone; this is how she changes phones. The file holds
  * the API key and the voice profile, so it is always encrypted with a
  * passphrase the owner types: it can sit in Downloads or a cloud drive and
  * be useless to anyone else.
@@ -67,10 +67,10 @@ class SettingsArchive(
 
     /** Why a file could not be opened, each with its own message for the owner. */
     sealed class Failure(message: String) : Exception(message) {
-        class NotAnArchive : Failure("Not a Friday settings file")
+        class NotAnArchive : Failure("Not a ULTRON settings file")
         /** GCM can't tell a wrong passphrase from a damaged file; neither can we. */
         class WrongPassphraseOrDamaged : Failure("Wrong passphrase, or the file is damaged")
-        class NewerFormat(val format: Int) : Failure("Made by a newer Friday (format $format)")
+        class NewerFormat(val format: Int) : Failure("Made by a newer ULTRON (format $format)")
     }
 
     fun seal(content: Content, passphrase: CharArray): ByteArray {

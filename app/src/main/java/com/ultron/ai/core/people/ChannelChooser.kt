@@ -1,4 +1,4 @@
-package com.ultron.ai.core.people
+﻿package com.ultron.ai.core.people
 
 /**
  * How to reach someone: SMS, WhatsApp or Telegram, and which of their numbers.
@@ -33,7 +33,7 @@ object ChannelChooser {
         val installed: Set<Channel>,
         /** What the user picked for this person before, if anything. */
         val usual: Channel? = null,
-        /** The user's general favourite messenger, if they have told Friday one. */
+        /** The user's general favourite messenger, if they have told ULTRON one. */
         val favourite: Channel? = null
     )
 

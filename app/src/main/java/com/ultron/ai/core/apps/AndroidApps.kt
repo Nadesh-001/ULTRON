@@ -1,4 +1,4 @@
-package com.ultron.ai.core.apps
+﻿package com.ultron.ai.core.apps
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -86,7 +86,7 @@ class AndroidApps(
 
     private companion object {
         const val TAG = "AndroidApps"
-        const val CHANNEL_ID = "friday_open_app"
+        const val CHANNEL_ID = "ULTRON_open_app"
         const val NOTIFICATION_ID = 4107
     }
 }

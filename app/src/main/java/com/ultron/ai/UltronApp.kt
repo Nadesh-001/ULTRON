@@ -21,6 +21,12 @@ class UltronApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // Enforce English as default application language across all contexts
+        java.util.Locale.setDefault(java.util.Locale.ENGLISH)
+        val config = resources.configuration
+        config.setLocale(java.util.Locale.ENGLISH)
+        config.setLayoutDirection(java.util.Locale.ENGLISH)
+
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@UltronApp)
@@ -102,12 +108,12 @@ class UltronApp : Application() {
         )
         if (prefs.migrate() == 0) return
         runCatching {
-            org.koin.java.KoinJavaComponent.get<com.ultron.ai.data.local.FridayDatabase>(
-                com.ultron.ai.data.local.FridayDatabase::class.java
+            org.koin.java.KoinJavaComponent.get<com.ultron.ai.data.local.UltronDatabase>(
+                com.ultron.ai.data.local.UltronDatabase::class.java
             ).openHelper.writableDatabase.execSQL("VACUUM")
         }.onFailure { android.util.Log.w("UltronApp", "VACUUM after sealing keys failed: ${it.message}") }
     }
 }
 
 /** Backward compatibility alias */
-typealias FridayApp = UltronApp
+typealias UltronApp = UltronApp

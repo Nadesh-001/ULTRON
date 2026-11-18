@@ -1,4 +1,4 @@
-package com.ultron.ai.core.capabilities
+﻿package com.ultron.ai.core.capabilities
 
 /**
  * A plain-text report for working out what went wrong: version, every
@@ -6,7 +6,7 @@ package com.ultron.ai.core.capabilities
  *
  * Redacted before it leaves the phone, always: API keys, phone numbers,
  * e-mail addresses and anything quoted (message text, what was said, names
- * in tool arguments) are replaced. What's left is which part of Friday did
+ * in tool arguments) are replaced. What's left is which part of ULTRON did
  * what and when, which is what a fix needs.
  */
 object DiagnosticReport {

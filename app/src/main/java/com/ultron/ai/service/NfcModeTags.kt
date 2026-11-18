@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.content.Context
 import android.content.Intent
@@ -49,15 +49,15 @@ class AndroidNfcTags(private val context: Context, private val prefs: UserPrefer
 }
 
 /**
- * A Friday tag was touched, whatever was open (or nothing): Android starts
+ * A ULTRON tag was touched, whatever was open (or nothing): Android starts
  * this from the tag's MIME type. It hands the payload to the voice service,
  * which toggles the mode and says what happened, and closes.
  */
 class NfcTagActivity : com.ultron.ai.HandOffActivity() {
 
     override fun handOff() {
-        payload(intent)?.let { FridayWakeWordService.tag(this, it) }
-            ?: Log.w("NfcTagActivity", "Not a Friday tag")
+        payload(intent)?.let { ULTRONWakeWordService.tag(this, it) }
+            ?: Log.w("NfcTagActivity", "Not a ULTRON tag")
     }
 
     private fun payload(intent: Intent): ByteArray? {

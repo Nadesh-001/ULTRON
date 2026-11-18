@@ -1,4 +1,4 @@
-package com.ultron.ai.data.backup
+﻿package com.ultron.ai.data.backup
 
 import com.ultron.ai.data.local.dao.BackupDao
 import com.ultron.ai.data.local.secure.SecurePreferenceDao
@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
- * Moves Friday to another phone: everything out into one encrypted file,
+ * Moves ULTRON to another phone: everything out into one encrypted file,
  * and back in.
  *
  * Export reads secrets in the clear (they are sealed with this phone's

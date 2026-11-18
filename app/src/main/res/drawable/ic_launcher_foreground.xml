@@ -1,99 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
+    android:viewportWidth="512"
+    android:viewportHeight="512">
 
-    <!-- Outer Circular Technical Ring (HUD dash) -->
+    <!-- Atmospheric Red Background Glow -->
     <path
-        android:strokeColor="#33FF2233"
+        android:pathData="M256,20 A236,236 0 1,1 255.9,20 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="256"
+                android:centerY="235"
+                android:gradientRadius="266"
+                android:type="radial">
+                <item android:color="#52FF3030" android:offset="0.0" />
+                <item android:color="#24A50000" android:offset="0.45" />
+                <item android:color="#00050505" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Outer HUD Circular Reticle Rings -->
+    <path
+        android:strokeColor="#4DFF3030"
+        android:strokeWidth="2.5"
+        android:pathData="M 256,20 A 236,236 0 1,1 255.9,20" />
+
+    <path
+        android:strokeColor="#CCFF3030"
+        android:strokeWidth="3.0"
+        android:pathData="M 256,38 A 218,218 0 1,1 255.9,38" />
+
+    <!-- Technical Reticle Ticks & Dots -->
+    <path
+        android:strokeColor="#FFFF3030"
+        android:strokeWidth="4.0"
+        android:strokeLineCap="round"
+        android:pathData="M256,6 L256,36 M256,476 L256,506 M6,256 L36,256 M476,256 L506,256" />
+
+    <!-- Corner Reticle Dots -->
+    <path
+        android:fillColor="#FFFF3030"
+        android:pathData="M256,38.5 A3.5,3.5 0 1,1 255.9,38.5 M256,466.5 A3.5,3.5 0 1,1 255.9,466.5 M38.5,256 A3.5,3.5 0 1,1 38.4,256 M466.5,256 A3.5,3.5 0 1,1 466.4,256" />
+
+    <!-- Outer Cranium Shadow Base & Silhouette -->
+    <path
+        android:fillColor="#0D0F13"
+        android:strokeColor="#80FF3030"
+        android:strokeWidth="3.0"
+        android:strokeLineJoin="round"
+        android:pathData="M176,120 L256,92 L336,120 L376,184 L358,248 L330,304 L256,396 L182,304 L154,248 L136,184 Z" />
+
+    <!-- Upper Cranium Armor Plates (Left Titanium Dark) -->
+    <path
+        android:strokeColor="#4A525C"
+        android:strokeWidth="1.5"
+        android:pathData="M176,120 L256,92 L256,192 L188,188 L154,204 L136,184 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="176"
+                android:startY="92"
+                android:endX="256"
+                android:endY="204"
+                android:type="linear">
+                <item android:color="#4A525C" android:offset="0.0" />
+                <item android:color="#21252B" android:offset="0.5" />
+                <item android:color="#121418" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Upper Cranium Armor Plates (Right Metallic Steel) -->
+    <path
+        android:strokeColor="#8D98A4"
+        android:strokeWidth="1.5"
+        android:pathData="M336,120 L256,92 L256,192 L324,188 L358,204 L376,184 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="256"
+                android:startY="92"
+                android:endX="376"
+                android:endY="204"
+                android:type="linear">
+                <item android:color="#CCD7E2" android:offset="0.0" />
+                <item android:color="#7E8A95" android:offset="0.5" />
+                <item android:color="#353A40" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Forehead Central Blade / Crest Plates -->
+    <path
+        android:strokeColor="#B3FFFFFF"
         android:strokeWidth="1.2"
-        android:pathData="M 54,10 A 44,44 0 1,1 53.9,10" />
+        android:pathData="M256,104 L274,152 L256,220 L238,152 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="238"
+                android:startY="104"
+                android:endX="274"
+                android:endY="220"
+                android:type="linear">
+                <item android:color="#E2ECF5" android:offset="0.0" />
+                <item android:color="#77828D" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
 
     <path
-        android:strokeColor="#55FF2233"
+        android:fillColor="#15171B"
+        android:pathData="M256,118 L266,152 L256,196 L246,152 Z" />
+
+    <!-- Forehead Core Node Glowing Red -->
+    <path
+        android:fillColor="#FFFF3030"
+        android:pathData="M256,132 L262,152 L256,176 L250,152 Z" />
+
+    <!-- Cheek Flanges (Ears / Antennas) Left & Right -->
+    <path
+        android:fillColor="#1C2025"
+        android:strokeColor="#CCFF3030"
+        android:strokeWidth="2.0"
+        android:pathData="M136,184 L154,248 L130,286 L112,238 Z" />
+
+    <path
+        android:fillColor="#59636E"
+        android:strokeColor="#CCFF3030"
+        android:strokeWidth="2.0"
+        android:pathData="M376,184 L358,248 L382,286 L400,238 Z" />
+
+    <!-- Brow Frames & Eye Cavities -->
+    <path
+        android:fillColor="#111317"
+        android:strokeColor="#FF3030"
+        android:strokeWidth="1.5"
+        android:pathData="M166,204 L246,184 L256,196 L232,228 L174,232 Z" />
+
+    <path
+        android:fillColor="#181B20"
+        android:strokeColor="#FF3030"
+        android:strokeWidth="1.5"
+        android:pathData="M346,204 L266,184 L256,196 L280,228 L338,232 Z" />
+
+    <!-- ULTRON GLOWING MENACING RED OPTICS (EYES) -->
+    <!-- Left Eye Core Glow & Highlights -->
+    <path
+        android:fillColor="#FFFF3030"
+        android:pathData="M174,236 L230,226 L222,254 L182,254 Z" />
+
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M170,234 L234,224" />
+
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M192,238 L220,232 L214,244 L196,244 Z" />
+
+    <!-- Right Eye Core Glow & Highlights -->
+    <path
+        android:fillColor="#FFFF3030"
+        android:pathData="M338,236 L282,226 L290,254 L330,254 Z" />
+
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M342,234 L278,224" />
+
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M320,238 L292,232 L298,244 L316,244 Z" />
+
+    <!-- Nose Bridge Divider -->
+    <path
+        android:fillColor="#090A0D"
+        android:strokeColor="#FF3030"
         android:strokeWidth="1.0"
-        android:pathData="M 54,14 A 40,40 0 1,1 53.9,14" />
+        android:pathData="M256,196 L266,252 L256,290 L246,252 Z" />
 
-    <!-- Subtle HUD Ticks -->
+    <!-- Lower Cheeks Armor Plates -->
     <path
-        android:strokeColor="#99FF2233"
+        android:fillColor="#22272E"
+        android:strokeColor="#3A4048"
+        android:strokeWidth="1.2"
+        android:pathData="M154,248 L182,304 L220,300 L188,252 Z" />
+
+    <path
+        android:fillColor="#4C545E"
+        android:strokeColor="#555E68"
+        android:strokeWidth="1.2"
+        android:pathData="M358,248 L330,304 L292,300 L324,252 Z" />
+
+    <!-- ULTRON MENACING ENERGY MOUTH CAVITY & GRILLE -->
+    <path
+        android:fillColor="#050608"
+        android:strokeColor="#FFFF3030"
+        android:strokeWidth="2.8"
+        android:strokeLineJoin="round"
+        android:pathData="M204,296 L256,278 L308,296 L286,348 L256,356 L226,348 Z" />
+
+    <!-- Inner Glowing Crimson Core -->
+    <path
+        android:pathData="M212,304 L256,290 L300,304 L282,342 L256,348 L230,342 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="256"
+                android:startY="290"
+                android:endX="256"
+                android:endY="348"
+                android:type="linear">
+                <item android:color="#FFFF3030" android:offset="0.0" />
+                <item android:color="#80FF1010" android:offset="0.5" />
+                <item android:color="#33400000" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Grille Energy Teeth Bars -->
+    <path
+        android:strokeColor="#FFFFFFFF"
         android:strokeWidth="2.0"
         android:strokeLineCap="round"
-        android:pathData="M54,6 L54,12 M54,96 L54,102 M6,54 L12,54 M96,54 L102,54" />
+        android:pathData="M234,298 L238,342 M278,298 L274,342" />
 
-    <!-- Ultron Stylized Helmet / Mask Cranium Silhouette -->
     <path
-        android:fillColor="#220A0E"
-        android:strokeColor="#B3FF2233"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.8"
+        android:strokeLineCap="round"
+        android:pathData="M248,293 L250,346 M264,293 L262,346" />
+
+    <!-- Chin Mandible / Jaw Plates -->
+    <path
+        android:fillColor="#76828E"
+        android:strokeColor="#FF3030"
         android:strokeWidth="1.8"
-        android:strokeLineJoin="round"
-        android:pathData="M34,26 L54,20 L74,26 L82,40 L78,54 L72,66 L54,88 L36,66 L30,54 L26,40 Z" />
-
-    <!-- Brow & Forehead Crest Plates -->
-    <path
-        android:fillColor="#1C060A"
-        android:strokeColor="#66FF2233"
-        android:strokeWidth="1.2"
-        android:strokeLineJoin="round"
-        android:pathData="M34,34 L54,28 L74,34 L70,44 L54,40 L38,44 Z" />
-
-    <!-- Glowing Red Optics / Eyes -->
-    <!-- Left Eye Glow & Outline -->
-    <path
-        android:fillColor="#FFFF2233"
-        android:pathData="M37,47 L49,45 L47,51 L38,51 Z" />
-    <path
-        android:strokeColor="#FFFF858F"
-        android:strokeWidth="1.0"
-        android:pathData="M36,46 L50,44" />
-
-    <!-- Right Eye Glow & Outline -->
-    <path
-        android:fillColor="#FFFF2233"
-        android:pathData="M71,47 L59,45 L61,51 L70,51 Z" />
-    <path
-        android:strokeColor="#FFFF858F"
-        android:strokeWidth="1.0"
-        android:pathData="M72,46 L58,44" />
-
-    <!-- Center Forehead Core Node -->
-    <path
-        android:fillColor="#FFFF858F"
-        android:pathData="M54,30.8 A2.2,2.2 0 1,1 53.9,30.8" />
-
-    <!-- Iconic Ultron Menacing Mouth / Energy Grille Outer Frame -->
-    <path
-        android:fillColor="#2B0509"
-        android:strokeColor="#FFFF2233"
-        android:strokeWidth="1.5"
-        android:strokeLineJoin="round"
-        android:pathData="M42,65 L54,61 L66,65 L60,77 L54,79 L48,77 Z" />
-
-    <!-- Inner Red Glow Grille -->
-    <path
-        android:fillColor="#E6FF2233"
-        android:pathData="M44,67 L54,64 L64,67 L59,74 L54,76 L49,74 Z" />
-
-    <!-- Grille Teeth Lines -->
-    <path
-        android:strokeColor="#1A0003"
-        android:strokeWidth="1.2"
-        android:strokeLineCap="round"
-        android:pathData="M50,65 L50,74 M54,64 L54,76 M58,65 L58,74" />
-
-    <!-- Jaw & Cheek Contours -->
-    <path
-        android:strokeColor="#80FF2233"
-        android:strokeWidth="1.2"
-        android:strokeLineCap="round"
-        android:pathData="M33,52 L42,65 M75,52 L66,65" />
+        android:pathData="M226,348 L256,356 L286,348 L274,392 L256,400 L238,392 Z" />
 
     <path
-        android:strokeColor="#B3FF2233"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:pathData="M54,79 L54,88" />
+        android:fillColor="#FFFF3030"
+        android:pathData="M246,396 L256,400 L266,396 L256,412 Z" />
 
 </vector>

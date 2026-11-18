@@ -1,7 +1,7 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
- * The phrase list Friday can understand with no network at all.
+ * The phrase list ULTRON can understand with no network at all.
  *
  * Speech recognition normally goes through Groq Whisper, so losing signal
  * currently makes the assistant completely mute — no alarm, no torch, nothing,
@@ -60,7 +60,7 @@ object OfflineCommands {
         else -> false
     }
 
-    /** What Friday says when it heard something it can't do without a network. */
+    /** What ULTRON says when it heard something it can't do without a network. */
     fun offlineRefusal(russian: Boolean): String =
         "No connection — I can only control the phone right now."
 }

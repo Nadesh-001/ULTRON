@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.app.AlarmManager
 import android.app.NotificationChannel
@@ -138,6 +138,6 @@ fun notifyModeResult(context: Context, text: String) {
     runCatching { manager.notify(NOTIFICATION_ID, notification) }
 }
 
-private const val CHANNEL_ID = "friday_modes"
+private const val CHANNEL_ID = "ULTRON_modes"
 private const val NOTIFICATION_ID = 4_201
 private const val PREVIEW_CHARS = 80

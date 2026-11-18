@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import com.ultron.ai.data.local.dao.InteractionDao
 import com.ultron.ai.data.local.dao.MemoryDao
@@ -24,7 +24,7 @@ import org.junit.Test
  * starts a new one.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
-class FridayMemorySessionTest {
+class ULTRONMemorySessionTest {
 
     private companion object {
         const val PREF_ID = "voice_session_id"
@@ -37,7 +37,7 @@ class FridayMemorySessionTest {
     private lateinit var groqApi: GroqApiService
     private lateinit var prefDao: UserPreferenceDao
     private lateinit var lazuriApi: LazuriApiService
-    private lateinit var memory: FridayMemory
+    private lateinit var memory: ULTRONMemory
 
     /** In-memory stand-in for the preferences table. */
     private val stored = mutableMapOf<String, String>()
@@ -56,7 +56,7 @@ class FridayMemorySessionTest {
             stored[saved.captured.key] = saved.captured.value
         }
 
-        memory = FridayMemory(memoryDao, interactionDao, groqApi, prefDao, lazuriApi, io.mockk.mockk(relaxed = true))
+        memory = ULTRONMemory(memoryDao, interactionDao, groqApi, prefDao, lazuriApi, io.mockk.mockk(relaxed = true))
     }
 
     @Test

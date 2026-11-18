@@ -1,4 +1,4 @@
-package com.ultron.ai.service.mail
+﻿package com.ultron.ai.service.mail
 
 import android.util.Log
 import com.ultron.ai.core.ContactMatcher
@@ -12,7 +12,7 @@ import com.ultron.ai.data.remote.GmailApi
 import java.io.IOException
 
 /**
- * Everything Friday does with mail, behind one spoken interface.
+ * Everything ULTRON does with mail, behind one spoken interface.
  *
  * Nothing is sent without an explicit "text". A spoken mail passes through
  * speech recognition before it reaches here; reading it back and waiting is
@@ -53,7 +53,7 @@ class MailAssistant(
     suspend fun handle(request: MailCommands.Request, russian: Boolean): Answer {
         if (prefDao.get(PREF_ACCOUNT).isNullOrBlank()) {
             return Answer(
-                "Mail isn't connected. Connect Gmail in Friday's settings."
+                "Mail isn't connected. Connect Gmail in ULTRON's settings."
             )
         }
         return try {
@@ -186,9 +186,9 @@ class MailAssistant(
         is GmailAuth.Result.NeedsConsent -> throw NoAccess(
             if (russian) {
                 "Gmail просит заново подтвердить доступ. " +
-                    "Откройте настройки Friday и нажмите «Подключить Gmail»."
+                    "Откройте настройки ULTRON и нажмите «Подключить Gmail»."
             }
-            else "Gmail wants access confirmed again. Open Friday's settings and tap “Connect Gmail”."
+            else "Gmail wants access confirmed again. Open ULTRON's settings and tap “Connect Gmail”."
         )
         is GmailAuth.Result.Failed -> throw NoAccess(r.reason)
     }

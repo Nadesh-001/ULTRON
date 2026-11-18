@@ -1,4 +1,4 @@
-package com.ultron.ai.service.lock
+﻿package com.ultron.ai.service.lock
 
 import android.app.KeyguardManager
 import android.app.Notification
@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 
 /**
- * Friday over the lock screen, within what Android allows.
+ * ULTRON over the lock screen, within what Android allows.
  *
  * Android hides overlay windows while the phone is locked. Over the lock
  * screen only an activity that asks to show there can appear
@@ -49,15 +49,15 @@ import kotlinx.coroutines.withTimeoutOrNull
 object LockScreen {
 
     private const val TAG = "LockScreen"
-    private const val CHANNEL_ID = "friday_lock_screen_v2"
-    private const val OLD_CHANNEL_ID = "friday_lock_screen"
+    private const val CHANNEL_ID = "ULTRON_lock_screen_v2"
+    private const val OLD_CHANNEL_ID = "ULTRON_lock_screen"
     private const val NOTIFICATION_ID = 4108
     private const val UNLOCK_WAIT_MS = 45_000L
 
     /** How long the activity has to come up after the notification before it counts as not shown. */
     const val SHOW_WAIT_MS = 3_000L
 
-    /** How the last attempt to show Friday over the lock screen ended. */
+    /** How the last attempt to show ULTRON over the lock screen ended. */
     enum class Outcome { ACTIVITY_VISIBLE, NOTIFICATION_ONLY, FSI_DENIED, NOTIFICATIONS_BLOCKED, FAILED }
 
     private val _lastOutcome = MutableStateFlow<Outcome?>(null)

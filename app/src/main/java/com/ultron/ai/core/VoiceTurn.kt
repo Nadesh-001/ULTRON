@@ -1,7 +1,7 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
- * What one listening turn produced, and what Friday does about it.
+ * What one listening turn produced, and what ULTRON does about it.
  *
  * Kept apart from the service so the rules — when to retry, when to stay
  * quiet, when to say something — can be tested without a microphone.
@@ -36,16 +36,16 @@ object VoiceTurn {
     }
 
     /**
-     * @param isFollowUp true when Friday is listening on after her own answer,
+     * @param isFollowUp true when ULTRON is listening on after her own answer,
      *   with no wake word in front of this turn
      * @param attempt 1 for the first try of this turn
      */
     fun next(outcome: Outcome, isFollowUp: Boolean, attempt: Int, maxAttempts: Int): Next = when {
         outcome is Outcome.Heard && outcome.text.isNotBlank() -> Next.PROCESS
 
-        // During a follow-up nobody has addressed Friday, so anything other
+        // During a follow-up nobody has addressed ULTRON, so anything other
         // than the owner speaking simply means the conversation is over. A
-        // reply to a stranger here would be Friday butting into a room.
+        // reply to a stranger here would be ULTRON butting into a room.
         isFollowUp -> Next.END_QUIETLY
 
         // The owner just woke her, so they are right there. Silence usually

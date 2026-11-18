@@ -1,4 +1,4 @@
-@file:Suppress("MaxLineLength")
+﻿@file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core.modes
 
@@ -254,7 +254,7 @@ class ModeEngineTest {
     }
 
     @Test
-    fun `an unknown name isn't taken from the rest of Friday`() = runTest {
+    fun `an unknown name isn't taken from the rest of ULTRON`() = runTest {
         createRest()
         assertNull("airplane mode is a system setting", engine.route("включи режим полета"))
         assertNull(engine.route("выключи режим полета"))
@@ -359,7 +359,7 @@ class ModeEngineTest {
     }
 
     @Test
-    fun `adding to a mode that doesn't exist is left to the rest of Friday`() = runTest {
+    fun `adding to a mode that doesn't exist is left to the rest of ULTRON`() = runTest {
         assertNull(engine.route("добавь в режим полета что-нибудь"))
     }
 

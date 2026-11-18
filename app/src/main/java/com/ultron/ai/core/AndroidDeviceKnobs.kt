@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.app.NotificationManager
 import android.bluetooth.BluetoothManager
@@ -41,7 +41,7 @@ class AndroidDeviceKnobs(private val context: Context) : DeviceKnobs {
         )
     }
 
-    // Flags 0: Friday answers in words, and the system slider popping up on
+    // Flags 0: ULTRON answers in words, and the system slider popping up on
     // top of her panel would be a second, competing display.
     override fun setMediaVolumeIndex(index: Int) = audio.setStreamVolume(MEDIA, index, 0)
 

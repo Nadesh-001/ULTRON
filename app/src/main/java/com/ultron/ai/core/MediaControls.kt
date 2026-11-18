@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.content.Context
 import android.content.Intent
@@ -45,7 +45,7 @@ class MediaControls(
     }
 
     /**
-     * Which player the user paused, and when. Friday pauses other audio
+     * Which player the user paused, and when. ULTRON pauses other audio
      * while she listens; some players treat getting it back as a cue to
      * resume, even after being told to pause in between.
      */
@@ -55,7 +55,7 @@ class MediaControls(
     private val audioManager: AudioManager
         get() = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    suspend fun perform(action: MediaAction, appHint: String?, russian: Boolean = true): String {
+    suspend fun perform(action: MediaAction, appHint: String?, russian: Boolean = false): String {
         val active = sessions.active() ?: return grantNotificationAccess(russian)
         // Any installed player counts as named, not only the well-known ones.
         val named = appHint?.let(starter::named)
@@ -121,7 +121,7 @@ class MediaControls(
     /** "text text «Believer» — Imagine Dragons, Spotify." */
     fun nowPlaying(russian: Boolean): String {
         val active = sessions.active() ?: return grantNotificationAccess(russian)
-        // Paused while Friday listens, so "the playing one" may be paused right now:
+        // Paused while ULTRON listens, so "the playing one" may be paused right now:
         // the first session is the one most recently in use.
         val session = active.firstOrNull(sessions::isPlaying) ?: active.firstOrNull()
         val nothing = "Nothing is playing"
@@ -134,7 +134,7 @@ class MediaControls(
         return "Now playing \"$title\"$by$where"
     }
 
-    /** Called when Friday gives the audio back: re-pauses a player the user paused, if it started again. */
+    /** Called when ULTRON gives the audio back: re-pauses a player the user paused, if it started again. */
     fun keepPaused() {
         val (pkg, at) = pausedByUser ?: return
         pausedByUser = null
@@ -177,7 +177,7 @@ class MediaControls(
             Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
-        "To control the player, allow Friday notification access — I've opened the settings"
+        "To control the player, allow ULTRON notification access — I've opened the settings"
     } catch (_: Exception) {
         "I need notification access"
     }

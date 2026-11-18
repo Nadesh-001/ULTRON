@@ -1,4 +1,4 @@
-package com.ultron.ai.core.modes
+﻿package com.ultron.ai.core.modes
 
 /** What can start a mode besides the owner's voice and the clock. */
 enum class Trigger(val key: String) {
@@ -54,7 +54,7 @@ object EventPhrases {
         val exit: Boolean
     )
 
-    private val wake = Regex("^(?:пятница|friday)[,!.\\s]+")
+    private val wake = Regex("^(?:пятница|ULTRON)[,!.\\s]+")
     private val whenWord = Regex("(?:^|\\s)(?:когда|как только|при|when|whenever)\\s")
 
     private val chargerOn = Regex(

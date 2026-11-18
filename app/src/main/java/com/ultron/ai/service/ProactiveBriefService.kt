@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.content.Context
 import android.util.Log
@@ -30,8 +30,8 @@ class ProactiveBriefService(
 
     /** Answers "text text text". */
     suspend fun whatDidIMiss(russian: Boolean): String = withContext(Dispatchers.IO) {
-        if (!FridayNotificationListener.isEnabled(context)) {
-            FridayNotificationListener.openSettings(context)
+        if (!ULTRONNotificationListener.isEnabled(context)) {
+            ULTRONNotificationListener.openSettings(context)
             return@withContext if (russian) {
                 "Мне нужен доступ к уведомлениям — открыл настройки."
             } else {
@@ -63,7 +63,7 @@ class ProactiveBriefService(
         val agenda = runCatching { todaysAgenda() }.getOrDefault(emptyList())
 
         val missed = runCatching {
-            if (FridayNotificationListener.isEnabled(context)) notificationDao.unseenCount() else 0
+            if (ULTRONNotificationListener.isEnabled(context)) notificationDao.unseenCount() else 0
         }.getOrDefault(0)
 
         BriefComposer.morningBrief(weather, agenda, missed, russian, java.time.LocalTime.now())

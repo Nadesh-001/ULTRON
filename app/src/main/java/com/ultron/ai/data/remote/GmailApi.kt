@@ -1,4 +1,4 @@
-package com.ultron.ai.data.remote
+﻿package com.ultron.ai.data.remote
 
 import com.ultron.ai.core.mail.GmailMessages
 import java.io.IOException
@@ -14,7 +14,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 /**
- * The four Gmail REST calls Friday needs, over plain OkHttp.
+ * The four Gmail REST calls ULTRON needs, over plain OkHttp.
  *
  * The official client library would add megabytes for list, get, send and
  * modify; these are small enough to write directly, and the parsing lives in

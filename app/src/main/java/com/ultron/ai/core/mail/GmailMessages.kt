@@ -1,11 +1,11 @@
-package com.ultron.ai.core.mail
+﻿package com.ultron.ai.core.mail
 
 import java.util.Base64
 import org.json.JSONArray
 import org.json.JSONObject
 
 /**
- * Turns Gmail API JSON into something Friday can talk about.
+ * Turns Gmail API JSON into something ULTRON can talk about.
  *
  * Separate from the network client so the awkward parts — nested MIME parts,
  * base64url bodies, HTML-only mail, quoted reply chains — are tested against

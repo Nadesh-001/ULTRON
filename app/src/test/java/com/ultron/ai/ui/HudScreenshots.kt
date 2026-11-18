@@ -1,4 +1,4 @@
-package com.ultron.ai.ui
+﻿package com.ultron.ai.ui
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import com.ultron.ai.ui.chat.ChatLayout
 import com.ultron.ai.ui.theme.ArcAmber
 import com.ultron.ai.ui.theme.ArcCyan
 import com.ultron.ai.ui.theme.ErrorColor
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.ui.theme.ULTRONTheme
 import com.ultron.ai.ui.theme.HudBackground
 import com.ultron.ai.ui.theme.HudButton
 import com.ultron.ai.ui.theme.HudNote
@@ -185,7 +185,7 @@ class HudScreenshots {
     private fun shoot(name: String, content: @Composable () -> Unit) {
         // Infinite animations never go idle: drive the clock by hand.
         compose.mainClock.autoAdvance = false
-        compose.setContent { FridayTheme(content) }
+        compose.setContent { ULTRONTheme(content) }
         compose.mainClock.advanceTimeBy(1_200)
         org.robolectric.shadows.ShadowLooper.idleMainLooper()
         // Drawn straight into a bitmap: captureToImage waits for a frame the paused looper never schedules.

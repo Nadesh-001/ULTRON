@@ -1,4 +1,4 @@
-package com.ultron.ai.core.capabilities
+﻿package com.ultron.ai.core.capabilities
 
 /**
  * The diagnostics screen as data: one row per check that decides whether an
@@ -25,7 +25,7 @@ object Diagnostics {
         MICROPHONE, POST_NOTIFICATIONS, OVERLAY, NOTIFICATION_ACCESS, BATTERY,
         CONTACTS, PHONE, CALENDAR, LOCATION, DND_ACCESS, WRITE_SETTINGS, NEARBY_DEVICES,
         ASSISTANT,
-        FRIDAY_SETTINGS
+        ULTRON_SETTINGS
     }
 
     data class Row(
@@ -62,7 +62,7 @@ object Diagnostics {
     }
 
     private fun essentials(c: UltronCapabilities) = listOf(
-        Check("groq", "Groq API Key", "Configured", "Not set: Ultron cannot process language or respond", Fix.FRIDAY_SETTINGS)
+        Check("groq", "Groq API Key", "Configured", "Not set: Ultron cannot process language or respond", Fix.ULTRON_SETTINGS)
             .row(Group.ESSENTIALS, c.integrations.groqKey),
         Check("microphone", "Microphone", "Granted", "Denied: Ultron cannot hear you", Fix.MICROPHONE)
             .row(Group.ESSENTIALS, c.permissions.microphone),
@@ -80,7 +80,7 @@ object Diagnostics {
         val v = c.voice
         val wakeWord = Check(
             "wake_word", "Wake Word 'Ultron'", "Enabled",
-            "Disabled: Ultron listens only when the app is open", Fix.FRIDAY_SETTINGS, optional = true
+            "Disabled: Ultron listens only when the app is open", Fix.ULTRON_SETTINGS, optional = true
         ).row(Group.VOICE, v.wakeWordEnabled)
         val sideButton = Check(
             "assistant", "Side Button", "Calls Ultron: selected as default digital assistant",
@@ -93,11 +93,11 @@ object Diagnostics {
             sideButton,
             Check(
                 "wake_model", "Wake Model", "Downloaded",
-                "Not downloaded: wake word cannot run offline", Fix.FRIDAY_SETTINGS
+                "Not downloaded: wake word cannot run offline", Fix.ULTRON_SETTINGS
             ).row(Group.VOICE, v.wakeModelReady),
             Check(
                 "listening", "Background Listener", "Active",
-                "Stopped: listener is currently inactive", Fix.FRIDAY_SETTINGS
+                "Stopped: listener is currently inactive", Fix.ULTRON_SETTINGS
             ).row(Group.VOICE, v.listening),
             Check(
                 "battery", "Battery Optimization", "Exempted",
@@ -105,7 +105,7 @@ object Diagnostics {
             ).row(Group.VOICE, c.permissions.batteryExempt),
             Check(
                 "voice_profile", "Voice Profile", "Enrolled: responds only to your voice",
-                "Not enrolled: any voice can command", Fix.FRIDAY_SETTINGS
+                "Not enrolled: any voice can command", Fix.ULTRON_SETTINGS
             ).row(Group.VOICE, v.voiceProfile)
         )
     }
@@ -149,7 +149,7 @@ object Diagnostics {
     private fun integrations(c: UltronCapabilities) = listOf(
         Check(
             "gmail", "Gmail", "Connected", "Not connected: email commands disabled",
-            Fix.FRIDAY_SETTINGS, optional = true
+            Fix.ULTRON_SETTINGS, optional = true
         ).row(Group.INTEGRATIONS, c.integrations.gmail)
     )
 

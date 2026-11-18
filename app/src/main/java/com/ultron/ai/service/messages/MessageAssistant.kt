@@ -1,4 +1,4 @@
-package com.ultron.ai.service.messages
+﻿package com.ultron.ai.service.messages
 
 import android.content.Context
 import com.ultron.ai.core.mail.Confirmation
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
 /**
- * Something Friday should say unprompted — a call, a message.
+ * Something ULTRON should say unprompted — a call, a message.
  *
  * @param listenAfter keep the microphone open afterwards, so "text, text
  *   text" can follow a message without the wake word
@@ -39,11 +39,11 @@ class Announcer {
  * "text text, text text text text text".
  *
  * Nothing is read out when it arrives: messages wait in memory until the
- * owner asks. Then Friday says who wrote and asks whose to read first; a
+ * owner asks. Then ULTRON says who wrote and asks whose to read first; a
  * name in answer reads that chat — retold in a sentence or two when it is
  * long — and the rest are named again.
  *
- * A reply to the chat Friday has just read out goes at once ("text
+ * A reply to the chat ULTRON has just read out goes at once ("text
  * text"): which chat is meant is beyond doubt, and the owner hears exactly
  * what was sent. Any other reply is read back before it goes — a misheard
  * word in a message sent in the user's name cannot be taken back. A reply to

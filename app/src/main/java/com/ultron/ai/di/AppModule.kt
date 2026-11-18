@@ -1,4 +1,4 @@
-package com.ultron.ai.di
+﻿package com.ultron.ai.di
 
 import androidx.room.Room
 import com.ultron.ai.core.AppLauncher
@@ -10,13 +10,13 @@ import com.ultron.ai.core.ContactsReader
 import com.ultron.ai.core.FileAnalyzer
 import com.ultron.ai.core.SystemPromptBuilder
 import com.ultron.ai.core.VoiceInputManager
-import com.ultron.ai.data.local.FridayDatabase
+import com.ultron.ai.data.local.UltronDatabase
 import com.ultron.ai.data.local.Migrations
 import com.ultron.ai.data.remote.GroqApiService
 import com.ultron.ai.data.remote.LazuriApiService
 import com.ultron.ai.data.remote.NearbyPlacesService
 import com.ultron.ai.data.remote.WeatherApiService
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.ProactiveBriefService
 import com.ultron.ai.service.SessionSummarizer
 import com.ultron.ai.data.repository.AssistantRepositoryImpl
@@ -39,30 +39,30 @@ val appModule = module {
     single {
         Room.databaseBuilder(
             androidContext(),
-            FridayDatabase::class.java,
-            "friday_db"
+            UltronDatabase::class.java,
+            "ULTRON_db"
         )
             // No destructive fallback: a missing migration must fail loudly
             // rather than quietly wipe the user's memory and history.
             .addMigrations(*Migrations.ALL)
             .build()
     }
-    single { get<FridayDatabase>().chatMessageDao() }
+    single { get<UltronDatabase>().chatMessageDao() }
     // API keys are sealed with Android Keystore before they reach the table.
     single {
         com.ultron.ai.data.local.secure.SecurePreferenceDao(
-            get<FridayDatabase>().userPreferenceDao(), com.ultron.ai.data.local.secure.KeystoreCipher()
+            get<UltronDatabase>().userPreferenceDao(), com.ultron.ai.data.local.secure.KeystoreCipher()
         )
     } bind com.ultron.ai.data.local.dao.UserPreferenceDao::class
-    single { get<FridayDatabase>().memoryDao() }
-    single { get<FridayDatabase>().interactionDao() }
-    single { get<FridayDatabase>().notificationDao() }
-    single { get<FridayDatabase>().sessionSummaryDao() }
-    single { get<FridayDatabase>().errandDao() }
+    single { get<UltronDatabase>().memoryDao() }
+    single { get<UltronDatabase>().interactionDao() }
+    single { get<UltronDatabase>().notificationDao() }
+    single { get<UltronDatabase>().sessionSummaryDao() }
+    single { get<UltronDatabase>().errandDao() }
     // Moving to another phone: everything in one passphrase-encrypted file.
     single {
         com.ultron.ai.data.backup.SettingsTransfer(
-            get<FridayDatabase>().backupDao(),
+            get<UltronDatabase>().backupDao(),
             get<com.ultron.ai.data.local.secure.SecurePreferenceDao>(),
             appVersion = com.ultron.ai.BuildConfig.VERSION_NAME
         )
@@ -149,7 +149,7 @@ val appModule = module {
         ).apply { load() }
     }
     // Modes the owner creates by voice: stored, compiled once by the model, then run without it.
-    single { get<FridayDatabase>().modeDao() }
+    single { get<UltronDatabase>().modeDao() }
     single {
         val writes = kotlinx.coroutines.CoroutineScope(
             kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.IO
@@ -176,7 +176,7 @@ val appModule = module {
     single {
         val alarms = com.ultron.ai.service.ModeAlarms(androidContext())
         com.ultron.ai.core.modes.ModeSchedules(
-            get<FridayDatabase>().modeScheduleDao(), get(),
+            get<UltronDatabase>().modeScheduleDao(), get(),
             onChanged = { now, before -> alarms.rebook(now, before) }
         )
     }
@@ -199,7 +199,7 @@ val appModule = module {
                 val locked = keyguard?.isKeyguardLocked == true
                 // Only a profile that checks commands, not just the wake word, says it's the owner.
                 val verified = !locked || com.ultron.ai.core.VoiceProfile
-                    .deserialise(prefs.get(com.ultron.ai.service.FridayWakeWordService.PREF_VOICE_PROFILE))
+                    .deserialise(prefs.get(com.ultron.ai.service.ULTRONWakeWordService.PREF_VOICE_PROFILE))
                     ?.coversCommands == true
                 locked to verified
             },
@@ -211,13 +211,13 @@ val appModule = module {
     }
     single {
         val device = get<com.ultron.ai.core.DeviceContext>()
-        com.ultron.ai.agent.FridayAgent(get(), get(), learned = get(), capabilities = { device.refresh() })
+        com.ultron.ai.agent.ULTRONAgent(get(), get(), learned = get(), capabilities = { device.refresh() })
     }
     single { ProactiveBriefService(androidContext(), get(), get(), get()) }
     single { com.ultron.ai.service.ModelCatalog(get(), get()) }
     single { SessionSummarizer(get(), get(), get(), get(), get()) }
     single { AppLauncher(androidContext(), get()) }
-    single { FridayMemory(get(), get(), get(), get(), get(), get()) }
+    single { ULTRONMemory(get(), get(), get(), get(), get(), get()) }
     single { com.ultron.ai.service.capture.ScreenCapture(androidContext()) }
     single { FileAnalyzer(androidContext()) }
 
@@ -278,4 +278,12 @@ val appModule = module {
             learned = get()
         )
     }
+
+    // Security & Permission Management System
+    single { com.ultron.ai.core.PermissionManager(androidContext()) }
+    single { com.ultron.ai.core.SecurityManager(androidContext(), get()) }
+    single { com.ultron.ai.core.ActionAuthorizationManager(androidContext(), get()) }
+    single { com.ultron.ai.core.PrivacyManager(androidContext()) }
+    single { com.ultron.ai.core.EmergencyStopController(androidContext(), get(), get()) }
+    viewModel { com.ultron.ai.ui.security.SecurityDashboardViewModel(get(), get(), get()) }
 }

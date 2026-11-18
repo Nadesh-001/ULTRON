@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.media.AudioFormat
 import android.media.AudioRecord
@@ -53,10 +53,10 @@ class VoiceCalibrator(
         const val PREF_WHISPER = "whisper_threshold_v2"
 
         /**
-         * Measured exactly the way Friday listens: the same source and the
+         * Measured exactly the way ULTRON listens: the same source and the
          * same noise suppression and gain control. Calibrating on MIC (louder,
          * differently processed on Samsung) gave thresholds the real path's
-         * speech hardly reached, so Friday seemed deaf to her own owner.
+         * speech hardly reached, so ULTRON seemed deaf to her own owner.
          *
          * Null when the microphone cannot be opened: no permission, or held
          * by a call or another app.

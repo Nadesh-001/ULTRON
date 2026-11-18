@@ -1,11 +1,11 @@
-package com.ultron.ai.data.local.entity
+﻿package com.ultron.ai.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
- * A notification Friday saw while it was on screen.
+ * A notification ULTRON saw while it was on screen.
  *
  * Only what's needed to answer "what did I miss" is kept — app, title, a
  * short text and when. Nothing is uploaded anywhere, and rows are pruned so

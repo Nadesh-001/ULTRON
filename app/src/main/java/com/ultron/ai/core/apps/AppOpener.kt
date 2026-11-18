@@ -1,4 +1,4 @@
-package com.ultron.ai.core.apps
+﻿package com.ultron.ai.core.apps
 
 /**
  * Opens the app a name means, and says only what is known.
@@ -6,7 +6,7 @@ package com.ultron.ai.core.apps
  * Android gives no public signal that a third-party app actually reached the
  * screen, so a launch Android accepted is reported as "opening", never as
  * opened. A launch Android cannot make from the background (Android 10+:
- * no visible Friday window) is not attempted silently: the owner gets a
+ * no visible ULTRON window) is not attempted silently: the owner gets a
  * notification to tap, and is told so.
  *
  * The Android side — PackageManager, startActivity, notifications — is
@@ -31,7 +31,7 @@ class AppOpener(private val platform: Platform) {
         /** The user's default app for a role named in [name] ("text"), if it names one; null otherwise. */
         fun role(name: String): RoleLookup?
 
-        /** Whether Friday has a visible window, which Android 10+ requires to start another app. */
+        /** Whether ULTRON has a visible window, which Android 10+ requires to start another app. */
         fun canStartActivities(): Boolean
 
         /** Asks Android to start [target]; throws what startActivity throws. */

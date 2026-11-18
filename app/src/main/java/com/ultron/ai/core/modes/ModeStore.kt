@@ -1,4 +1,4 @@
-package com.ultron.ai.core.modes
+﻿package com.ultron.ai.core.modes
 
 import android.util.Log
 import com.ultron.ai.agent.ActionEnvelope
@@ -109,7 +109,7 @@ class ModeStore(private val dao: ModeDao, private val clock: () -> Long = System
         )
     }.onFailure { Log.w(TAG, "Unreadable mode: ${it.message}") }.getOrNull()
 
-    /** Steps written by an older Friday are brought up to date; unreadable ones are dropped. */
+    /** Steps written by an older ULTRON are brought up to date; unreadable ones are dropped. */
     private fun envelopes(json: String): List<ActionEnvelope> =
         groqJson.parseToJsonElement(json).jsonArray.mapNotNull { ActionSchema.parse(it.toString()) }
 

@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.settings
+﻿package com.ultron.ai.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** What the owner lets Friday do while the phone is locked ([LockPolicy.Level]). */
+/** What the owner lets ULTRON do while the phone is locked ([LockPolicy.Level]). */
 class LockLevelViewModel(private val prefs: UserPreferenceDao) : ViewModel() {
 
     private val _level = MutableStateFlow(LockPolicy.Level.VOICE)

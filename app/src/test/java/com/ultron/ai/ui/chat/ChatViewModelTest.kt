@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.chat
+﻿package com.ultron.ai.ui.chat
 
 import android.app.Activity
 import android.content.Intent
@@ -13,7 +13,7 @@ import com.ultron.ai.command.PhoneActions
 import com.ultron.ai.command.PlannerActions
 import com.ultron.ai.core.CommandRouter
 import com.ultron.ai.core.VoiceInputManager
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.mail.MailAssistant
 import com.ultron.ai.domain.model.AssistantMode
 import com.ultron.ai.domain.model.CommandResult
@@ -56,7 +56,7 @@ class ChatViewModelTest {
     private lateinit var getChatHistoryUseCase: GetChatHistoryUseCase
     private lateinit var analyzeContentUseCase: AnalyzeContentUseCase
     private lateinit var voiceInputManager: VoiceInputManager
-    private lateinit var memory: FridayMemory
+    private lateinit var memory: ULTRONMemory
     private lateinit var router: CommandRouter
     private lateinit var phone: PhoneActions
     private lateinit var planner: PlannerActions
@@ -128,8 +128,8 @@ class ChatViewModelTest {
         viewModel = createViewModel()
         advanceUntilIdle()
 
-        viewModel.onInputChange("Hello Friday")
-        assertEquals("Hello Friday", viewModel.inputText.value)
+        viewModel.onInputChange("Hello ULTRON")
+        assertEquals("Hello ULTRON", viewModel.inputText.value)
     }
 
     @Test
@@ -226,7 +226,7 @@ class ChatViewModelTest {
 
     @Test
     fun `opens the session the voice assistant is already using`() = runTest {
-        // Talking to Friday and then opening the app should land in the same
+        // Talking to ULTRON and then opening the app should land in the same
         // thread, not a blank screen.
         viewModel = createViewModel()
         advanceUntilIdle()
@@ -482,7 +482,7 @@ class ChatViewModelTest {
         advanceUntilIdle()
 
         coVerify(exactly = 1) { sendMessageUseCase(any(), any(), any()) }
-        // The refused text stays in the field, to send once Friday has answered.
+        // The refused text stays in the field, to send once ULTRON has answered.
         assertEquals("вопрос", viewModel.inputText.value)
     }
 

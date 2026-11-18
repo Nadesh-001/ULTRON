@@ -1,12 +1,12 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.os.SystemClock
 import com.ultron.ai.core.voice.VoicePanelStore
 
 /**
  * The one voice session every surface shows: the floating panel, the layer
- * inside Friday's own screen, and the lock-screen panel. The voice service
- * writes it ([com.ultron.ai.service.FridayOverlayManager]); the surfaces
+ * inside ULTRON's own screen, and the lock-screen panel. The voice service
+ * writes it ([com.ultron.ai.service.ULTRONOverlayManager]); the surfaces
  * only read it, and ask through [close] to end it.
  */
 object VoiceUi {

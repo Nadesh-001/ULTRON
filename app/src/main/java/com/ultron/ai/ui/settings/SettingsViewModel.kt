@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.settings
+﻿package com.ultron.ai.ui.settings
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -6,11 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.ultron.ai.data.local.dao.UserPreferenceDao
 import com.ultron.ai.data.local.entity.UserPreferenceEntity
 import com.ultron.ai.data.remote.LazuriApiService
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.UltronWakeWordService
 import com.ultron.ai.service.UltronWakeWordService.Companion.PREF_VOICE_PROFILE
-import com.ultron.ai.service.FridayWakeWordService
-import com.ultron.ai.service.FridayNotificationListener
+import com.ultron.ai.service.ULTRONWakeWordService
+import com.ultron.ai.service.ULTRONNotificationListener
 import com.ultron.ai.core.GroqModels
 import com.ultron.ai.core.VoiceProfile
 import com.ultron.ai.service.SpeakerEmbedder
@@ -31,7 +31,7 @@ class SettingsViewModel(
     private val gmailConnector: GmailConnector,
     private val catalog: com.ultron.ai.service.ModelCatalog,
     private val lazuriApi: LazuriApiService,
-    private val memory: FridayMemory,
+    private val memory: ULTRONMemory,
     private val learned: com.ultron.ai.agent.LearnedCommands
 ) : ViewModel() {
 
@@ -313,14 +313,14 @@ class SettingsViewModel(
             _lazuriApiKey.value = prefDao.get("lazuri_api_key") ?: ""
             _lazuriStatus.value = if (memory.isLazuriConfigured()) LazuriStatus.CONNECTED else LazuriStatus.DISCONNECTED
             _mapsProvider.value = prefDao.get("maps_provider") ?: "auto"
-            _announceCalls.value = prefDao.get(FridayNotificationListener.PREF_ANNOUNCE_CALLS) != "false"
+            _announceCalls.value = prefDao.get(ULTRONNotificationListener.PREF_ANNOUNCE_CALLS) != "false"
         }
     }
 
     fun onAnnounceCallsChange(on: Boolean) {
         _announceCalls.value = on
         viewModelScope.launch {
-            prefDao.set(UserPreferenceEntity(FridayNotificationListener.PREF_ANNOUNCE_CALLS, on.toString()))
+            prefDao.set(UserPreferenceEntity(ULTRONNotificationListener.PREF_ANNOUNCE_CALLS, on.toString()))
         }
     }
 
@@ -396,9 +396,9 @@ class SettingsViewModel(
             // Saved first: the service reads it when it starts.
             prefDao.set(UserPreferenceEntity("wake_word_enabled", enabled.toString()))
             if (enabled) {
-                FridayWakeWordService.start(appContext)
+                ULTRONWakeWordService.start(appContext)
             } else {
-                FridayWakeWordService.stop(appContext)
+                ULTRONWakeWordService.stop(appContext)
             }
         }
     }
@@ -421,8 +421,8 @@ class SettingsViewModel(
         _isCalibrated.value = true
 
         if (_wakeWordEnabled.value) {
-            FridayWakeWordService.stop(appContext)
-            FridayWakeWordService.start(appContext)
+            ULTRONWakeWordService.stop(appContext)
+            ULTRONWakeWordService.start(appContext)
         }
     }
 

@@ -1,6 +1,6 @@
-package com.ultron.ai.core.capabilities
+﻿package com.ultron.ai.core.capabilities
 
-typealias FridayCapabilities = UltronCapabilities
+typealias UltronCapabilities = UltronCapabilities
 
 /**
  * Everything Ultron can or can't do right now, in one snapshot.

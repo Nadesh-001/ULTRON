@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.dashboard
+﻿package com.ultron.ai.ui.dashboard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -56,7 +56,7 @@ import org.koin.androidx.compose.koinViewModel
 private val NodeBody = Color(0xFF06111A)
 
 /**
- * A map of what Friday knows: you in the middle, what you've told it around
+ * A map of what ULTRON knows: you in the middle, what you've told it around
  * you, and dates branching into the conversations held on them.
  *
  * Tap a bubble to open it; tap a leaf to read the full value. Drag to pan,
@@ -395,7 +395,7 @@ private fun EmptyMap(modifier: Modifier = Modifier) {
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            "Talk to Friday and it will start filling this in — what you like, " +
+            "Talk to ULTRON and it will start filling this in — what you like, " +
                 "what you've told it, and the conversations it came from.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)

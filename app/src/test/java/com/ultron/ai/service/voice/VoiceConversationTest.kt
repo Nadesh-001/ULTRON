@@ -1,11 +1,11 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import com.ultron.ai.command.CommandExecutor
 import com.ultron.ai.core.OfflineCommands
 import com.ultron.ai.core.VoiceTurn
 import com.ultron.ai.domain.model.CommandResult
 import com.ultron.ai.service.EdgeTtsSpeaker
-import com.ultron.ai.service.FridayOverlayManager
+import com.ultron.ai.service.ULTRONOverlayManager
 import com.ultron.ai.service.OfflineCommandRecognizer
 import com.ultron.ai.service.WhisperTranscriber
 import io.mockk.coEvery
@@ -34,7 +34,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class VoiceConversationTest {
 
-    private lateinit var overlay: FridayOverlayManager
+    private lateinit var overlay: ULTRONOverlayManager
     private lateinit var speaker: EdgeTtsSpeaker
     private lateinit var transcriber: WhisperTranscriber
     private lateinit var offline: OfflineCommandRecognizer
@@ -44,7 +44,7 @@ class VoiceConversationTest {
     private lateinit var answers: SpokenAnswer
     private lateinit var session: VoiceSession
 
-    /** Everything Friday was asked to say, with the callback for when she finishes. */
+    /** Everything ULTRON was asked to say, with the callback for when she finishes. */
     private val said = mutableListOf<Pair<String, (() -> Unit)?>>()
 
     @Before
@@ -80,7 +80,7 @@ class VoiceConversationTest {
         gate, commands, answers, session
     )
 
-    /** Lets Friday finish the nth thing she was asked to say. */
+    /** Lets ULTRON finish the nth thing she was asked to say. */
     private fun TestScope.finishSpeaking(index: Int) {
         said[index].second!!.invoke()
         advanceUntilIdle()
@@ -106,7 +106,7 @@ class VoiceConversationTest {
     }
 
     @Test
-    fun `once a call starts Friday neither talks over it nor opens the microphone`() = runTest {
+    fun `once a call starts ULTRON neither talks over it nor opens the microphone`() = runTest {
         var callActive = false
         hears(VoiceTurn.Outcome.Heard("позвони маме"), VoiceTurn.Outcome.Nothing)
         every { commands.route("позвони маме") } returns CommandResult.PhoneCall("маме")
@@ -226,7 +226,7 @@ class VoiceConversationTest {
     }
 
     @Test
-    fun `plain conversation goes to the model and ends when Friday says goodbye`() = runTest {
+    fun `plain conversation goes to the model and ends when ULTRON says goodbye`() = runTest {
         hears(VoiceTurn.Outcome.Heard("расскажи анекдот"))
         every { commands.route(any()) } returns CommandResult.ChatMessage("расскажи анекдот")
         coEvery { commands.execute(any(), any()) } returns CommandExecutor.Outcome.Conversation("расскажи анекдот")
@@ -266,7 +266,7 @@ class VoiceConversationTest {
         advanceUntilIdle()
         finishSpeaking(0)
 
-        verify { overlay.error("Не задан ключ Groq — откройте настройки Friday", any()) }
+        verify { overlay.error("Не задан ключ Groq — откройте настройки ULTRON", any()) }
         coVerify(exactly = 0) { transcriber.recordAndTranscribe(any(), any()) }
     }
 

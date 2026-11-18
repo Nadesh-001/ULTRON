@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.settings
+﻿package com.ultron.ai.ui.settings
 
 import android.content.Context
 import android.net.Uri
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ultron.ai.data.backup.SettingsArchive
 import com.ultron.ai.data.backup.SettingsTransfer
-import com.ultron.ai.service.FridayWakeWordService
+import com.ultron.ai.service.ULTRONWakeWordService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -68,9 +68,9 @@ class TransferViewModel(
             modes?.load()
             schedules?.let { com.ultron.ai.service.ModeAlarms(appContext).rebook(it.all(), emptySet()) }
             // Wake word, thresholds and voice profile are read when the service starts.
-            if (FridayWakeWordService.running) {
-                FridayWakeWordService.stop(appContext)
-                FridayWakeWordService.start(appContext)
+            if (ULTRONWakeWordService.running) {
+                ULTRONWakeWordService.stop(appContext)
+                ULTRONWakeWordService.start(appContext)
             }
             State.Done("Done: Settings and data imported successfully.")
         }

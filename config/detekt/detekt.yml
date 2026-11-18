@@ -1,4 +1,4 @@
-# Deviations from detekt's default rule set, each with its reason.
+﻿# Deviations from detekt's default rule set, each with its reason.
 # Anything not listed here runs at the default setting.
 
 naming:
@@ -15,7 +15,7 @@ style:
     excludes:
       - '**/test/**'
       - '**/ui/**'
-      - '**/FridayOverlayManager.kt'
+      - '**/ULTRONOverlayManager.kt'
       - '**/WeatherCodes.kt'
       - '**/PcmAudio.kt'
       - '**/KaldiFbank.kt'

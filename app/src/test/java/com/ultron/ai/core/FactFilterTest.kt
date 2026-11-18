@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -9,7 +9,7 @@ class FactFilterTest {
     @Test
     fun `a question is never stored as a fact`() {
         // The observed failure: asking "как меня зовут?" saved the question as
-        // the answer, after which Friday insisted she remembered the name.
+        // the answer, after which ULTRON insisted she remembered the name.
         assertFalse(FactFilter.isStorable("name", "меня зовут?"))
         assertFalse(FactFilter.isStorable("name", "как меня зовут"))
         assertFalse(FactFilter.isStorable("name", "what is my name"))

@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -38,7 +38,7 @@ class WakeWordDetectionTest {
 
     @Test
     fun `bare russian name wakes the assistant`() {
-        // Both names are first-class wake words: "Friday" and "Пятница".
+        // Both names are first-class wake words: "ULTRON" and "Пятница".
         assertTrue(engine.containsWakePhrase(finalResult("пятница")))
         assertTrue(engine.containsWakePhrase(finalResult("пятница открой камеру")))
     }
@@ -47,7 +47,7 @@ class WakeWordDetectionTest {
     fun `the weekday used mid sentence still does not trigger`() {
         // "пятница" doubles as the ordinary word for the day, so it only
         // counts when it opens the utterance — otherwise ordinary talk about
-        // Friday would wake the assistant.
+        // ULTRON would wake the assistant.
         assertFalse(engine.containsWakePhrase(finalResult("встретимся в пятницу")))
         assertFalse(engine.containsWakePhrase(finalResult("сегодня пятница")))
     }

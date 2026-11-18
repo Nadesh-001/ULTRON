@@ -1,4 +1,4 @@
-package com.ultron.ai.core.voice
+﻿package com.ultron.ai.core.voice
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.update
 
 /** The stages of one spoken exchange, as every surface shows them. */
 enum class VoicePhase {
-    /** Called; Friday greets. */
+    /** Called; ULTRON greets. */
     GREETING,
     LISTENING,
     /** Recording ended: transcribing, then working on it. */
@@ -34,13 +34,13 @@ data class VoicePanel(
     val phase: VoicePhase,
     /** What the owner said, only once it has been transcribed. */
     val heard: String? = null,
-    /** Friday's words: the greeting, the answer, a notice. */
+    /** ULTRON's words: the greeting, the answer, a notice. */
     val answer: String? = null,
     /** "text text" while the owner is speaking. */
     val hearing: Boolean = false,
     /** Who answered: "text" or "text". */
     val source: String? = null,
-    /** The owner called Friday (word, button) — not an announcement she made on her own. */
+    /** The owner called ULTRON (word, button) — not an announcement she made on her own. */
     val userInitiated: Boolean = true,
     /** When the owner last spoke or touched the panel (ms, monotonic). */
     val lastInputAt: Long = 0,
@@ -65,7 +65,7 @@ class VoicePanelStore(private val clock: () -> Long) {
 
     /**
      * Starts a session unless one is open. A call by the owner during one
-     * Friday started herself (an announcement) makes it the owner's.
+     * ULTRON started herself (an announcement) makes it the owner's.
      */
     fun begin(userInitiated: Boolean): Long {
         val now = clock()

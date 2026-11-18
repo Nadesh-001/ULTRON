@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import com.ultron.ai.data.remote.GroqApiException
 import java.io.IOException
@@ -6,7 +6,7 @@ import java.io.IOException
 /**
  * Turns a failed answer into something worth hearing.
  *
- * "Something went wrong" was all Friday ever said, whatever the cause — so when
+ * "Something went wrong" was all ULTRON ever said, whatever the cause — so when
  * Groq retired her model there was no way to tell from the phone. Each cause
  * the user can act on gets its own sentence.
  */

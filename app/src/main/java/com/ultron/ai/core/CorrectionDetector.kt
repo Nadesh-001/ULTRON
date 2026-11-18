@@ -1,7 +1,7 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
- * Spots the moment you tell Friday it got something wrong.
+ * Spots the moment you tell ULTRON it got something wrong.
  *
  * Corrections are the highest-signal thing a user ever says — "text, text text
  * text", "text text text, text text text text" — and until now they were treated
@@ -39,7 +39,7 @@ object CorrectionDetector {
 
     /**
      * @param userText what the user just said
-     * @param assistantSaidSomething whether Friday had actually answered — a
+     * @param assistantSaidSomething whether ULTRON had actually answered — a
      *        correction needs something to correct.
      */
     fun detect(userText: String, assistantSaidSomething: Boolean): Correction? {

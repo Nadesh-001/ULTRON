@@ -1,4 +1,4 @@
-package com.ultron.ai.data.repository
+﻿package com.ultron.ai.data.repository
 
 import com.ultron.ai.agent.UltronAgent
 import com.ultron.ai.agent.PromptBudget
@@ -15,7 +15,7 @@ import com.ultron.ai.domain.model.AssistantMode
 import com.ultron.ai.domain.model.Message
 import com.ultron.ai.domain.model.MessageRole
 import com.ultron.ai.domain.repository.AssistantRepository
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.ModelCatalog
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -30,7 +30,7 @@ class AssistantRepositoryImpl(
     private val chatDao: ChatMessageDao,
     private val prefDao: UserPreferenceDao,
     private val promptBuilder: SystemPromptBuilder,
-    private val memory: FridayMemory,
+    private val memory: ULTRONMemory,
     private val catalog: ModelCatalog,
     private val agent: UltronAgent
 ) : AssistantRepository {

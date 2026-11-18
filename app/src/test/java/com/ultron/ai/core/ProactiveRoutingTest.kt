@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import com.ultron.ai.domain.model.CommandResult
 import com.ultron.ai.domain.model.DeviceAction
@@ -85,7 +85,7 @@ class ProactiveRoutingTest {
     @Test
     fun `wifi and bluetooth say what is wanted, the controller decides how`() {
         // Android forbids apps from switching these; the intent still routes
-        // so Friday can check the state, say so and open the setting.
+        // so ULTRON can check the state, say so and open the setting.
         assertEquals(
             DeviceAction.WIFI_ON,
             (router.route("включи wifi") as CommandResult.DeviceControl).action

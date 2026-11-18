@@ -1,10 +1,10 @@
-// Long lines on purpose: fixtures and tool-call JSON are kept whole.
+﻿// Long lines on purpose: fixtures and tool-call JSON are kept whole.
 @file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core.capabilities
 
 import com.ultron.ai.agent.AgentTools
-import com.ultron.ai.agent.FridayAgent
+import com.ultron.ai.agent.ULTRONAgent
 import com.ultron.ai.agent.LearnedCommands
 import com.ultron.ai.agent.ToolKit
 import com.ultron.ai.command.CommandExecutor
@@ -33,19 +33,19 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /** A phone where everything a feature can need is in place. */
-private val allGood = FridayCapabilities(
-    permissions = FridayCapabilities.Permissions(
+private val allGood = UltronCapabilities(
+    permissions = UltronCapabilities.Permissions(
         microphone = true, overlay = true, notificationListener = true, postNotifications = true,
         contacts = true, phone = true, calendar = true, location = true, batteryExempt = true,
         dndAccess = true, writeSettings = true, nearbyDevices = true
     ),
-    integrations = FridayCapabilities.Integrations(groqKey = true, gmail = true, lazuri = true),
-    voice = FridayCapabilities.Voice(wakeWordEnabled = true, wakeModelReady = true, voiceProfile = true, listening = true),
+    integrations = UltronCapabilities.Integrations(groqKey = true, gmail = true, lazuri = true),
+    voice = UltronCapabilities.Voice(wakeWordEnabled = true, wakeModelReady = true, voiceProfile = true, listening = true),
     modes = listOf("отдыха")
 )
 
-private fun FridayCapabilities.withoutGmail() = copy(integrations = integrations.copy(gmail = false))
-private fun FridayCapabilities.withoutNotifications() =
+private fun UltronCapabilities.withoutGmail() = copy(integrations = integrations.copy(gmail = false))
+private fun UltronCapabilities.withoutNotifications() =
     copy(permissions = permissions.copy(notificationListener = false))
 
 class ToolRequirementsTest {
@@ -59,7 +59,7 @@ class ToolRequirementsTest {
 
     @Test
     fun `tools that need nothing are always there`() {
-        val bare = FridayCapabilities()
+        val bare = UltronCapabilities()
         listOf("set_alarm", "flashlight", "weather", "calculate", "web_search", "camera")
             .forEach { assertTrue(it, ToolRequirements.met(it, bare)) }
     }
@@ -97,7 +97,7 @@ class CapabilityAwareToolsTest {
     fun `the light kit is unaffected`() {
         assertEquals(
             names(AgentTools.definitions(ToolKit.Kit.LIGHT)),
-            names(AgentTools.definitions(ToolKit.Kit.LIGHT, FridayCapabilities()))
+            names(AgentTools.definitions(ToolKit.Kit.LIGHT, UltronCapabilities()))
         )
     }
 
@@ -113,11 +113,11 @@ class CapabilityAwareToolsTest {
             )
         )
         every { groq.streamChat(any(), capture(sent), any(), any(), any()) } answers { turns.removeFirst() }
-        val agent = FridayAgent(
+        val agent = ULTRONAgent(
             groq, commands, now = { LocalDateTime.of(2026, 10, 7, 12, 0) },
             capabilities = { allGood.withoutGmail() }
         )
-        val reply = agent.reply(FridayAgent.Settings("k", "m", 100), listOf(ApiMessage("user", "проверь почту")), true)
+        val reply = agent.reply(ULTRONAgent.Settings("k", "m", 100), listOf(ApiMessage("user", "проверь почту")), true)
             .toList().joinToString("")
         assertEquals("Подключите Gmail.", reply)
         assertTrue(sent[1].last().content.contains("Gmail isn't connected"))
@@ -141,7 +141,7 @@ class CapabilityAwareToolsTest {
 
 class DiagnosticsTest {
 
-    private fun row(c: FridayCapabilities, id: String) = Diagnostics.rows(c).single { it.id == id }
+    private fun row(c: UltronCapabilities, id: String) = Diagnostics.rows(c).single { it.id == id }
 
     @Test
     fun `everything in place means nothing to fix`() {
@@ -157,7 +157,7 @@ class DiagnosticsTest {
             permissions = allGood.permissions.copy(microphone = false)
         )
         assertEquals(Status.PROBLEM, row(c, "groq").status)
-        assertEquals(Fix.FRIDAY_SETTINGS, row(c, "groq").fix)
+        assertEquals(Fix.ULTRON_SETTINGS, row(c, "groq").fix)
         assertEquals(Fix.MICROPHONE, row(c, "microphone").fix)
         assertEquals(2, Diagnostics.problems(Diagnostics.rows(c)))
     }
@@ -172,7 +172,7 @@ class DiagnosticsTest {
 
     @Test
     fun `voice details only matter when the wake word is on`() {
-        val off = allGood.copy(voice = FridayCapabilities.Voice(wakeWordEnabled = false))
+        val off = allGood.copy(voice = UltronCapabilities.Voice(wakeWordEnabled = false))
         val ids = Diagnostics.rows(off).map { it.id }
         assertTrue("wake_word" in ids)
         assertFalse("wake_model" in ids)
@@ -189,7 +189,7 @@ class DiagnosticsTest {
 
     @Test
     fun `device facts are information, never problems`() {
-        val rows = Diagnostics.rows(FridayCapabilities())
+        val rows = Diagnostics.rows(UltronCapabilities())
         assertTrue(rows.filter { it.group == Diagnostics.Group.DEVICE }.all { it.status == Status.INFO && it.fix == null })
     }
 }

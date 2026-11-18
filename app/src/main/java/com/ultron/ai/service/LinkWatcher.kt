@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -84,7 +84,7 @@ class AndroidPhoneLinks(private val context: Context) : PhoneLinks {
 }
 
 /**
- * Watches the phone's links while Friday's service runs: a Bluetooth device
+ * Watches the phone's links while ULTRON's service runs: a Bluetooth device
  * connecting or going, the charger, the Wi-Fi network. Each change goes to
  * [onChange] once — Bluetooth reconnects in bursts, so a repeat of the same
  * change within a short time is dropped.

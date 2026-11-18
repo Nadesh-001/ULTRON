@@ -1,4 +1,4 @@
-package com.ultron.ai.core.modes
+﻿package com.ultron.ai.core.modes
 
 import com.ultron.ai.domain.model.CommandResult
 
@@ -11,7 +11,7 @@ object ModePhrases {
 
     private const val EN_DESCRIPTION = 3
 
-    private val wake = Regex("^(?:ultron|friday)[,!.\\s]+")
+    private val wake = Regex("^(?:ultron|ULTRON)[,!.\\s]+")
 
     private val createEn = Regex(
         "^(?:please\\s+)?(?:create|make|add|set up)\\s+(?:me\\s+)?(?:a\\s+|an\\s+|new\\s+)*" +

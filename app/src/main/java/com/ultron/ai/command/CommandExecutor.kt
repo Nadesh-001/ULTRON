@@ -1,4 +1,4 @@
-package com.ultron.ai.command
+﻿package com.ultron.ai.command
 
 import android.util.Log
 import com.ultron.ai.agent.LearnedCommands
@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
  * Before this existed the chat and the voice service each had their own copy
  * of every command, and the copies had drifted: the chat caught failures and
  * the voice loop did not, so one exception in a spoken command silenced
- * Friday for the rest of the turn. One implementation means one behaviour.
+ * ULTRON for the rest of the turn. One implementation means one behaviour.
  */
 // One collaborator per kind of command, plus the two that hold a pending
 // "text?"; grouping them would only hide that.

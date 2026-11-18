@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.media.AudioFormat
 import android.media.AudioRecord
@@ -229,7 +229,7 @@ class WhisperTranscriber(
         val prompt = runCatching { hints() }.getOrNull()
         // A file of its own: the chat's microphone and the voice service each
         // have a transcriber, and a shared name let one overwrite the other.
-        val wavFile = File.createTempFile("friday-asr-", ".wav", cacheDir)
+        val wavFile = File.createTempFile("ULTRON-asr-", ".wav", cacheDir)
         val heard = try {
             writeWav(wavFile, capture.pcm, SAMPLE_RATE)
             groqApi.transcribeAudio(apiKey, wavFile, language = language, prompt = prompt)

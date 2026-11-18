@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * Regression tests for "I said bye but Friday kept listening". The old check
+ * Regression tests for "I said bye but ULTRON kept listening". The old check
  * was an exact match against a fixed set, so anything but a bare stop word
  * fell through and the assistant re-opened its overlay.
  */
@@ -93,7 +93,7 @@ class ConversationControlTest {
 
     @Test
     fun `assistant replies can also signal the end`() {
-        // Used so that when Friday itself says goodbye, it stops listening
+        // Used so that when ULTRON itself says goodbye, it stops listening
         // instead of re-opening the mic.
         assertTrue(ConversationControl.isFarewell("Пока!"))
         assertTrue(ConversationControl.isFarewell("Goodbye."))

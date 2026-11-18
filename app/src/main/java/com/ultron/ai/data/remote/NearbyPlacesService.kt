@@ -1,4 +1,4 @@
-package com.ultron.ai.data.remote
+﻿package com.ultron.ai.data.remote
 
 import android.util.Log
 import com.ultron.ai.core.ErrandPlaces
@@ -76,7 +76,7 @@ class NearbyPlacesService private constructor(
         try {
             val request = Request.Builder()
                 .url(ENDPOINT)
-                .addHeader("User-Agent", "FridayAI/1.0 (personal assistant)")
+                .addHeader("User-Agent", "ULTRONAI/1.0 (personal assistant)")
                 .post(FormBody.Builder().add("data", query).build())
                 .build()
 

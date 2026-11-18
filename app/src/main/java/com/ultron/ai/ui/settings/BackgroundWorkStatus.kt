@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.settings
+﻿package com.ultron.ai.ui.settings
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,14 +25,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ultron.ai.service.voice.WakeHealth
 import com.ultron.ai.service.voice.WakeStatus
 
-/** Whether the system may stop Friday's always-on listener to save battery. */
+/** Whether the system may stop ULTRON's always-on listener to save battery. */
 fun isBatteryRestricted(context: Context): Boolean {
     val power = context.getSystemService(Context.POWER_SERVICE) as PowerManager
     return !power.isIgnoringBatteryOptimizations(context.packageName)
 }
 
 /**
- * Asks Android to exempt Friday from battery optimisation. An assistant that
+ * Asks Android to exempt ULTRON from battery optimisation. An assistant that
  * must hear its name at any moment cannot be put to sleep, and Samsung's
  * battery manager is known for stopping exactly this kind of service.
  */

@@ -1,4 +1,4 @@
-package com.ultron.ai.core.people
+﻿package com.ultron.ai.core.people
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -209,7 +209,7 @@ class Messenger(
         context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         if (choice.channel == Channel.TELEGRAM && text != null) {
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            clipboard.setPrimaryClip(ClipData.newPlainText("Friday", text))
+            clipboard.setPrimaryClip(ClipData.newPlainText("ULTRON", text))
             return false
         }
         return true

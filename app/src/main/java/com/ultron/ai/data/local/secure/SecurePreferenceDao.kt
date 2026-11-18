@@ -1,4 +1,4 @@
-package com.ultron.ai.data.local.secure
+﻿package com.ultron.ai.data.local.secure
 
 import android.util.Log
 import com.ultron.ai.data.local.dao.UserPreferenceDao
@@ -27,7 +27,7 @@ interface SecretCipher {
  *
  * A value that can't be decrypted — a database restored onto another phone,
  * whose Keystore never held the key — reads as absent: the user is asked
- * for the key again rather than Friday failing on every request.
+ * for the key again rather than ULTRON failing on every request.
  */
 class SecurePreferenceDao(
     private val delegate: UserPreferenceDao,

@@ -1,8 +1,8 @@
-package com.ultron.ai.command
+﻿package com.ultron.ai.command
 
 /**
  * Asks Android to unlock the phone — its own screen: fingerprint, face or
- * PIN. Friday never sees the PIN; it only learns whether the phone is now
+ * PIN. ULTRON never sees the PIN; it only learns whether the phone is now
  * unlocked.
  */
 fun interface Unlocker {

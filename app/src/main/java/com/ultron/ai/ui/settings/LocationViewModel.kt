@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.settings
+﻿package com.ultron.ai.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** The owner's city for weather, and whether Friday may use the phone's location. */
+/** The owner's city for weather, and whether ULTRON may use the phone's location. */
 class LocationViewModel(private val weather: WeatherHere) : ViewModel() {
 
     private val _city = MutableStateFlow("")

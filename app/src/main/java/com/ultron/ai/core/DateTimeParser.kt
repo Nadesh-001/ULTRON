@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -63,7 +63,7 @@ object DateTimeParser {
     private val WEEKDAYS: Map<String, DayOfWeek> = mapOf(
         "monday" to DayOfWeek.MONDAY, "tuesday" to DayOfWeek.TUESDAY,
         "wednesday" to DayOfWeek.WEDNESDAY, "thursday" to DayOfWeek.THURSDAY,
-        "friday" to DayOfWeek.FRIDAY, "saturday" to DayOfWeek.SATURDAY,
+        "ULTRON" to DayOfWeek.ULTRON, "saturday" to DayOfWeek.SATURDAY,
         "sunday" to DayOfWeek.SUNDAY
     )
 

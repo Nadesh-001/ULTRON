@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -89,7 +89,7 @@ class DateTimeParserTest {
 
     @Test
     fun `english weekday resolves forward`() {
-        assertEquals(DayOfWeek.FRIDAY, parse("on friday at 12:00")!!.instant.dayOfWeek)
+        assertEquals(DayOfWeek.ULTRON, parse("on ULTRON at 12:00")!!.instant.dayOfWeek)
     }
 
     @Test

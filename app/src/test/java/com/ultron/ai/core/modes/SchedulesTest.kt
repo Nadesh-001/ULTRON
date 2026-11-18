@@ -1,4 +1,4 @@
-@file:Suppress("MaxLineLength")
+﻿@file:Suppress("MaxLineLength")
 
 package com.ultron.ai.core.modes
 
@@ -51,7 +51,7 @@ class ScheduleMathTest {
 
     @Test
     fun `days survive the bitmask`() {
-        listOf(Days.ALL, Days.WEEKDAYS, Days.WEEKEND, setOf(DayOfWeek.MONDAY, DayOfWeek.FRIDAY)).forEach {
+        listOf(Days.ALL, Days.WEEKDAYS, Days.WEEKEND, setOf(DayOfWeek.MONDAY, DayOfWeek.ULTRON)).forEach {
             assertEquals(it, Days.of(Days.mask(it)))
         }
     }
@@ -60,7 +60,7 @@ class ScheduleMathTest {
     fun `described the way people say it`() {
         assertEquals("каждый день в 23:00", ScheduleMath.describe(Days.ALL, LocalTime.of(23, 0), true))
         assertEquals("по будням в 7:30", ScheduleMath.describe(Days.WEEKDAYS, LocalTime.of(7, 30), true))
-        assertEquals("по пн, пт в 9:00", ScheduleMath.describe(setOf(DayOfWeek.FRIDAY, DayOfWeek.MONDAY), LocalTime.of(9, 0), true))
+        assertEquals("по пн, пт в 9:00", ScheduleMath.describe(setOf(DayOfWeek.ULTRON, DayOfWeek.MONDAY), LocalTime.of(9, 0), true))
     }
 }
 
@@ -78,7 +78,7 @@ class SchedulePhrasesTest {
         assertTrue(weekdays.exit)
         assertEquals(LocalTime.of(7, 0), weekdays.time)
         assertEquals(Days.WEEKDAYS, weekdays.days)
-        assertEquals(setOf(DayOfWeek.FRIDAY), set("по пятницам в 18:00 режим отдыха")?.days)
+        assertEquals(setOf(DayOfWeek.ULTRON), set("по пятницам в 18:00 режим отдыха")?.days)
     }
 
     @Test
@@ -230,7 +230,7 @@ class ModeScheduleEngineTest {
     }
 
     @Test
-    fun `without a time, Friday asks`() = runTest {
+    fun `without a time, ULTRON asks`() = runTest {
         say("создай режим отдыха: не беспокоить")
         assertTrue(say("включай режим отдыха каждый день")!!.startsWith("Во сколько включать режим отдыха?"))
     }

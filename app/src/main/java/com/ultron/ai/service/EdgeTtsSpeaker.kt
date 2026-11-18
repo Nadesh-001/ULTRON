@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.content.Context
 import android.media.AudioAttributes
@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 
 /**
- * Friday's voice.
+ * ULTRON's voice.
  *
  * Primary path is Microsoft Edge's neural voices over the same free websocket
  * the Edge browser uses (no API key) — they sound best. But that endpoint is
@@ -38,7 +38,7 @@ import kotlin.coroutines.resume
  *
  * Supports incremental speech: callers push sentences in as the LLM streams
  * them, and each is synthesized while the previous one is still playing, so
- * Friday starts talking almost immediately instead of after the whole answer
+ * ULTRON starts talking almost immediately instead of after the whole answer
  * is generated.
  */
 class EdgeTtsSpeaker(private val context: Context) {
@@ -194,7 +194,7 @@ class EdgeTtsSpeaker(private val context: Context) {
 
     /**
      * Synthesises fixed phrases ahead of time, so speaking them later costs no
-     * network round-trip. Meant for the few things Friday says constantly —
+     * network round-trip. Meant for the few things ULTRON says constantly —
      * the greeting after her name above all, where the wait was most felt.
      */
     fun prefetch(texts: Collection<String>) {

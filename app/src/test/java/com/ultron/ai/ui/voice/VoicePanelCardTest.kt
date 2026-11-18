@@ -1,4 +1,4 @@
-@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
+﻿@file:Suppress("MaxLineLength") // test scenes and spoken sentences, kept whole
 
 package com.ultron.ai.ui.voice
 
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.ultron.ai.core.voice.VoicePanel
 import com.ultron.ai.core.voice.VoicePhase
 import com.ultron.ai.core.voice.VoicePresentation
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.ui.theme.ULTRONTheme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -50,7 +50,7 @@ class VoicePanelCardTest {
             var expanded by androidx.compose.runtime.remember { mutableStateOf(false) }
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
-                FridayTheme {
+                ULTRONTheme {
                     VoicePanelCard(
                         view = if (locked) VoicePresentation.locked(panel, false) else VoicePresentation.open(panel),
                         level = { 0.3f },
@@ -61,7 +61,7 @@ class VoicePanelCardTest {
                         },
                         onClose = { closed++ },
                         actions = if (expanded || locked) {
-                            listOf(PanelAction("Закрыть") { closed++ }, PanelAction("Открыть в Friday", primary = true) {})
+                            listOf(PanelAction("Закрыть") { closed++ }, PanelAction("Открыть в ULTRON", primary = true) {})
                         } else {
                             emptyList()
                         }
@@ -79,7 +79,7 @@ class VoicePanelCardTest {
         compose.mainClock.advanceTimeBy(500)
         assertEquals(1, expandedTaps)
         assertEquals(0, closed)
-        compose.onNodeWithText("Открыть в Friday").assertIsDisplayed()
+        compose.onNodeWithText("Открыть в ULTRON").assertIsDisplayed()
     }
 
     @Test
@@ -97,7 +97,7 @@ class VoicePanelCardTest {
     fun `actions are at least 48 dp tall`() {
         show(locked = true)
         compose.onNodeWithText("Закрыть").assertHeightIsAtLeast(48.dp)
-        compose.onNodeWithText("Открыть в Friday").assertHeightIsAtLeast(48.dp)
+        compose.onNodeWithText("Открыть в ULTRON").assertHeightIsAtLeast(48.dp)
     }
 
     @Test

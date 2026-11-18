@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -41,8 +41,8 @@ class ErrandWatchWorker(
 
     companion object {
         private const val TAG = "ErrandWatch"
-        private const val WORK_NAME = "friday_errand_watch"
-        const val CHANNEL_ID = "friday_errands"
+        private const val WORK_NAME = "ULTRON_errand_watch"
+        const val CHANNEL_ID = "ULTRON_errands"
         private const val NOTIFICATION_BASE_ID = 3000
 
         /** Frequent enough to be useful, rare enough not to drain the battery. */
@@ -173,7 +173,7 @@ class ErrandWatchWorker(
         manager.notify(
             NOTIFICATION_BASE_ID + errandId.toInt(),
             NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-                .setContentTitle("Friday")
+                .setContentTitle("ULTRON")
                 .setContentText(text)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(text))
                 .setSmallIcon(android.R.drawable.ic_dialog_map)

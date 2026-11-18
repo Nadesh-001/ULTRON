@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -17,7 +17,7 @@ import org.junit.Test
 
 class ModelInstallerTest {
 
-    private val root: File = Files.createTempDirectory("friday-installer").toFile()
+    private val root: File = Files.createTempDirectory("ULTRON-installer").toFile()
     private val files = File(root, "files").apply { mkdirs() }
     private val cache = File(root, "cache").apply { mkdirs() }
     private val marker = "conf/model.conf"

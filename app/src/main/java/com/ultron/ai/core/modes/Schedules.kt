@@ -1,4 +1,4 @@
-package com.ultron.ai.core.modes
+﻿package com.ultron.ai.core.modes
 
 import com.ultron.ai.core.DateTimeParser
 import java.time.DayOfWeek
@@ -106,13 +106,13 @@ object SchedulePhrases {
     private val exitVerb = Regex("(?:^|\\s)(?:выключай|отключай|выключать|отключать|выходи|turn off|switch off|end)\\s")
     private val modeWord = Regex("(?:режим\\p{L}*|mode)\\s+(.+)$")
     private val evening = Regex("(?:вечер|ночь|ночи|evening|night)")
-    private val wake = Regex("^(?:пятница|friday)[,!.\\s]+")
+    private val wake = Regex("^(?:пятница|ULTRON)[,!.\\s]+")
     private val trailingSchedule = Regex("\\s*по расписанию.*$")
     private val leadingSchedule = Regex("^расписани\\p{L}*\\s+")
 
     private val weekdayStems = mapOf(
         "понедельник" to DayOfWeek.MONDAY, "вторник" to DayOfWeek.TUESDAY, "сред" to DayOfWeek.WEDNESDAY,
-        "четверг" to DayOfWeek.THURSDAY, "пятниц" to DayOfWeek.FRIDAY, "суббот" to DayOfWeek.SATURDAY,
+        "четверг" to DayOfWeek.THURSDAY, "пятниц" to DayOfWeek.ULTRON, "суббот" to DayOfWeek.SATURDAY,
         "воскресень" to DayOfWeek.SUNDAY
     )
 

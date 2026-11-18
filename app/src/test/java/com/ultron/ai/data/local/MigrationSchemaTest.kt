@@ -1,4 +1,4 @@
-package com.ultron.ai.data.local
+﻿package com.ultron.ai.data.local
 
 import java.io.File
 import org.json.JSONObject
@@ -18,10 +18,10 @@ import org.junit.Test
  */
 class MigrationSchemaTest {
 
-    private val schemaDir = File("schemas/com.ultron.ai.data.local.FridayDatabase")
+    private val schemaDir = File("schemas/com.ultron.ai.data.local.UltronDatabase")
 
     private val migrationSql: String by lazy {
-        File("src/main/java/com/friday/ai/data/local/Migrations.kt").readText()
+        File("src/main/java/com/ULTRON/ai/data/local/Migrations.kt").readText()
     }
 
     private fun latestSchema(): JSONObject {
@@ -149,7 +149,7 @@ class MigrationSchemaTest {
     fun `destructive fallback is not used`() {
         // Losing the user's memory to a routine schema change is the whole
         // thing this work exists to prevent.
-        val di = File("src/main/java/com/friday/ai/di/AppModule.kt").readText()
+        val di = File("src/main/java/com/ULTRON/ai/di/AppModule.kt").readText()
         assertTrue(
             "fallbackToDestructiveMigration would wipe the database on upgrade",
             !di.contains("fallbackToDestructiveMigration()")

@@ -1,4 +1,4 @@
-import java.util.Properties
+﻿import java.util.Properties
 
 // No API key is read here: one compiled into an APK can be read back out of
 // it by anyone who has the file. The user enters their own in Settings.
@@ -23,12 +23,12 @@ val ownerSigning: OwnerSigning? = run {
     }
     // local.properties for a developer machine, the environment for CI secrets.
     fun value(key: String, env: String): String? =
-        local.getProperty("friday.signing.$key")?.takeIf { it.isNotBlank() }
+        local.getProperty("ULTRON.signing.$key")?.takeIf { it.isNotBlank() }
             ?: System.getenv(env)?.takeIf { it.isNotBlank() }
-    val store = value("storeFile", "FRIDAY_SIGNING_STORE_FILE")?.let { rootProject.file(it) }?.takeIf { it.exists() }
-    val storePassword = value("storePassword", "FRIDAY_SIGNING_STORE_PASSWORD")
-    val alias = value("keyAlias", "FRIDAY_SIGNING_KEY_ALIAS")
-    val keyPassword = value("keyPassword", "FRIDAY_SIGNING_KEY_PASSWORD")
+    val store = value("storeFile", "ULTRON_SIGNING_STORE_FILE")?.let { rootProject.file(it) }?.takeIf { it.exists() }
+    val storePassword = value("storePassword", "ULTRON_SIGNING_STORE_PASSWORD")
+    val alias = value("keyAlias", "ULTRON_SIGNING_KEY_ALIAS")
+    val keyPassword = value("keyPassword", "ULTRON_SIGNING_KEY_PASSWORD")
     if (store != null && storePassword != null && alias != null && keyPassword != null) {
         OwnerSigning(store, storePassword, alias, keyPassword)
     } else {
@@ -56,7 +56,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Every phone Friday runs on is 64-bit ARM. The x86 and 32-bit copies
+        // Every phone ULTRON runs on is 64-bit ARM. The x86 and 32-bit copies
         // of the ONNX Runtime and Vosk libraries were a third of the APK.
         ndk { abiFilters += "arm64-v8a" }
     }
@@ -72,13 +72,13 @@ android {
     // The owner's signing key and its passwords are never committed: they come
     // from local.properties or the environment (see keystore/README.md). With
     // them, debug and release builds are signed as the owner's. Without them,
-    // a debug build uses this machine's SDK debug key (fine for trying Friday
+    // a debug build uses this machine's SDK debug key (fine for trying ULTRON
     // out) and a release build is left unsigned — it builds and passes the R8
     // checks, but cannot be installed, so nothing ships signed by the wrong key.
     // Installable releases come from ownerRelease, which fails without the key.
     signingConfigs {
         ownerSigning?.let { owner ->
-            create("friday") {
+            create("ULTRON") {
                 storeFile = owner.storeFile
                 storePassword = owner.storePassword
                 keyAlias = owner.keyAlias
@@ -86,7 +86,7 @@ android {
             }
         }
     }
-    val ownerSigned = signingConfigs.findByName("friday")
+    val ownerSigned = signingConfigs.findByName("ULTRON")
 
     buildTypes {
         debug {
@@ -315,8 +315,8 @@ val ownerRelease by tasks.registering {
 gradle.taskGraph.whenReady {
     if (hasTask(":app:ownerRelease") && ownerSigning == null) {
         throw GradleException(
-            "Release signing is not configured. Set friday.signing.storeFile, storePassword, keyAlias and " +
-                "keyPassword in local.properties (or the FRIDAY_SIGNING_* environment variables) — see " +
+            "Release signing is not configured. Set ULTRON.signing.storeFile, storePassword, keyAlias and " +
+                "keyPassword in local.properties (or the ULTRON_SIGNING_* environment variables) — see " +
                 "keystore/README.md. Refusing to build a release that cannot update the owner's install."
         )
     }

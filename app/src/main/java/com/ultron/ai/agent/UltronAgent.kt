@@ -1,4 +1,4 @@
-package com.ultron.ai.agent
+﻿package com.ultron.ai.agent
 
 import android.util.Log
 import com.ultron.ai.command.CommandExecutor
@@ -20,7 +20,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-typealias FridayAgent = UltronAgent
+typealias ULTRONAgent = UltronAgent
 
 /**
  * Ultron answering hands-free: the model may use [AgentTools] while

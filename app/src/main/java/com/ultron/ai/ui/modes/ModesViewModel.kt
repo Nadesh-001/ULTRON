@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.modes
+﻿package com.ultron.ai.ui.modes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -49,7 +49,7 @@ class ModesViewModel(
     }
 
     private val _status = MutableStateFlow<String?>(null)
-    /** What the last action reported, as Friday would have said it. */
+    /** What the last action reported, as ULTRON would have said it. */
     val status: StateFlow<String?> = _status.asStateFlow()
 
     private val _busy = MutableStateFlow<String?>(null)

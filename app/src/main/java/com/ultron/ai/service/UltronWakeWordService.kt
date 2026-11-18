@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.app.Service
 import android.content.Context
@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import com.ultron.ai.command.CommandExecutor
-import com.ultron.ai.agent.FridayAgent
+import com.ultron.ai.agent.ULTRONAgent
 import com.ultron.ai.core.Acknowledgements
 import com.ultron.ai.core.SystemPromptBuilder
 import com.ultron.ai.data.local.dao.ChatMessageDao
@@ -34,10 +34,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.get
 
-typealias FridayWakeWordService = UltronWakeWordService
+typealias ULTRONWakeWordService = UltronWakeWordService
 
 /**
- * The foreground service that keeps Friday listening.
+ * The foreground service that keeps ULTRON listening.
  *
  * Only lifecycle and wiring live here. The parts each do one thing:
  * [WakeListener] waits for the owner's "text", [VoiceConversation] runs the
@@ -45,7 +45,7 @@ typealias FridayWakeWordService = UltronWakeWordService
  * [CommandExecutor] carries out commands — the same one the chat uses — and
  * [VoiceSession] keeps the record.
  */
-// Lifecycle, plus one handler per way Friday is called: wake word, side button, NFC tag, shortcut.
+// Lifecycle, plus one handler per way ULTRON is called: wake word, side button, NFC tag, shortcut.
 @Suppress("TooManyFunctions")
 class UltronWakeWordService : Service() {
 
@@ -75,7 +75,7 @@ class UltronWakeWordService : Service() {
 
         fun start(context: Context) {
             try {
-                val intent = Intent(context, FridayWakeWordService::class.java)
+                val intent = Intent(context, ULTRONWakeWordService::class.java)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     context.startForegroundService(intent)
                 } else {
@@ -106,7 +106,7 @@ class UltronWakeWordService : Service() {
          */
         fun invoke(context: Context) {
             try {
-                val intent = Intent(context, FridayWakeWordService::class.java).setAction(ACTION_INVOKE)
+                val intent = Intent(context, ULTRONWakeWordService::class.java).setAction(ACTION_INVOKE)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
                 else context.startService(intent)
             } catch (e: Exception) {
@@ -120,7 +120,7 @@ class UltronWakeWordService : Service() {
         /** A mode's NFC tag was touched: toggle the mode and say what happened. */
         fun tag(context: Context, payload: ByteArray) {
             try {
-                val intent = Intent(context, FridayWakeWordService::class.java)
+                val intent = Intent(context, ULTRONWakeWordService::class.java)
                     .setAction(ACTION_TAG).putExtra(EXTRA_PAYLOAD, payload)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
                 else context.startService(intent)
@@ -135,7 +135,7 @@ class UltronWakeWordService : Service() {
         /** A mode's launcher shortcut: toggle it and say what happened. */
         fun toggleMode(context: Context, modeId: String) {
             try {
-                val intent = Intent(context, FridayWakeWordService::class.java)
+                val intent = Intent(context, ULTRONWakeWordService::class.java)
                     .setAction(ACTION_MODE).putExtra(EXTRA_MODE, modeId)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) context.startForegroundService(intent)
                 else context.startService(intent)
@@ -146,7 +146,7 @@ class UltronWakeWordService : Service() {
 
         fun stop(context: Context) {
             try {
-                context.stopService(Intent(context, FridayWakeWordService::class.java))
+                context.stopService(Intent(context, ULTRONWakeWordService::class.java))
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to stop: ${e.message}")
             }
@@ -156,7 +156,7 @@ class UltronWakeWordService : Service() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     private lateinit var notifier: ServiceNotifier
-    private lateinit var overlay: FridayOverlayManager
+    private lateinit var overlay: ULTRONOverlayManager
     private lateinit var focus: AudioFocusHold
     private lateinit var speaker: EdgeTtsSpeaker
     private lateinit var wake: WakeListener
@@ -193,7 +193,7 @@ class UltronWakeWordService : Service() {
 
     private fun assemble() {
         prefDao = get(UserPreferenceDao::class.java)
-        overlay = FridayOverlayManager(this)
+        overlay = ULTRONOverlayManager(this)
         focus = AudioFocusHold(this)
         speaker = EdgeTtsSpeaker(this).apply {
             // The greeting follows "text" every time; recorded once, it
@@ -211,7 +211,7 @@ class UltronWakeWordService : Service() {
             endpointModel = { if (::wake.isInitialized) wake.voskModel else null }
         }
         val session = VoiceSession(
-            prefDao, get(FridayMemory::class.java), get(ChatMessageDao::class.java), get(ModelCatalog::class.java)
+            prefDao, get(ULTRONMemory::class.java), get(ChatMessageDao::class.java), get(ModelCatalog::class.java)
         )
         conversation = VoiceConversation(
             scope = scope,
@@ -222,8 +222,8 @@ class UltronWakeWordService : Service() {
             gate = gate,
             commands = get(CommandExecutor::class.java),
             answers = SpokenAnswer(
-                get(FridayAgent::class.java), get(SystemPromptBuilder::class.java),
-                get(FridayMemory::class.java), session, speaker, overlay
+                get(ULTRONAgent::class.java), get(SystemPromptBuilder::class.java),
+                get(ULTRONMemory::class.java), session, speaker, overlay
             ),
             session = session
         )
@@ -325,7 +325,7 @@ class UltronWakeWordService : Service() {
         }.also { it.start() }
     }
 
-    /** A Friday NFC tag: its mode is toggled, if this phone signed it. */
+    /** A ULTRON NFC tag: its mode is toggled, if this phone signed it. */
     private suspend fun onTag(payload: ByteArray) {
         val secret = get<AndroidNfcTags>(AndroidNfcTags::class.java).secret()
         when (val read = com.ultron.ai.core.modes.ModeTags.read(payload, secret)) {

@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.voice
+﻿package com.ultron.ai.ui.voice
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -47,7 +47,7 @@ import com.ultron.ai.ui.theme.ErrorColor
 import com.ultron.ai.ui.theme.OnBackground
 
 /**
- * Design tokens shared by every Friday voice surface: the floating panel,
+ * Design tokens shared by every ULTRON voice surface: the floating panel,
  * the in-app layer and the lock-screen panel. Spacing on a 4/8 dp grid.
  */
 object VoiceTokens {
@@ -76,7 +76,7 @@ object VoiceTokens {
 data class PanelAction(val label: String, val primary: Boolean = false, val onClick: () -> Unit)
 
 /**
- * Friday's panel: the reactor, the stage in words, the text, and a close
+ * ULTRON's panel: the reactor, the stage in words, the text, and a close
  * button. Compact it shows two lines; a tap on the text expands it (it
  * never closes it) to the whole text and [actions].
  *

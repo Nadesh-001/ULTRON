@@ -1,4 +1,4 @@
-package com.ultron.ai.core.capabilities
+﻿package com.ultron.ai.core.capabilities
 
 /**
  * What each tool needs in order to work.
@@ -9,7 +9,7 @@ package com.ultron.ai.core.capabilities
  * The same check keeps a learned phrase from running a tool that stopped
  * working since it was learned.
  *
- * Tools not listed need nothing beyond what Friday can't run without (a
+ * Tools not listed need nothing beyond what ULTRON can't run without (a
  * Groq key) or degrade on their own — an alarm, a flashlight, weather for a
  * named city.
  */
@@ -23,7 +23,7 @@ object ToolRequirements {
         LOCATION("location access is off"),
         MODES("no modes created yet");
 
-        fun met(c: FridayCapabilities): Boolean = when (this) {
+        fun met(c: UltronCapabilities): Boolean = when (this) {
             GMAIL -> c.integrations.gmail
             NOTIFICATIONS -> c.permissions.notificationListener
             CONTACTS -> c.permissions.contacts
@@ -51,18 +51,18 @@ object ToolRequirements {
         "run_mode" to Rule(setOf(Need.MODES), "the owner's modes")
     )
 
-    fun missing(tool: String, c: FridayCapabilities): Set<Need> =
+    fun missing(tool: String, c: UltronCapabilities): Set<Need> =
         rules[tool]?.needs?.filterNot { it.met(c) }?.toSet().orEmpty()
 
     /** True when [tool] can work now; with no snapshot yet, nothing is held back. */
-    fun met(tool: String, c: FridayCapabilities?): Boolean = c == null || missing(tool, c).isEmpty()
+    fun met(tool: String, c: UltronCapabilities?): Boolean = c == null || missing(tool, c).isEmpty()
 
     /**
      * One line for the system prompt naming what can't be done right now and
      * why, so the model says "turn on notification access" instead of
      * pretending, or inventing a reason. Null when nothing is missing.
      */
-    fun unavailableNote(c: FridayCapabilities): String? {
+    fun unavailableNote(c: UltronCapabilities): String? {
         // No modes is not something to fix; it just means there are none to offer.
         val gaps = rules.filterKeys { it != "run_mode" }.values
             .mapNotNull { rule ->

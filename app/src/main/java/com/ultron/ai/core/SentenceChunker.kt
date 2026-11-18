@@ -1,9 +1,9 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
  * Splits a streaming LLM response into speakable chunks as tokens arrive.
  *
- * This is what lets Friday start talking after the first sentence instead of
+ * This is what lets ULTRON start talking after the first sentence instead of
  * waiting for the whole answer to finish generating and synthesizing — the
  * single biggest remaining source of perceived lag in the voice loop.
  *

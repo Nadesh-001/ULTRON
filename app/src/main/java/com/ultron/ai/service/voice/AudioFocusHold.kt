@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.content.Context
 import android.media.AudioAttributes
@@ -7,7 +7,7 @@ import android.media.AudioManager
 import android.util.Log
 
 /**
- * Quiets other audio while Friday listens and talks, the way Google
+ * Quiets other audio while ULTRON listens and talks, the way Google
  * Assistant and Siri do.
  *
  * Without it music kept playing through the whole exchange: the microphone
@@ -36,7 +36,7 @@ class AudioFocusHold(context: Context) {
                     .build()
             )
             // Losing it (a call, the user starting music) needs no reaction:
-            // Friday's own speech is not gated on focus.
+            // ULTRON's own speech is not gated on focus.
             .setOnAudioFocusChangeListener { }
             .build()
         val granted = audio.requestAudioFocus(request) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED

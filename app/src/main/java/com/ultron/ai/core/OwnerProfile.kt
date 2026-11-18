@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
  *
  * Android keeps an owner profile separate from the contact list — it is what
  * the Contacts app shows at the top as "Me", populated from the account the
- * phone was set up with. Reading it means Friday can answer "text text text?"
+ * phone was set up with. Reading it means ULTRON can answer "text text text?"
  * from the device instead of waiting to be told, which is the whole point of
  * running on the user's own phone.
  *

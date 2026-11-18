@@ -1,4 +1,4 @@
-package com.ultron.ai.core.voice
+﻿package com.ultron.ai.core.voice
 
 /** What a panel says, decided apart from how it is drawn. */
 data class PanelView(
@@ -83,7 +83,7 @@ object VoicePresentation {
  * activity ever holds it (FLAG_KEEP_SCREEN_ON); never a service, a wake
  * lock, or the system timeout.
  *
- *  - while Friday greets, listens, works or speaks — the owner is in the
+ *  - while ULTRON greets, listens, works or speaks — the owner is in the
  *    middle of it;
  *  - for [READ_MS] after the answer or a failure, to read it (a touch on the
  *    panel starts that again);
@@ -125,14 +125,14 @@ object Surfaces {
 
     fun choose(c: Conditions): Surface = when {
         c.locked -> locked(c)
-        // Friday's own screen is open: her own layer, not a second window over it.
+        // ULTRON's own screen is open: her own layer, not a second window over it.
         c.appInForeground -> Surface.IN_APP
         c.overlayAllowed -> Surface.OVERLAY
         else -> Surface.VOICE_ONLY
     }
 
     private fun locked(c: Conditions): Surface = when {
-        // Announcements Friday makes on her own never light the screen.
+        // Announcements ULTRON makes on her own never light the screen.
         !c.userInitiated -> Surface.VOICE_ONLY
         !c.notificationsAllowed -> Surface.VOICE_ONLY
         c.fullScreenAllowed -> Surface.LOCK_ACTIVITY

@@ -1,11 +1,11 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import java.time.Duration
 import java.time.LocalTime
 import java.time.ZonedDateTime
 
 /**
- * When the morning brief goes out, and how Friday greets you when it does.
+ * When the morning brief goes out, and how ULTRON greets you when it does.
  *
  * Everything here works on local wall-clock time in the phone's current zone.
  * The brief is about *your* morning, so a fixed interval measured in hours

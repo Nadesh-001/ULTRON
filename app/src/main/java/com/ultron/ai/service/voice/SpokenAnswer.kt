@@ -1,4 +1,4 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.os.SystemClock
 import android.util.Log
@@ -13,27 +13,27 @@ import com.ultron.ai.data.remote.GroqApiService
 import com.ultron.ai.data.remote.dto.ApiMessage
 import com.ultron.ai.domain.model.AssistantMode
 import com.ultron.ai.service.EdgeTtsSpeaker
-import com.ultron.ai.service.FridayMemory
-import com.ultron.ai.service.FridayOverlayManager
+import com.ultron.ai.service.ULTRONMemory
+import com.ultron.ai.service.ULTRONOverlayManager
 import kotlinx.coroutines.CancellationException
 
 /**
  * A conversational answer from the model, spoken as it is written.
  *
- * Each sentence goes to the speaker the moment it is complete, so Friday
+ * Each sentence goes to the speaker the moment it is complete, so ULTRON
  * starts talking while the rest of the answer is still being generated.
  */
 class SpokenAnswer(
     private val agent: UltronAgent,
     private val prompts: SystemPromptBuilder,
-    private val memory: FridayMemory,
+    private val memory: ULTRONMemory,
     private val session: VoiceSession,
     private val speaker: EdgeTtsSpeaker,
-    private val overlay: FridayOverlayManager
+    private val overlay: ULTRONOverlayManager
 ) {
 
     sealed interface Result {
-        /** Spoken in full. [followUp] is false when Friday herself said goodbye. */
+        /** Spoken in full. [followUp] is false when ULTRON herself said goodbye. */
         data class Finished(val response: String, val followUp: Boolean) : Result
 
         /** Nothing usable came back; [message] should be said instead. */
@@ -51,7 +51,7 @@ class SpokenAnswer(
         const val HISTORY_TURNS = 5
 
         const val VOICE_RULE =
-            "\n\nYou are Friday, a voice assistant. Answer in ONE short, natural sentence — this is a spoken " +
+            "\n\nYou are ULTRON, a voice assistant. Answer in ONE short, natural sentence — this is a spoken " +
                 "conversation, not a chat window. Only go longer than one sentence if the user explicitly asks for " +
                 "detail or the request genuinely requires a list/steps. Respond in the same language the user speaks."
     }
@@ -84,7 +84,7 @@ class SpokenAnswer(
             remember(userText, response, assistantSpokeBefore = history.isNotEmpty())
             speech.endInput()
             speech.awaitCompletion()
-            // If Friday herself just said goodbye the exchange is over: don't
+            // If ULTRON herself just said goodbye the exchange is over: don't
             // reopen the microphone and sit there in the user's way.
             Result.Finished(response, followUp = !ConversationControl.isFarewell(response))
         } catch (e: CancellationException) {

@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.content.Context
 import android.media.AudioManager
@@ -10,8 +10,8 @@ import android.media.AudioManager
  * it in `MODE_IN_CALL`, a WhatsApp or Telegram call in
  * `MODE_IN_COMMUNICATION`, and a ringing phone in `MODE_RINGTONE`.
  *
- * Used to confirm that a call Friday started really started, and to keep
- * Friday quiet during one: no speaking over it, no microphone opened for a
+ * Used to confirm that a call ULTRON started really started, and to keep
+ * ULTRON quiet during one: no speaking over it, no microphone opened for a
  * follow-up.
  */
 object CallState {

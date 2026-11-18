@@ -1,4 +1,4 @@
-package com.ultron.ai.agent
+﻿package com.ultron.ai.agent
 
 import com.ultron.ai.command.CommandExecutor
 import com.ultron.ai.core.CommandRouter
@@ -209,11 +209,11 @@ class ToolCallAssemblerTest {
     }
 }
 
-class FridayAgentTest {
+class ULTRONAgentTest {
 
     private val groq = mockk<GroqApiService>()
     private val commands = mockk<CommandExecutor>()
-    private val agent = FridayAgent(groq, commands, now = { LocalDateTime.of(2026, 10, 5, 22, 10) })
+    private val agent = ULTRONAgent(groq, commands, now = { LocalDateTime.of(2026, 10, 5, 22, 10) })
     private val sent = mutableListOf<List<ApiMessage>>()
 
     private fun replies(vararg turns: Flow<ChatEvent>) {
@@ -227,7 +227,7 @@ class FridayAgentTest {
     private fun text(vararg t: String) = flowOf(*t.map { ChatEvent.Text(it) }.toTypedArray())
 
     private suspend fun ask(q: String) =
-        agent.reply(FridayAgent.Settings("k", "m", 100), listOf(ApiMessage("user", q)), russian = true)
+        agent.reply(ULTRONAgent.Settings("k", "m", 100), listOf(ApiMessage("user", q)), russian = true)
             .toList().joinToString("")
 
     @Test
@@ -363,7 +363,7 @@ class FridayAgentTest {
             }
         }
         coEvery { commands.execute(any(), any()) } returns CommandExecutor.Outcome.Reply("on")
-        val settings = FridayAgent.Settings("k", "big", 100, backupModel = "small")
+        val settings = ULTRONAgent.Settings("k", "big", 100, backupModel = "small")
         val reply = agent.reply(settings, listOf(ApiMessage("user", "фонарик")), true).toList().joinToString("")
         assertEquals("Включила.", reply)
         // Once the big model is out, it is not asked again within this answer.
@@ -377,7 +377,7 @@ class FridayAgentTest {
             if (models.size == 1) flow { throw GroqApiException(429, "Rate limit exceeded.", retryAfterMs = 855) }
             else text("Да.")
         }
-        val settings = FridayAgent.Settings("k", "big", 100, backupModel = "small")
+        val settings = ULTRONAgent.Settings("k", "big", 100, backupModel = "small")
         assertEquals("Да.", agent.reply(settings, listOf(ApiMessage("user", "x")), true).toList().joinToString(""))
         assertEquals(listOf("big", "big"), models)
     }

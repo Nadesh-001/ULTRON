@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import android.util.Log
 import com.ultron.ai.domain.model.DeviceAction
@@ -33,7 +33,7 @@ class DeviceController(private val knobs: DeviceKnobs) {
         private const val MIN_BRIGHTNESS = 1
     }
 
-    fun perform(action: DeviceAction, level: Int?, russian: Boolean = true): String =
+    fun perform(action: DeviceAction, level: Int?, russian: Boolean = false): String =
         apply(action, level, russian).message
 
     fun apply(action: DeviceAction, level: Int?, russian: Boolean): DeviceActionResult = try {
@@ -296,7 +296,7 @@ class DeviceController(private val knobs: DeviceKnobs) {
         knobs.openWriteSettingsPermission()
         return DeviceActionResult(
             DeviceActionResult.Mode.NEEDS_PERMISSION, null,
-            "To change brightness, allow Friday to modify system settings — I've opened that screen"
+            "To change brightness, allow ULTRON to modify system settings — I've opened that screen"
         )
     }
 

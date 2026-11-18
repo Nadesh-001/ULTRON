@@ -1,9 +1,9 @@
-package com.ultron.ai.core.mail
+﻿package com.ultron.ai.core.mail
 
 import com.ultron.ai.core.BriefComposer
 
 /**
- * What Friday says about mail, kept short enough to be listened to.
+ * What ULTRON says about mail, kept short enough to be listened to.
  *
  * Names stay in the nominative ("text text — «text»") rather than being
  * forced into "text …": declining an arbitrary sender's name is a guess, and a

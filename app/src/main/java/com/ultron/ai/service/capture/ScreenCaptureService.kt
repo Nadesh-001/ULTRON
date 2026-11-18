@@ -1,4 +1,4 @@
-package com.ultron.ai.service.capture
+﻿package com.ultron.ai.service.capture
 
 import android.app.Activity
 import android.app.Notification
@@ -50,7 +50,7 @@ class ScreenCaptureService : Service() {
         private const val EXTRA_CODE = "result_code"
         private const val EXTRA_DATA = "result_data"
         private const val ACTION_CANCEL = "com.ultron.ai.capture.CANCEL"
-        private const val CHANNEL_ID = "friday_screen_capture"
+        private const val CHANNEL_ID = "ULTRON_screen_capture"
         private const val NOTIFICATION_ID = 4107
 
         /** No frame within this: the capture failed. */
@@ -78,7 +78,7 @@ class ScreenCaptureService : Service() {
 
     private val capture: ScreenCapture by inject()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-    private val thread = HandlerThread("friday-screen-capture").apply { start() }
+    private val thread = HandlerThread("ULTRON-screen-capture").apply { start() }
     private val handler = Handler(thread.looper)
 
     /** The capture in progress; one at a time. */
@@ -182,7 +182,7 @@ class ScreenCaptureService : Service() {
                 this.reader = reader
                 reader.setOnImageAvailableListener({ onFrame(it) }, handler)
                 display = projection.createVirtualDisplay(
-                    "FridayScreenCapture", size.width, size.height, metrics.densityDpi,
+                    "ULTRONScreenCapture", size.width, size.height, metrics.densityDpi,
                     DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, reader.surface, null, handler
                 )
                 handler.postDelayed(timeout, FRAME_TIMEOUT_MS)

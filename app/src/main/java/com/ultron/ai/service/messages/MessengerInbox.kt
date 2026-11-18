@@ -1,4 +1,4 @@
-package com.ultron.ai.service.messages
+﻿package com.ultron.ai.service.messages
 
 import android.app.Notification
 import android.app.PendingIntent
@@ -21,7 +21,7 @@ import com.ultron.ai.core.messages.InboxMessage
  * way Android Auto and watches do it: the message is sent by the messenger
  * without the app being opened. That field only lives as long as the
  * notification, which is why this is kept in memory and never written down:
- * a stored copy could not reply anyway, and chats are not Friday's to keep.
+ * a stored copy could not reply anyway, and chats are not ULTRON's to keep.
  */
 class MessengerInbox(private val isSpam: (Conversation) -> Boolean = { false }) {
 
@@ -36,7 +36,7 @@ class MessengerInbox(private val isSpam: (Conversation) -> Boolean = { false }) 
         const val MAX_CHATS = 20
         const val MAX_MESSAGES = 10
 
-        /** How long after Friday reads a chat out "text …" still means that chat. */
+        /** How long after ULTRON reads a chat out "text …" still means that chat. */
         const val JUST_READ_MS = 5 * 60 * 1000L
     }
 
@@ -52,7 +52,7 @@ class MessengerInbox(private val isSpam: (Conversation) -> Boolean = { false }) 
     @Synchronized
     fun answerable(now: Long = System.currentTimeMillis()): List<Conversation> = live(now).map { it.chat }
 
-    /** The chat Friday read or announced in the last few minutes, if it is still there. */
+    /** The chat ULTRON read or announced in the last few minutes, if it is still there. */
     @Synchronized
     fun justRead(now: Long = System.currentTimeMillis()): Conversation? {
         val (key, at) = lastRead ?: return null

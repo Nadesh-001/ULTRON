@@ -1,4 +1,4 @@
-package com.ultron.ai.data.remote
+﻿package com.ultron.ai.data.remote
 
 import com.ultron.ai.data.remote.dto.ApiMessage
 import java.io.File
@@ -121,7 +121,7 @@ class GroqCancellationTest {
 
     @Test
     fun `a cancelled transcription cancels the call to a stalled server`() = runBlocking {
-        val audio = File.createTempFile("friday-test", ".wav").apply { writeBytes(ByteArray(44)) }
+        val audio = File.createTempFile("ULTRON-test", ".wav").apply { writeBytes(ByteArray(44)) }
         try {
             val request = async(Dispatchers.Default) { groq(hangBeforeReply = true).transcribeAudio("k", audio) }
             withTimeout(TIMEOUT_MS) { while (call.get() == null) kotlinx.coroutines.delay(POLL_MS) }

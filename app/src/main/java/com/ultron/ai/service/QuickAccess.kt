@@ -1,4 +1,4 @@
-package com.ultron.ai.service
+﻿package com.ultron.ai.service
 
 import android.app.PendingIntent
 import android.content.Context
@@ -43,10 +43,10 @@ class UltronTileService : TileService() {
     }
 }
 
-typealias FridayTileService = UltronTileService
+typealias ULTRONTileService = UltronTileService
 
 /**
- * Long press on Friday's icon: the modes used most, one tap to turn each on
+ * Long press on ULTRON's icon: the modes used most, one tap to turn each on
  * or off. Kept in step with the modes as they change.
  */
 object ModeShortcuts {
@@ -76,6 +76,6 @@ object ModeShortcuts {
 class ModeShortcutActivity : com.ultron.ai.HandOffActivity() {
 
     override fun handOff() {
-        intent.getStringExtra(ModeShortcuts.EXTRA_ID)?.let { FridayWakeWordService.toggleMode(this, it) }
+        intent.getStringExtra(ModeShortcuts.EXTRA_ID)?.let { ULTRONWakeWordService.toggleMode(this, it) }
     }
 }

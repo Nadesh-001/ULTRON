@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.chat.components
+﻿package com.ultron.ai.ui.chat.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.RepeatMode
@@ -48,13 +48,13 @@ import java.util.Locale
 /**
  * One line of the conversation.
  *
- * The owner speaks from a lit glass card on the right. Friday answers
+ * The owner speaks from a lit glass card on the right. ULTRON answers
  * from the dark on the left, without a bubble: a cyan rail, her name and
  * the time in monospace, then the text, the way a HUD prints a log line.
  */
 @Composable
 fun MessageBubble(message: Message, modifier: Modifier = Modifier) {
-    if (message.role == MessageRole.USER) UserLine(message, modifier) else FridayLine(message, modifier)
+    if (message.role == MessageRole.USER) UserLine(message, modifier) else ULTRONLine(message, modifier)
 }
 
 @Composable
@@ -87,7 +87,7 @@ private fun UserLine(message: Message, modifier: Modifier) {
 }
 
 @Composable
-private fun FridayLine(message: Message, modifier: Modifier) {
+private fun ULTRONLine(message: Message, modifier: Modifier) {
     Row(modifier.fillMaxWidth().height(IntrinsicSize.Min).padding(end = 28.dp)) {
         Box(
             Modifier

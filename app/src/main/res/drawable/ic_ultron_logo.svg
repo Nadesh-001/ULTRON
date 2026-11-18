@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Radial Atmosphere / Core Glow -->
+    <radialGradient id="coreAtmosphere" cx="50%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#FF3030" stop-opacity="0.32" />
+      <stop offset="45%" stop-color="#A50000" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#050505" stop-opacity="0.0" />
+    </radialGradient>
+
+    <!-- Metallic Gradient 1 (Forehead & Cranium) -->
+    <linearGradient id="metalCrest" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D5DFE8" />
+      <stop offset="48%" stop-color="#8B96A0" />
+      <stop offset="100%" stop-color="#3A4048" />
+    </linearGradient>
+
+    <!-- Metallic Gradient 2 (Dark Titanium Plates) -->
+    <linearGradient id="metalTitanium" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4C545E" />
+      <stop offset="50%" stop-color="#252A30" />
+      <stop offset="100%" stop-color="#14171A" />
+    </linearGradient>
+
+    <!-- Metallic Gradient 3 (Cheek / Jaw Highlights) -->
+    <linearGradient id="metalCheek" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#9EABB8" />
+      <stop offset="50%" stop-color="#555E68" />
+      <stop offset="100%" stop-color="#1C2024" />
+    </linearGradient>
+
+    <!-- High-Intensity Red Eye Glow -->
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="35%" stop-color="#FF6B6B" />
+      <stop offset="70%" stop-color="#FF3030" />
+      <stop offset="100%" stop-color="#900000" />
+    </radialGradient>
+
+    <!-- Crimson Grille / Mouth Core -->
+    <linearGradient id="crimsonMouth" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF3030" />
+      <stop offset="100%" stop-color="#4A0000" />
+    </linearGradient>
+  </defs>
+
+  <!-- HUD Targeting Ring & Reticle -->
+  <circle cx="256" cy="256" r="236" fill="url(#coreAtmosphere)" />
+  <circle cx="256" cy="256" r="236" fill="none" stroke="#FF3030" stroke-width="1.8" stroke-opacity="0.3" stroke-dasharray="14 18" />
+  <circle cx="256" cy="256" r="218" fill="none" stroke="#FF3030" stroke-width="2.5" stroke-opacity="0.75" />
+  
+  <!-- Outer Technical Reticle Ticks -->
+  <path d="M 256,6 L 256,36 M 256,476 L 256,506 M 6,256 L 36,256 M 476,256 L 506,256" stroke="#FF3030" stroke-width="3.5" stroke-linecap="round" />
+  <circle cx="256" cy="42" r="3.5" fill="#FF3030" />
+  <circle cx="256" cy="470" r="3.5" fill="#FF3030" />
+  <circle cx="42" cy="256" r="3.5" fill="#FF3030" />
+  <circle cx="470" cy="256" r="3.5" fill="#FF3030" />
+
+  <!-- ULTRON HELMET / HEAD STRUCTURE -->
+  
+  <!-- Outer Cranium Shadow Base -->
+  <polygon points="176,120 256,92 336,120 376,184 358,248 330,304 256,396 182,304 154,248 136,184" fill="#0B0D10" stroke="#FF3030" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.5" />
+
+  <!-- Upper Cranium Armor Plates (Left / Right) -->
+  <polygon points="176,120 256,92 256,192 188,188 154,204 136,184" fill="url(#metalTitanium)" stroke="#555E68" stroke-width="1.5" />
+  <polygon points="336,120 256,92 256,192 324,188 358,204 376,184" fill="url(#metalCrest)" stroke="#9EABB8" stroke-width="1.5" />
+
+  <!-- Forehead Central Blade / Crest -->
+  <polygon points="256,104 274,152 256,220 238,152" fill="url(#metalCrest)" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.6" />
+  <polygon points="256,118 266,152 256,196 246,152" fill="#181B20" />
+  <polygon points="256,132 262,152 256,176 250,152" fill="#FF3030" />
+
+  <!-- Brow Contours & Eye Sockets Frame -->
+  <polygon points="166,204 246,184 256,196 232,228 174,232" fill="#14171A" stroke="#FF3030" stroke-width="1.5" />
+  <polygon points="346,204 266,184 256,196 280,228 338,232" fill="#1E2328" stroke="#FF3030" stroke-width="1.5" />
+
+  <!-- Cheek Armor Flanges (Ears / Antennas) -->
+  <polygon points="136,184 154,248 130,286 112,238" fill="url(#metalTitanium)" stroke="#FF3030" stroke-width="2" />
+  <polygon points="376,184 358,248 382,286 400,238" fill="url(#metalCheek)" stroke="#FF3030" stroke-width="2" />
+
+  <!-- ULTRON GLOWING RED OPTICS (EYES) -->
+  <!-- Left Eye -->
+  <polygon points="174,236 230,226 222,254 182,254" fill="url(#eyeGlow)" />
+  <polyline points="170,234 234,224" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="204" cy="240" r="14" fill="#FF3030" filter="drop-shadow(0px 0px 8px #FF3030)" fill-opacity="0.6" />
+
+  <!-- Right Eye -->
+  <polygon points="338,236 282,226 290,254 330,254" fill="url(#eyeGlow)" />
+  <polyline points="342,234 278,224" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="308" cy="240" r="14" fill="#FF3030" filter="drop-shadow(0px 0px 8px #FF3030)" fill-opacity="0.6" />
+
+  <!-- Nose Bridge / Central Divider -->
+  <polygon points="256,196 266,252 256,290 246,252" fill="#0B0D10" stroke="#FF3030" stroke-width="1" />
+
+  <!-- Lower Cheeks -->
+  <polygon points="154,248 182,304 220,300 188,252" fill="url(#metalTitanium)" stroke="#3A4048" stroke-width="1.2" />
+  <polygon points="358,248 330,304 292,300 324,252" fill="url(#metalCheek)" stroke="#555E68" stroke-width="1.2" />
+
+  <!-- ULTRON MENACING ENERGY MOUTH / GRILLE -->
+  <!-- Outer Mouth Cavity -->
+  <polygon points="204,296 256,278 308,296 286,348 256,356 226,348" fill="#07080A" stroke="#FF3030" stroke-width="2.5" stroke-linejoin="round" />
+
+  <!-- Inner Glowing Grille Core -->
+  <polygon points="212,304 256,290 300,304 282,342 256,348 230,342" fill="url(#crimsonMouth)" />
+
+  <!-- Grille Vertical Laser / Teeth Bars -->
+  <line x1="234" y1="298" x2="238" y2="342" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-opacity="0.9" />
+  <line x1="248" y1="293" x2="250" y2="346" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.95" />
+  <line x1="264" y1="293" x2="262" y2="346" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.95" />
+  <line x1="278" y1="298" x2="274" y2="342" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-opacity="0.9" />
+
+  <!-- Chin Mandible / Jaw Plates -->
+  <polygon points="226,348 256,356 286,348 274,392 256,400 238,392" fill="url(#metalCrest)" stroke="#FF3030" stroke-width="1.5" />
+  <polygon points="246,396 256,400 266,396 256,412" fill="#FF3030" />
+</svg>

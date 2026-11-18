@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.voice
+﻿package com.ultron.ai.ui.voice
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -19,7 +19,7 @@ import com.ultron.ai.core.voice.VoicePresentation
 import com.ultron.ai.service.voice.VoiceUi
 
 /**
- * The voice panel inside Friday's own screen. While the app is in front the
+ * The voice panel inside ULTRON's own screen. While the app is in front the
  * floating window is not drawn ([com.ultron.ai.core.voice.Surfaces]), so a
  * spoken exchange shows here instead of in a second panel on top of the chat.
  */

@@ -1,4 +1,4 @@
-package com.ultron.ai.data.remote.dto
+﻿package com.ultron.ai.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -19,7 +19,7 @@ data class ChatCompletionRequest(
     /** Only for reasoning models; omitted from the JSON when null. */
     @SerialName("reasoning_effort")
     val reasoningEffort: String? = null,
-    /** What Friday can do, offered to the model; omitted when null. */
+    /** What ULTRON can do, offered to the model; omitted when null. */
     val tools: List<ToolDefinition>? = null
 )
 

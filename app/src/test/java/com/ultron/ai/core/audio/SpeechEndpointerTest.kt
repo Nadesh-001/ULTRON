@@ -1,4 +1,4 @@
-package com.ultron.ai.core.audio
+﻿package com.ultron.ai.core.audio
 
 import com.ultron.ai.core.VoiceProfile
 import com.ultron.ai.core.audio.SpeechEndpointer.End
@@ -208,7 +208,7 @@ class WhisperArtifactsTest {
     @Test
     fun `ordinary thanks and talk about subtitles stay`() {
         assertEquals("Спасибо", WhisperArtifacts.clean("Спасибо"))
-        assertEquals("Thank you, Friday", WhisperArtifacts.clean("Thank you, Friday"))
+        assertEquals("Thank you, ULTRON", WhisperArtifacts.clean("Thank you, ULTRON"))
         assertEquals("Включи субтитры", WhisperArtifacts.clean("Включи субтитры"))
     }
 }

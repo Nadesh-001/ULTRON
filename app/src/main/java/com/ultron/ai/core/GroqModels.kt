@@ -1,11 +1,11 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
  * Which Groq model does which job.
  *
  * Groq retires models without much warning, and a hard-coded name fails all
  * at once: when `llama-3.3-70b-versatile` and `llama-3.1-8b-instant` went,
- * Friday's spoken answers, memory, session summaries and mail retelling all
+ * ULTRON's spoken answers, memory, session summaries and mail retelling all
  * stopped together, while speech recognition carried on and hid the problem.
  * So every job names an ordered list of acceptable models, and the first one
  * the account can actually use is chosen from the live list.

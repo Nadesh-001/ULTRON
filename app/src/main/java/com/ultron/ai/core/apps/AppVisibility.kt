@@ -1,4 +1,4 @@
-package com.ultron.ai.core.apps
+﻿package com.ultron.ai.core.apps
 
 import java.util.concurrent.atomic.AtomicInteger
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 /**
- * Whether Friday has a window on screen right now — what Android 10+ looks
+ * Whether ULTRON has a window on screen right now — what Android 10+ looks
  * at before letting an app start another one from the background.
  *
  * Declaring SYSTEM_ALERT_WINDOW proves nothing: the overlay counts only
@@ -21,7 +21,7 @@ object AppVisibility {
 
     private val _foreground = MutableStateFlow(false)
 
-    /** One of Friday's own screens is in front: the voice panel lives inside it then. */
+    /** One of ULTRON's own screens is in front: the voice panel lives inside it then. */
     val foreground: StateFlow<Boolean> = _foreground.asStateFlow()
 
     fun activityResumed() {

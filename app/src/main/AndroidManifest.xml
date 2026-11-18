@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -36,7 +36,7 @@
     <!-- A dictated SMS is read back and sent only after a spoken "yes"
          (SmsConfirmation); without this grant the SMS app opens with the text. -->
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <!-- Friday's panel over the lock screen, and Android's unlock screen on request:
+    <!-- ULTRON's panel over the lock screen, and Android's unlock screen on request:
          a background service can bring an activity there only through a full-screen
          notification, as alarms and calls do (LockScreen). -->
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
@@ -46,7 +46,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!-- Without it Friday isn't listed under "Do Not Disturb access", so DND and silent mode can't be granted. -->
+    <!-- Without it ULTRON isn't listed under "Do Not Disturb access", so DND and silent mode can't be granted. -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <!-- Brightness: granted by the user once, on the system's "Modify system settings" screen. -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
@@ -70,14 +70,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:usesCleartextTraffic="false"
-        android:theme="@style/Theme.FridayMobile">
+        android:theme="@style/Theme.ULTRONMobile">
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.FridayMobile">
+            android:theme="@style/Theme.ULTRONMobile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -85,7 +85,7 @@
         </activity>
 
         <!-- "The assistant": side button (Samsung: press and hold → Digital assistant), assist
-             gesture, a headset's voice button. Declaring it makes Friday selectable as the
+             gesture, a headset's voice button. Declaring it makes ULTRON selectable as the
              phone's digital assistant. No screen of its own: it starts a conversation and closes. -->
         <activity
             android:name=".service.lock.LockScreenActivity"
@@ -94,7 +94,7 @@
             android:excludeFromRecents="true"
             android:taskAffinity="com.ultron.ai.lockscreen"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.FridayMobile.LockPanel" />
+            android:theme="@style/Theme.ULTRONMobile.LockPanel" />
 
         <activity
             android:name=".AssistActivity"
@@ -114,7 +114,7 @@
             </intent-filter>
         </activity>
 
-        <!-- A Friday NFC tag touched: toggles its mode, even with Friday closed. -->
+        <!-- A ULTRON NFC tag touched: toggles its mode, even with ULTRON closed. -->
         <activity
             android:name=".service.NfcTagActivity"
             android:exported="true"
@@ -125,7 +125,7 @@
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="application/vnd.friday.mode" />
+                <data android:mimeType="application/vnd.ULTRON.mode" />
             </intent-filter>
         </activity>
 
@@ -155,7 +155,7 @@
             android:name=".service.NfcWriteActivity"
             android:exported="false"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.FridayMobile" />
+            android:theme="@style/Theme.ULTRONMobile" />
 
         <service
             android:name=".service.UltronWakeWordService"
@@ -169,7 +169,7 @@
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
 
-        <!-- Lets Friday answer "what did I miss". The user must switch this on
+        <!-- Lets ULTRON answer "what did I miss". The user must switch this on
              in system settings; declaring it is not enough to read anything. -->
         <!-- Time zone and manual clock changes are exempt from the implicit-
              broadcast limits, so a manifest receiver still gets them. -->

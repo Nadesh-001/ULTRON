@@ -1,4 +1,4 @@
-package com.ultron.ai
+﻿package com.ultron.ai
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
 import com.ultron.ai.core.DeviceContext
 import com.ultron.ai.data.local.dao.UserPreferenceDao
-import com.ultron.ai.service.FridayWakeWordService
-import com.ultron.ai.ui.navigation.FridayNavGraph
-import com.ultron.ai.ui.theme.FridayTheme
+import com.ultron.ai.service.ULTRONWakeWordService
+import com.ultron.ai.ui.navigation.ULTRONNavGraph
+import com.ultron.ai.ui.theme.ULTRONTheme
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -30,10 +30,10 @@ class MainActivity : ComponentActivity() {
         handleWakeWordIntent(intent)
 
         setContent {
-            FridayTheme {
+            ULTRONTheme {
                 androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxSize()) {
-                    FridayNavGraph(activity = this@MainActivity)
-                    // A spoken exchange while Friday is open shows here, not in a window over her.
+                    ULTRONNavGraph(activity = this@MainActivity)
+                    // A spoken exchange while ULTRON is open shows here, not in a window over her.
                     InAppVoiceLayer()
                 }
             }
@@ -52,9 +52,9 @@ class MainActivity : ComponentActivity() {
             deviceContext.refresh()
             // An update or a reboot stops the listening service, and Android
             // won't let a microphone service start itself in the background.
-            // Opening Friday brings her back; if she is already listening,
+            // Opening ULTRON brings her back; if she is already listening,
             // this changes nothing.
-            if (prefs.get("wake_word_enabled") == "true") FridayWakeWordService.start(this@MainActivity)
+            if (prefs.get("wake_word_enabled") == "true") ULTRONWakeWordService.start(this@MainActivity)
         }
     }
 

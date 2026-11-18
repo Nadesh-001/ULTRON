@@ -1,4 +1,4 @@
-package com.ultron.ai.core.links
+﻿package com.ultron.ai.core.links
 
 /**
  * Whether a quick link's phrase was said, the way people actually say it.
@@ -16,7 +16,7 @@ internal object PhraseMatch {
     private val OPTIONAL = setOf(
         "давай", "давайте", "хочу", "хотим", "хотел", "хотела", "я", "мы", "мне", "нам", "ну", "пожалуйста",
         "пятница", "фрайдей", "может", "можно", "ка", "а", "и", "вот", "сейчас", "let", "lets", "s", "i", "want",
-        "to", "please", "friday", "now", "just"
+        "to", "please", "ULTRON", "now", "just"
     )
 
     /** Russian endings, longest first; English words lose only a plural "s". */

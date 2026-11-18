@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.notebook
+﻿package com.ultron.ai.ui.notebook
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -47,7 +47,7 @@ import com.ultron.ai.ui.theme.hudFrame
 import org.koin.compose.koinInject
 
 /**
- * Friday's notebook: write or draw — a question, a sum, a diagram — and
+ * ULTRON's notebook: write or draw — a question, a sum, a diagram — and
  * ask. The page goes to the vision model as a picture, so it reads
  * handwriting, formulas and sketches alike.
  *

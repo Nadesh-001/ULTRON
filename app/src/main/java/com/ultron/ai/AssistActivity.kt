@@ -1,6 +1,6 @@
-package com.ultron.ai
+﻿package com.ultron.ai
 
-import com.ultron.ai.service.FridayWakeWordService
+import com.ultron.ai.service.ULTRONWakeWordService
 
 /**
  * What the system opens for "the assistant": a long press of the side
@@ -9,7 +9,7 @@ import com.ultron.ai.service.FridayWakeWordService
  *
  * It has no screen of its own. It asks the voice service to start a
  * conversation as if "text" had been heard, and closes; the listening
- * panel appears over whatever was open. Declaring it is what makes Friday
+ * panel appears over whatever was open. Declaring it is what makes ULTRON
  * selectable as the phone's digital assistant.
  *
  * The press is not a voice: with a voice profile recorded, what is said
@@ -18,6 +18,6 @@ import com.ultron.ai.service.FridayWakeWordService
 class AssistActivity : HandOffActivity() {
 
     // Started while this activity is in the foreground, so Android allows a
-    // microphone service even if Friday wasn't running.
-    override fun handOff() = FridayWakeWordService.invoke(this)
+    // microphone service even if ULTRON wasn't running.
+    override fun handOff() = ULTRONWakeWordService.invoke(this)
 }

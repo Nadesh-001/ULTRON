@@ -1,4 +1,4 @@
-package com.ultron.ai.command
+﻿package com.ultron.ai.command
 
 import com.ultron.ai.domain.model.CommandResult
 
@@ -18,7 +18,7 @@ import com.ultron.ai.domain.model.CommandResult
  *    fingerprint, face or PIN — and the command runs right after it.
  *  - [Level.UNLOCK]: always Android's unlock screen first, voice or not.
  *
- * Friday never sees or keeps the PIN: the unlock is Android's
+ * ULTRON never sees or keeps the PIN: the unlock is Android's
  * (KeyguardManager.requestDismissKeyguard), and it either happens or not.
  */
 object LockPolicy {

@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.diagnostics
+﻿package com.ultron.ai.ui.diagnostics
 
 import android.Manifest
 import android.app.Activity
@@ -44,7 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ultron.ai.core.capabilities.Diagnostics
 import com.ultron.ai.core.capabilities.Diagnostics.Fix
 import com.ultron.ai.core.capabilities.Diagnostics.Status
-import com.ultron.ai.service.FridayNotificationListener
+import com.ultron.ai.service.ULTRONNotificationListener
 import com.ultron.ai.ui.settings.requestBatteryExemption
 import com.ultron.ai.ui.theme.ArcAmber
 import com.ultron.ai.ui.theme.ArcCyan
@@ -61,7 +61,7 @@ import com.ultron.ai.ui.theme.StatusDot
 
 /**
  * "Is everything in order?" — every permission, setting and integration a
- * Friday feature depends on, what its absence breaks, and one tap to fix it.
+ * ULTRON feature depends on, what its absence breaks, and one tap to fix it.
  * Drawn as a systems check: one panel per group, a lit dot per line.
  */
 @Composable
@@ -181,12 +181,12 @@ private fun rememberFixer(onOpenSettings: () -> Unit, onChanged: () -> Unit): (F
     }
     return { fix ->
         when (fix) {
-            Fix.FRIDAY_SETTINGS -> onOpenSettings()
+            Fix.ULTRON_SETTINGS -> onOpenSettings()
             Fix.OVERLAY -> context.startActivity(
                 Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}"))
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             )
-            Fix.NOTIFICATION_ACCESS -> FridayNotificationListener.openSettings(context)
+            Fix.NOTIFICATION_ACCESS -> ULTRONNotificationListener.openSettings(context)
             Fix.BATTERY -> requestBatteryExemption(context)
             Fix.ASSISTANT -> com.ultron.ai.ui.openDefaultAssistantSettings(context)
             Fix.DND_ACCESS -> context.startActivity(

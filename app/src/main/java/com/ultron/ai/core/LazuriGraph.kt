@@ -1,11 +1,11 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
 
 /**
- * The shape of the "what Friday knows about me" map.
+ * The shape of the "what ULTRON knows about me" map.
  *
  * You at the centre, what you've told it radiating out, and dates branching
  * into the sessions held on them and the notes inside those. Kept free of
@@ -35,7 +35,7 @@ object LazuriGraph {
         val parentY: Float
     )
 
-    /** A fact Friday has learned, as stored in memory. */
+    /** A fact ULTRON has learned, as stored in memory. */
     data class Fact(val category: String, val key: String, val value: String)
 
     /** A past conversation, with anything worth showing inside it. */
@@ -49,7 +49,7 @@ object LazuriGraph {
     )
 
     /**
-     * Builds the tree. [centreLabel] is the user's name when Friday has
+     * Builds the tree. [centreLabel] is the user's name when ULTRON has
      * learned it, otherwise a neutral placeholder — the map should still be
      * useful on day one.
      */

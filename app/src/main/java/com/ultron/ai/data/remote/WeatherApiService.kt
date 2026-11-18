@@ -1,4 +1,4 @@
-package com.ultron.ai.data.remote
+﻿package com.ultron.ai.data.remote
 
 import android.util.Log
 import com.ultron.ai.core.WeatherCodes
@@ -193,7 +193,7 @@ class WeatherApiService private constructor(
     private fun get(url: String): String? {
         val request = Request.Builder()
             .url(url)
-            .addHeader("User-Agent", "FridayAI/1.0 (personal assistant)")
+            .addHeader("User-Agent", "ULTRONAI/1.0 (personal assistant)")
             .get()
             .build()
         client.newCall(request).execute().use { response ->

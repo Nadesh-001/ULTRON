@@ -1,4 +1,4 @@
-package com.ultron.ai.agent
+﻿package com.ultron.ai.agent
 
 import com.ultron.ai.data.remote.groqJson
 import kotlinx.serialization.json.JsonObject
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.put
  * One stored action: which tool, with which arguments, in which version of
  * the tools' language.
  *
- * Everything Friday keeps to run later — learned phrases, modes, NFC tags,
+ * Everything ULTRON keeps to run later — learned phrases, modes, NFC tags,
  * schedules — is an envelope, the same shape as a model's tool call. One
  * language means one interpreter ([AgentTools.interpret]) and one set of
  * checks, instead of a second command system for automation.
@@ -30,7 +30,7 @@ data class ActionEnvelope(val tool: String, val args: JsonObject, val version: I
 }
 
 /**
- * Reads envelopes written by any version of Friday and brings them up to
+ * Reads envelopes written by any version of ULTRON and brings them up to
  * the current tool language.
  *
  * v1: 0.9–0.11; no version field. `phone_control` named implementations

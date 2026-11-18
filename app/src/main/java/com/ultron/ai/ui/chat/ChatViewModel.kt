@@ -1,4 +1,4 @@
-package com.ultron.ai.ui.chat
+﻿package com.ultron.ai.ui.chat
 
 import android.app.Activity
 import android.content.Intent
@@ -18,7 +18,7 @@ import com.ultron.ai.domain.model.MessageRole
 import com.ultron.ai.domain.usecase.AnalyzeContentUseCase
 import com.ultron.ai.domain.usecase.GetChatHistoryUseCase
 import com.ultron.ai.domain.usecase.SendMessageUseCase
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.capture.ScreenCapture
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 /**
  * The chat screen.
  *
- * One request at a time: a send, a screen or a file while Friday is still
+ * One request at a time: a send, a screen or a file while ULTRON is still
  * answering is refused here, not only by a disabled button. Each request
  * belongs to the conversation it began in, fixed when it starts — its
  * prompt and its answer are saved there and its stream is drawn only while
@@ -55,7 +55,7 @@ class ChatViewModel(
     private val analyzeContent: AnalyzeContentUseCase,
     private val voiceInput: VoiceInputManager,
     private val commands: CommandExecutor,
-    private val memory: FridayMemory,
+    private val memory: ULTRONMemory,
     private val files: FileAnalyzer? = null,
     private val screen: ScreenCapture? = null
 ) : ViewModel() {
@@ -95,7 +95,7 @@ class ChatViewModel(
 
     /**
      * Opens whatever conversation is currently active — the same one the
-     * voice assistant is using — so talking to Friday and then opening the
+     * voice assistant is using — so talking to ULTRON and then opening the
      * app lands you in the same thread rather than a blank screen.
      */
     private fun resumeActiveSession() {

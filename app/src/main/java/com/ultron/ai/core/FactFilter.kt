@@ -1,9 +1,9 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 /**
  * Guards what the extractor is allowed to write into long-term memory.
  *
- * The failure this exists for: asking "text text text?" made Friday store
+ * The failure this exists for: asking "text text text?" made ULTRON store
  * `fact | name | text text?`, and from then on she claimed to remember the
  * user's name — quoting the question back as if it had been an answer. A
  * question is the user asking for a fact, never stating one, and the prompt

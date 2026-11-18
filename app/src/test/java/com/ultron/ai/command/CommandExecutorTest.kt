@@ -1,4 +1,4 @@
-package com.ultron.ai.command
+﻿package com.ultron.ai.command
 
 import com.ultron.ai.core.AppLauncher
 import com.ultron.ai.core.CommandRouter
@@ -7,7 +7,7 @@ import com.ultron.ai.core.mail.MailCommands
 import com.ultron.ai.data.local.dao.ErrandDao
 import com.ultron.ai.service.WeatherHere
 import com.ultron.ai.domain.model.CommandResult
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.ProactiveBriefService
 import com.ultron.ai.service.mail.MailAssistant
 import io.mockk.coEvery
@@ -86,7 +86,7 @@ class PlannerActionsTest {
 
     private val apps = mockk<AppLauncher>(relaxed = true)
     private val errands = mockk<ErrandDao>(relaxed = true)
-    private val memory = mockk<FridayMemory>(relaxed = true)
+    private val memory = mockk<ULTRONMemory>(relaxed = true)
     private var watched = 0
     private val zone = ZoneId.of("Asia/Tashkent")
     private val planner = PlannerActions(apps, errands, memory, watchErrands = { watched++ }, zone = { zone })

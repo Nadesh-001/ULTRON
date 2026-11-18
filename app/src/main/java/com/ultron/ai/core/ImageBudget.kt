@@ -1,4 +1,4 @@
-package com.ultron.ai.core
+﻿package com.ultron.ai.core
 
 import kotlin.math.max
 import kotlin.math.min
@@ -6,7 +6,7 @@ import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 /**
- * How big an image Friday handles, decided before anything is allocated.
+ * How big an image ULTRON handles, decided before anything is allocated.
  *
  * A screen or a photo goes to the vision model as a JPEG in Base64. Full
  * resolution buys nothing there and costs memory on the phone: a 50-megapixel

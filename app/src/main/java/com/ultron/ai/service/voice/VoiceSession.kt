@@ -1,11 +1,11 @@
-package com.ultron.ai.service.voice
+﻿package com.ultron.ai.service.voice
 
 import android.util.Log
 import com.ultron.ai.data.local.dao.ChatMessageDao
 import com.ultron.ai.data.local.dao.UserPreferenceDao
 import com.ultron.ai.data.local.entity.ChatMessageEntity
 import com.ultron.ai.domain.model.MessageRole
-import com.ultron.ai.service.FridayMemory
+import com.ultron.ai.service.ULTRONMemory
 import com.ultron.ai.service.ModelCatalog
 import java.util.UUID
 
@@ -15,7 +15,7 @@ import java.util.UUID
  */
 class VoiceSession(
     private val prefDao: UserPreferenceDao,
-    private val memory: FridayMemory,
+    private val memory: ULTRONMemory,
     private val chatDao: ChatMessageDao,
     private val catalog: ModelCatalog
 ) {

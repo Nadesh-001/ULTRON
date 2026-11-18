@@ -1,11 +1,11 @@
-package com.ultron.ai.core.messages
+﻿package com.ultron.ai.core.messages
 
 import com.ultron.ai.core.ContactMatcher
 
 /**
  * Who "text …" is for, what to send, and whether to send it at once.
  *
- * Right after Friday reads or announces a message, "text text" is
+ * Right after ULTRON reads or announces a message, "text text" is
  * plainly an answer to that chat: it is sent straight away, the way the
  * owner asked. Anything less certain — another chat, or nothing read just
  * now — is read back first ("text «text» text WhatsApp: «…»?").
@@ -23,8 +23,8 @@ object ReplyTarget {
      * @param who      the person the phrase seemed to name ("text text: …"), if any
      * @param loose    everything after "text" when nothing separated a name from
      *                 the message, so [who] is only a guess ("text text text")
-     * @param known    every chat Friday can still answer, read or not
-     * @param justRead the chat Friday read or announced in the last few minutes
+     * @param known    every chat ULTRON can still answer, read or not
+     * @param justRead the chat ULTRON read or announced in the last few minutes
      */
     fun choose(
         who: String?,
