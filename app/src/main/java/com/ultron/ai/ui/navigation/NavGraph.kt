@@ -89,6 +89,7 @@ fun ULTRONNavGraph(activity: MainActivity) {
             SettingsScreen(
                 onBack = { navController.popBackStack() },
                 onOpenDiagnostics = { navController.navigate("diagnostics") },
+                onOpenControlCenter = { navController.navigate("control_center") },
                 onOpenModes = { navController.navigate("modes") }
             )
         }
@@ -128,6 +129,11 @@ fun ULTRONNavGraph(activity: MainActivity) {
         }
         composable("vision_chat") {
             com.ultron.ai.vision.ui.VisionChatScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+        composable("control_center") {
+            com.ultron.ai.controlcenter.presentation.ControlCenterHostScreen(
                 onNavigateBack = { navController.popBackStack() }
             )
         }

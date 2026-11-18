@@ -69,6 +69,7 @@ fun SettingsScreen(
     quickLinksViewModel: QuickLinksViewModel = koinViewModel(),
     onBack: () -> Unit = {},
     onOpenDiagnostics: () -> Unit = {},
+    onOpenControlCenter: () -> Unit = {},
     onOpenModes: () -> Unit = {},
     onOpenMemory: () -> Unit = {},
     onEnrol: () -> Unit = {}
@@ -120,6 +121,9 @@ fun SettingsScreen(
                     }
                 },
                 actions = {
+                    IconButton(onClick = onOpenControlCenter) {
+                        Icon(androidx.compose.material.icons.Icons.Filled.Tune, contentDescription = "AI Control Center", tint = UltronRed)
+                    }
                     IconButton(onClick = onOpenDiagnostics) {
                         Icon(Icons.Filled.MonitorHeart, contentDescription = "Diagnostics", tint = ArcCyan)
                     }
@@ -133,7 +137,8 @@ fun SettingsScreen(
                 models = models,
                 onApiKeyChange = viewModel::onApiKeyChange,
                 onSaveApiKey = viewModel::saveApiKey,
-                onSelectModel = viewModel::onSelectModel
+                onSelectModel = viewModel::onSelectModel,
+                onOpenControlCenter = onOpenControlCenter
             )
 
             VoicePanels(vm = viewModel, onEnrol = onEnrol, say = ::say)
@@ -228,7 +233,8 @@ private fun BrainPanel(
     models: List<String>,
     onApiKeyChange: (String) -> Unit,
     onSaveApiKey: () -> Unit,
-    onSelectModel: (String) -> Unit
+    onSelectModel: (String) -> Unit,
+    onOpenControlCenter: () -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -285,6 +291,10 @@ private fun BrainPanel(
 
         HudOutlinedButton(onClick = onSaveApiKey, modifier = Modifier.fillMaxWidth()) {
             Text(if (isSaved) "Saved" else "Save")
+        }
+        Spacer(Modifier.height(8.dp))
+        HudOutlinedButton(onClick = onOpenControlCenter, modifier = Modifier.fillMaxWidth()) {
+            Text("Open AI Control Center")
         }
         Spacer(Modifier.height(4.dp))
         HudNote("Key is stored encrypted (Android Keystore) and sent only to Groq.")

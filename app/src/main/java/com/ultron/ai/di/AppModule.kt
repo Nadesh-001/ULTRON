@@ -308,4 +308,20 @@ val appModule = module {
             visionAIService = get()
         )
     }
+
+    // ULTRON AI Control Center
+    single { com.ultron.ai.controlcenter.data.AIControlCenterDatabase.create(androidContext()) }
+    single { get<com.ultron.ai.controlcenter.data.AIControlCenterDatabase>().aiUsageDao() }
+    single { com.ultron.ai.controlcenter.data.AIControlCenterPreferences(androidContext()) }
+    single { com.ultron.ai.controlcenter.core.AIModelRouter(get()) }
+    single { com.ultron.ai.controlcenter.usage.UsageTracker(get()) }
+    single { com.ultron.ai.controlcenter.health.ModelHealthMonitor(get(), get()) }
+    viewModel {
+        com.ultron.ai.controlcenter.presentation.ControlCenterViewModel(
+            preferences = get(),
+            router = get(),
+            usageTracker = get(),
+            healthMonitor = get()
+        )
+    }
 }
