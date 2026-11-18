@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.ui.settings
+package com.ultron.ai.ui.settings
 
 import android.Manifest
 import android.content.Context

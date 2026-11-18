@@ -1,4 +1,4 @@
-﻿package com.ultron.ai.service
+package com.ultron.ai.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
