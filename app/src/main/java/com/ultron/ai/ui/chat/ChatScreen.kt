@@ -55,7 +55,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ultron.ai.ui.chat.components.AddContextBottomSheet
+import com.ultron.ai.ui.chat.components.AddContextPopup
+import com.ultron.ai.ui.chat.components.ContextOption
 import com.ultron.ai.ui.chat.components.ChatInputBar
 import com.ultron.ai.ui.chat.components.MessageBubble
 import com.ultron.ai.ui.chat.components.SessionDrawer
@@ -121,15 +122,15 @@ fun ChatScreen(
                 SessionDrawer(
                     sessions = sessions,
                     currentSessionId = currentSessionId,
-                    onSelect = { id ->
+                    onNewChat = {
+                        viewModel.onNewChat()
+                        scope.launch { drawerState.close() }
+                    },
+                    onOpenSession = { id ->
                         viewModel.onOpenSession(id)
                         scope.launch { drawerState.close() }
                     },
-                    onDelete = { id -> viewModel.onDeleteSession(id) },
-                    onNew = {
-                        viewModel.onNewChat()
-                        scope.launch { drawerState.close() }
-                    }
+                    onDeleteSession = { id -> viewModel.onDeleteSession(id) }
                 )
             }
         }
@@ -383,37 +384,23 @@ fun ChatScreen(
             }
 
             // Universal Context Sheet (+)
-            if (showAddContextSheet) {
-                AddContextBottomSheet(
-                    onDismiss = { showAddContextSheet = false },
-                    onAttachFile = {
-                        showAddContextSheet = false
-                        viewModel.onAnalyzeFileRequested?.invoke(null)
-                    },
-                    onAttachFolder = {
-                        showAddContextSheet = false
-                        viewModel.onAnalyzeFileRequested?.invoke(null)
-                    },
-                    onMention = { mention ->
-                        showAddContextSheet = false
-                        viewModel.onInputChange("$inputText @$mention ")
-                    },
-                    onAction = { action ->
-                        showAddContextSheet = false
-                        viewModel.onInputChange(action)
-                        viewModel.onSend()
-                    },
-                    onWebExtract = { url ->
-                        showAddContextSheet = false
-                        viewModel.onInputChange("Extract and summarize: $url")
-                        viewModel.onSend()
-                    },
-                    onGoogleDrive = {
-                        showAddContextSheet = false
-                        viewModel.onInputChange("Search Google Drive for: ")
+            AddContextPopup(
+                isOpen = showAddContextSheet,
+                onDismiss = { showAddContextSheet = false },
+                onOptionSelected = { option ->
+                    showAddContextSheet = false
+                    when (option) {
+                        ContextOption.FILES, ContextOption.FOLDER -> viewModel.onAnalyzeFileRequested?.invoke(null)
+                        ContextOption.ACTIONS -> {
+                            viewModel.onInputChange("Run system diagnostic")
+                            viewModel.onSend()
+                        }
+                        ContextOption.BROWSER -> viewModel.onInputChange("Extract web content: ")
+                        ContextOption.DRIVE -> viewModel.onInputChange("Search Google Drive: ")
+                        ContextOption.MENTIONS -> viewModel.onInputChange("$inputText @")
                     }
-                )
-            }
+                }
+            )
 
             SnackbarHost(
                 hostState = snackbarHostState,

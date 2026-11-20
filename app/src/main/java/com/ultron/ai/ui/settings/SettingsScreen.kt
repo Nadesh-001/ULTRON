@@ -559,7 +559,7 @@ fun SettingsScreen(
                             onCheckedChange = { viewModel.setAnnounceCalls(it) }
                         )
 
-                        val hasNotifListener = ULTRONNotificationListener.isConnected.value
+                        val hasNotifListener = ULTRONNotificationListener.isEnabled(context)
                         SettingActionRow(
                             title = "Notification Listener Access",
                             subtitle = if (hasNotifListener) "PERMISSION GRANTED" else "ACCESS REQUIRED",
