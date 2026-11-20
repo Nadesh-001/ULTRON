@@ -5,7 +5,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -14,7 +13,6 @@ import com.ultron.ai.core.FileAnalyzer
 import com.ultron.ai.service.capture.ScreenCapture
 import com.ultron.ai.ui.chat.ChatScreen
 import com.ultron.ai.ui.chat.ChatViewModel
-import com.ultron.ai.ui.dashboard.LazuriDashboardScreen
 import com.ultron.ai.ui.dashboard.UltronHomeDashboard
 import com.ultron.ai.ui.diagnostics.DiagnosticsScreen
 import com.ultron.ai.ui.security.SecurityDashboard
@@ -79,6 +77,8 @@ fun ULTRONNavGraph(activity: MainActivity) {
             LaunchedEffect(Unit) { inbox.take()?.let(viewModel::onNotebook) }
 
             ChatScreen(
+                onNavigateToHome = { navController.navigate("home") },
+                onNavigateToVoice = { navController.navigate("voice") },
                 onNavigateToSettings = { navController.navigate("settings") },
                 onNavigateToModes = { navController.navigate("modes") },
                 onNavigateToNotebook = { navController.navigate("notebook") },
@@ -87,10 +87,14 @@ fun ULTRONNavGraph(activity: MainActivity) {
         }
         composable("settings") {
             SettingsScreen(
+                onNavigateToHome = { navController.navigate("home") },
+                onNavigateToVoice = { navController.navigate("voice") },
+                onNavigateToChat = { navController.navigate("chat") },
                 onBack = { navController.popBackStack() },
                 onOpenDiagnostics = { navController.navigate("diagnostics") },
                 onOpenControlCenter = { navController.navigate("control_center") },
-                onOpenModes = { navController.navigate("modes") }
+                onOpenModes = { navController.navigate("modes") },
+                onOpenMemory = { navController.navigate("notebook") }
             )
         }
         composable("notebook") {
@@ -111,9 +115,6 @@ fun ULTRONNavGraph(activity: MainActivity) {
                     if (!navController.popBackStack("settings", inclusive = false)) navController.navigate("settings")
                 }
             )
-        }
-        composable("lazuri_dashboard") {
-            LazuriDashboardScreen(onNavigateBack = { navController.popBackStack() })
         }
         composable("security") {
             com.ultron.ai.ui.security.SecurityDashboard(

@@ -51,11 +51,11 @@ import com.ultron.ai.ui.theme.OnBackground
  * the in-app layer and the lock-screen panel. Spacing on a 4/8 dp grid.
  */
 object VoiceTokens {
-    val Surface = Color(0xF00A1016)
-    val Edge = Color(0x4438E8FF)
-    val Muted = Color(0xFF7E97A3)
+    val Surface = Color(0xF00B0C0F)
+    val Edge = Color(0x44FF3030)
+    val Muted = Color(0xFF929292)
     /** Behind the lock-screen panel: enough for contrast, the wallpaper still shows. */
-    val Scrim = Color(0x6603080C)
+    val Scrim = Color(0x99050505)
     val CompactRadius = 28.dp
     val ExpandedRadius = 24.dp
     val Reactor = 52.dp

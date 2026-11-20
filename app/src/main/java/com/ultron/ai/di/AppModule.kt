@@ -25,7 +25,6 @@ import com.ultron.ai.domain.usecase.AnalyzeContentUseCase
 import com.ultron.ai.domain.usecase.GetChatHistoryUseCase
 import com.ultron.ai.domain.usecase.SendMessageUseCase
 import com.ultron.ai.ui.chat.ChatViewModel
-import com.ultron.ai.ui.dashboard.LazuriDashboardViewModel
 import com.ultron.ai.ui.settings.SettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
@@ -259,14 +258,6 @@ val appModule = module {
     viewModel { com.ultron.ai.ui.settings.LocationViewModel(get()) }
     viewModel { com.ultron.ai.ui.settings.LockLevelViewModel(get()) }
     viewModel { com.ultron.ai.ui.settings.QuickLinksViewModel(get()) }
-    viewModel {
-        LazuriDashboardViewModel(
-            memoryDao = get(),
-            chatDao = get(),
-            summaryDao = get(),
-            summarizer = get()
-        )
-    }
     viewModel {
         SettingsViewModel(
             prefDao = get(),
