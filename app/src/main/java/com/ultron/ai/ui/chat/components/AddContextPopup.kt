@@ -24,8 +24,8 @@ import com.ultron.ai.core.context.MentionCategory
 import com.ultron.ai.ui.theme.*
 
 /**
- * Modern Add Context Popup matching the ULTRON AI HTML HUD Specification.
- * Presents a 2-column grid of context sources: Files, Folder, @ Mentions, Actions, Browser, Drive.
+ * Modern Add Context Popup matching the ULTRON AI HUD Specification (Exact Visual Match).
+ * Presents a sleek vertical list of context sources: Files, Folder, Mentions, Actions, Browser, Drive.
  */
 @Composable
 fun AddContextPopup(
@@ -41,106 +41,116 @@ fun AddContextPopup(
     ) {
         Card(
             modifier = modifier
-                .fillMaxWidth()
+                .width(220.dp)
                 .padding(horizontal = 12.dp, vertical = 6.dp),
-            colors = CardDefaults.cardColors(containerColor = SurfaceDark),
-            border = androidx.compose.foundation.BorderStroke(1.dp, OutlineDim),
-            shape = RoundedCornerShape(16.dp)
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF16181D)),
+            border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF2A2F3A)),
+            shape = RoundedCornerShape(12.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(14.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                    .padding(vertical = 6.dp, horizontal = 4.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                // Header with title and close button
+                // Header
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp, vertical = 6.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        "ADD CONTEXT & TOOLS",
-                        color = OnSurfaceMuted,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace,
-                        letterSpacing = 1.2.sp
-                    )
-                    IconButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.size(24.dp)
-                    ) {
-                        Icon(
-                            Icons.Default.Close,
-                            contentDescription = "Close context menu",
-                            tint = OnSurfaceMuted,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                }
-
-                // 2-Column Grid of 6 Context Cards
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    ContextCard(
-                        title = "Files",
-                        subtitle = "PDF, DOCX, CSV",
-                        icon = Icons.Default.AttachFile,
-                        onClick = { onOptionSelected(ContextOption.FILES) },
-                        modifier = Modifier.weight(1f)
-                    )
-                    ContextCard(
-                        title = "Folder",
-                        subtitle = "Kotlin & Gradle",
-                        icon = Icons.Default.FolderOpen,
-                        onClick = { onOptionSelected(ContextOption.FOLDER) },
-                        modifier = Modifier.weight(1f)
+                        "Add Context",
+                        color = Color(0xFF8E95A5),
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Medium
                     )
                 }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    ContextCard(
-                        title = "@ Mentions",
-                        subtitle = "Smart Sources",
-                        icon = Icons.Default.AlternateEmail,
-                        onClick = { onOptionSelected(ContextOption.MENTIONS) },
-                        modifier = Modifier.weight(1f)
-                    )
-                    ContextCard(
-                        title = "Actions",
-                        subtitle = "Tools & Routines",
-                        icon = Icons.Default.Bolt,
-                        onClick = { onOptionSelected(ContextOption.ACTIONS) },
-                        modifier = Modifier.weight(1f)
-                    )
-                }
+                HorizontalDivider(color = Color(0xFF222630), thickness = 1.dp, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    ContextCard(
-                        title = "Browser",
-                        subtitle = "Web & Extract",
-                        icon = Icons.Default.Language,
-                        onClick = { onOptionSelected(ContextOption.BROWSER) },
-                        modifier = Modifier.weight(1f)
-                    )
-                    ContextCard(
-                        title = "Drive",
-                        subtitle = "Google OAuth",
-                        icon = Icons.Default.CloudSync,
-                        onClick = { onOptionSelected(ContextOption.DRIVE) },
-                        modifier = Modifier.weight(1f)
-                    )
-                }
+                // Vertical List of Context Items (Exact Match)
+                ContextMenuItem(
+                    title = "Files",
+                    icon = Icons.Default.AttachFile,
+                    onClick = { onOptionSelected(ContextOption.FILES) }
+                )
+                ContextMenuItem(
+                    title = "Folder",
+                    icon = Icons.Default.FolderOpen,
+                    onClick = { onOptionSelected(ContextOption.FOLDER) }
+                )
+                ContextMenuItem(
+                    title = "Mentions",
+                    icon = Icons.Default.AlternateEmail,
+                    onClick = { onOptionSelected(ContextOption.MENTIONS) }
+                )
+                ContextMenuItem(
+                    title = "Actions",
+                    icon = Icons.Default.EditNote,
+                    onClick = { onOptionSelected(ContextOption.ACTIONS) }
+                )
+                ContextMenuItem(
+                    title = "Browser",
+                    icon = Icons.Default.Language,
+                    onClick = { onOptionSelected(ContextOption.BROWSER) }
+                )
+                ContextMenuItem(
+                    title = "Drive",
+                    icon = Icons.Default.CloudSync,
+                    trailingText = "Set up",
+                    trailingTextColor = Color(0xFF38BDF8),
+                    onClick = { onOptionSelected(ContextOption.DRIVE) }
+                )
             }
+        }
+    }
+}
+
+@Composable
+private fun ContextMenuItem(
+    title: String,
+    icon: ImageVector,
+    trailingText: String? = null,
+    trailingTextColor: Color = Color.Unspecified,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(onClick = onClick)
+            .padding(horizontal = 10.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Icon(
+                icon,
+                contentDescription = null,
+                tint = Color(0xFF9E9E9E),
+                modifier = Modifier.size(18.dp)
+            )
+            Text(
+                title,
+                color = Color(0xFFE0E0E0),
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Normal
+            )
+        }
+        if (trailingText != null) {
+            Text(
+                trailingText,
+                color = trailingTextColor,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold
+            )
         }
     }
 }

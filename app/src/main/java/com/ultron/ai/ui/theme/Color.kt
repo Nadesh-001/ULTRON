@@ -2,6 +2,8 @@ package com.ultron.ai.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Refined: added surface scale, agentAccentSoft/Ghost, glowRed
+
 /**
  * ULTRON AI - Cinematic dark-metallic HUD and neural core design system.
  *
@@ -10,53 +12,69 @@ import androidx.compose.ui.graphics.Color
  */
 
 // --- Primary & Secondary Energy Accents -----------------------------------
-/** Ultron Red (#FF3030): AI core, active voice states, primary interactive triggers. */
 val UltronRed = Color(0xFFFF3030)
 val ArcCyan = UltronRed
 
-/** Secondary deep crimson (#A50000): energy gradients, orbital rings, pressed states. */
 val CrimsonRed = Color(0xFFA50000)
 val ArcCyanDim = CrimsonRed
 val Crimson = CrimsonRed
 
-/** Hot neon core bloom / high-energy highlight. */
 val UltronRedHot = Color(0xFFFFDAD6)
 val ArcCyanHot = UltronRedHot
 
-/** Tactical Amber/Orange: telemetry warnings and computing states. */
 val ArcAmber = Color(0xFFF59E0B)
-
-/** Success green for telemetry checks. */
 val SuccessGreen = Color(0xFF22C55E)
 
-// --- Obsidian Void & Metallic Gunmetal Surfaces ----------------------------
-val BackgroundDark = Color(0xFF050505)       // Deep obsidian void canvas
-val SurfaceContainerLow = Color(0xFF0B0C0F)  // Recessed panels
-val SurfaceDark = Color(0xFF101216)          // Standard HUD containers & cards
-val SurfaceContainer = SurfaceDark
-val SurfaceVariant = Color(0xFF181B22)       // Elevated gunmetal surfaces
-val SurfaceContainerHigh = SurfaceVariant
+// Sub-Agent Accents
+val JarvisBlue = Color(0xFF3B82F6)
+val FridayAmber = Color(0xFFF59E0B)
+val EdithGreen = Color(0xFF22C55E)
+val RouterGrey = Color(0xFF929292)
+
+// --- 5-Step Surface Scale for Layering ------------------------------------
+val SurfaceDim = Color(0xFF020202)
+val Surface = Color(0xFF050505)
+val SurfaceBright = Color(0xFF0B0C0F)
+val SurfaceContainer = Color(0xFF101216)
+val SurfaceContainerHigh = Color(0xFF181B22)
 val SurfaceContainerHighest = Color(0xFF222630)
 
+val BackgroundDark = Surface
+val SurfaceContainerLow = SurfaceBright
+val SurfaceDark = SurfaceContainer
+val SurfaceVariant = SurfaceContainerHigh
+
 // --- Structural Outlines & Framing ----------------------------------------
-val OutlineDim = Color(0xFF2A2F3A)           // Crisp hairline steel outline
+val OutlineDim = Color(0xFF2A2F3A)
 val Outline = OutlineDim
 val OutlineVariant = Color(0xFF1A1D24)
 
 // --- Typography & Readouts ------------------------------------------------
-val OnBackground = Color(0xFFFFFFFF)         // Crisp white for primary telemetry & titles
+val OnBackground = Color(0xFFFFFFFF)
 val OnSurface = Color(0xFFFFFFFF)
-val OnSurfaceMuted = Color(0xFF929292)       // Metallic grey for secondary metadata
+val OnSurfaceMuted = Color(0xFF929292)
 val MetallicGrey = OnSurfaceMuted
-val OnPrimary = Color(0xFF050505)            // Obsidian ink on lit red button
+val OnPrimary = Color(0xFF050505)
 
 val ErrorColor = Color(0xFFFF3030)
 
-// --- Chat & Bubble Tokens -------------------------------------------------
-val UserBubble = Color(0xFF3B0808)           // Primary dark container
-val AssistantBubble = Color(0xFF101216)      // Surface container
+// --- Glow & Atmospheric Tokens --------------------------------------------
+val GlowRed = UltronRed.copy(alpha = 0.30f)
 
-// Kept for seamless backwards compatibility with existing UI components
+fun agentAccentColor(agentName: String): Color = when (agentName.uppercase()) {
+    "JARVIS" -> JarvisBlue
+    "FRIDAY" -> FridayAmber
+    "EDITH" -> EdithGreen
+    else -> UltronRed
+}
+
+fun agentAccentSoft(accent: Color): Color = accent.copy(alpha = 0.20f)
+fun agentAccentGhost(accent: Color): Color = accent.copy(alpha = 0.08f)
+
+// --- Chat & Bubble Tokens -------------------------------------------------
+val UserBubble = Color(0xFF3B0808)
+val AssistantBubble = Color(0xFF101216)
+
 val PrimaryDark = UltronRed
 val PrimaryVariant = UltronRedHot
 val SecondaryDark = ArcAmber

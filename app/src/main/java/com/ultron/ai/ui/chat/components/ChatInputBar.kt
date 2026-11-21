@@ -44,6 +44,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material3.IconButton
 import com.ultron.ai.ui.theme.OutlineDim
 import com.ultron.ai.ui.theme.SurfaceVariant
@@ -59,6 +60,7 @@ fun ChatInputBar(
     isLoading: Boolean,
     isListening: Boolean = false,
     onToggleAddContext: () -> Unit = {},
+    onAttachFileClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -66,19 +68,34 @@ fun ChatInputBar(
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         // (+) Add Context Trigger Button
         IconButton(
             onClick = onToggleAddContext,
             modifier = Modifier
-                .size(42.dp)
+                .size(40.dp)
                 .background(SurfaceVariant, CircleShape)
                 .border(1.dp, OutlineDim, CircleShape)
         ) {
             Icon(
                 Icons.Default.Add,
                 contentDescription = "Add context & tools",
+                tint = UltronRed
+            )
+        }
+
+        // File Upload Button (Paperclip)
+        IconButton(
+            onClick = onAttachFileClick,
+            modifier = Modifier
+                .size(40.dp)
+                .background(SurfaceVariant, CircleShape)
+                .border(1.dp, OutlineDim, CircleShape)
+        ) {
+            Icon(
+                Icons.Default.AttachFile,
+                contentDescription = "Upload or attach file",
                 tint = UltronRed
             )
         }
@@ -104,11 +121,11 @@ fun ChatInputBar(
             shape = RoundedCornerShape(26.dp),
             textStyle = MaterialTheme.typography.bodyLarge,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = if (isListening) ErrorColor else ArcCyan.copy(alpha = 0.7f),
-                unfocusedBorderColor = ArcCyan.copy(alpha = 0.18f),
+                focusedBorderColor = if (isListening) ErrorColor else UltronRed,
+                unfocusedBorderColor = OutlineDim,
                 focusedContainerColor = SurfaceDark.copy(alpha = 0.85f),
                 unfocusedContainerColor = SurfaceDark.copy(alpha = 0.7f),
-                cursorColor = ArcCyan
+                cursorColor = UltronRed
             ),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
             keyboardActions = KeyboardActions(onSend = { onSend() }),
@@ -124,7 +141,7 @@ fun ChatInputBar(
             FilledIconButton(
                 onClick = onSend,
                 enabled = !isLoading,
-                colors = IconButtonDefaults.filledIconButtonColors(containerColor = ArcCyan, contentColor = OnPrimary)
+                colors = IconButtonDefaults.filledIconButtonColors(containerColor = UltronRed, contentColor = OnPrimary)
             ) {
                 Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
             }

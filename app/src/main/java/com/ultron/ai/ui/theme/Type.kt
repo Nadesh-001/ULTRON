@@ -1,5 +1,7 @@
 package com.ultron.ai.ui.theme
 
+// Refined: display-lg tightened (-0.5sp tracking), title-lg-accent, label-micro, body-md breathability (22sp)
+
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -16,9 +18,9 @@ val ULTRONTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
-        lineHeight = 36.sp,
-        letterSpacing = 2.sp
+        fontSize = 44.sp,
+        lineHeight = 46.sp,
+        letterSpacing = (-0.5).sp
     ),
     headlineLarge = TextStyle(
         fontFamily = FontFamily.SansSerif,
@@ -59,7 +61,7 @@ val ULTRONTypography = Typography(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        lineHeight = 20.sp,
+        lineHeight = 22.sp,
         letterSpacing = 0.15.sp
     ),
     labelLarge = TextStyle(
@@ -83,6 +85,22 @@ val ULTRONTypography = Typography(
         lineHeight = 12.sp,
         letterSpacing = 0.6.sp
     )
+)
+
+val TitleLargeAccent = TextStyle(
+    fontFamily = FontFamily.SansSerif,
+    fontWeight = FontWeight.Bold,
+    fontSize = 18.sp,
+    lineHeight = 24.sp,
+    letterSpacing = 1.2.sp
+)
+
+val LabelMicro = TextStyle(
+    fontFamily = FontFamily.Monospace,
+    fontWeight = FontWeight.Bold,
+    fontSize = 9.sp,
+    lineHeight = 12.sp,
+    letterSpacing = 1.5.sp
 )
 
 val TitleMedium: TextStyle = ULTRONTypography.titleMedium

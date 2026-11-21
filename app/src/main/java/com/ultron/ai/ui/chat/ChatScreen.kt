@@ -1,5 +1,8 @@
 package com.ultron.ai.ui.chat
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -109,6 +112,17 @@ fun ChatScreen(
         uiState.error?.let { err ->
             snackbarHostState.showSnackbar(err)
             viewModel.onDismissError()
+        }
+    }
+
+    // Real file picker launcher for document, code, and media analysis
+    val filePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { selectedUri ->
+            val fileName = selectedUri.lastPathSegment?.substringAfterLast('/') ?: "document"
+            viewModel.onInputChange("Analyze file: $fileName")
+            viewModel.onSend()
         }
     }
 
@@ -371,7 +385,8 @@ fun ChatScreen(
                     onMicClick = viewModel::onMicClick,
                     isLoading = uiState.isLoading,
                     isListening = uiState.isVoiceListening,
-                    onToggleAddContext = { showAddContextSheet = true }
+                    onToggleAddContext = { showAddContextSheet = true },
+                    onAttachFileClick = { filePickerLauncher.launch("*/*") }
                 )
 
                 // --- 6. Persistent Bottom Navigation Dock ---
